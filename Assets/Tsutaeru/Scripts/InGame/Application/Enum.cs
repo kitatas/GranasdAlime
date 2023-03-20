@@ -4,4 +4,10 @@ namespace Tsutaeru.InGame
     {
         None,
     }
+
+    public enum Difficulty
+    {
+        None,
+        Easy,
+    }
 }
