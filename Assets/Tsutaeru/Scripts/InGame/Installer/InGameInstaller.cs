@@ -1,3 +1,4 @@
+using Tsutaeru.InGame.Data.Container;
 using Tsutaeru.InGame.Data.DataStore;
 using Tsutaeru.InGame.Domain.Factory;
 using Tsutaeru.InGame.Domain.Repository;
@@ -19,6 +20,9 @@ namespace Tsutaeru.InGame.Installer
 
         protected override void Configure(IContainerBuilder builder)
         {
+            // Container
+            builder.Register<WordContainer>(Lifetime.Scoped);
+
             // DataStore
             builder.RegisterInstance<PrefabTable>(prefabTable);
             builder.RegisterInstance<QuestionTable>(questionTable);

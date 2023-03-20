@@ -2,6 +2,7 @@ namespace Tsutaeru.InGame
 {
     public sealed class WordConfig
     {
-        public const float INTERVAL = 90.0f;
+        public const int INTERVAL = 90;
+        public const int SHIFT_RANGE = WordConfig.INTERVAL - 15;
     }
 }

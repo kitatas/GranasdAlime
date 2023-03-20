@@ -10,4 +10,19 @@ namespace Tsutaeru.InGame
         None,
         Easy,
     }
+
+    public enum WordStatus
+    {
+        None,
+        First,
+        Middle,
+        Last,
+    }
+
+    public enum MoveStatus
+    {
+        None,
+        Left,
+        Right,
+    }
 }
