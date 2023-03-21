@@ -8,15 +8,15 @@ namespace Tsutaeru.InGame.Data.DataStore
         [SerializeField] private Difficulty difficultyType = default;
 
         [SerializeField] private string originMessage = default;
-        [SerializeField] private string originHintType = default;
+        [SerializeField] private HintType originHintType = default;
 
         [SerializeField] private string answerMessage = default;
-        [SerializeField] private string answerHintType = default;
+        [SerializeField] private HintType answerHintType = default;
 
         public Difficulty difficulty => difficultyType;
         public string origin => originMessage;
-        public string originHint => originHintType;
+        public HintType originHint => originHintType;
         public string answer => answerMessage;
-        public string answerHint => answerHintType;
+        public HintType answerHint => answerHintType;
     }
 }

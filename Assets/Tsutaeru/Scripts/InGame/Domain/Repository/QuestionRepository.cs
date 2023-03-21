@@ -32,12 +32,12 @@ namespace Tsutaeru.InGame.Domain.Repository
                 throw new Exception($"question data is null.");
             }
 
-            if (string.IsNullOrEmpty(data.origin) || string.IsNullOrEmpty(data.originHint))
+            if (string.IsNullOrEmpty(data.origin) || data.originHint == HintType.None)
             {
                 throw new Exception($"question origin data is invalid. (name: {data.name})");
             }
 
-            if (string.IsNullOrEmpty(data.answer) || string.IsNullOrEmpty(data.answerHint))
+            if (string.IsNullOrEmpty(data.answer) || data.answerHint == HintType.None)
             {
                 throw new Exception($"question answer data is invalid. (name: {data.name})");
             }

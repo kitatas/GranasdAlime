@@ -11,6 +11,11 @@ namespace Tsutaeru.InGame
         Easy,
     }
 
+    public enum HintType
+    {
+        None,
+    }
+
     public enum WordStatus
     {
         None,
