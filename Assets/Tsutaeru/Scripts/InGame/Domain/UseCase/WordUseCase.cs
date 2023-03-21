@@ -31,7 +31,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public void Build(Data.DataStore.QuestionData data)
         {
-            _wordContainer.Clear();
+            _wordContainer.Refresh();
             _answerEntity = new AnswerEntity(data);
 
             var length = data.origin.Length;

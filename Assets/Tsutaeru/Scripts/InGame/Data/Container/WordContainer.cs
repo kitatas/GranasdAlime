@@ -31,5 +31,11 @@ namespace Tsutaeru.InGame.Data.Container
             var chars = _list.Select(x => x.wordChar).ToArray();
             return new string(chars);
         }
+
+        public void Refresh()
+        {
+            _list.Select(x => x.gameObject).ToList().DestroyAll();
+            _list.Clear();
+        }
     }
 }
