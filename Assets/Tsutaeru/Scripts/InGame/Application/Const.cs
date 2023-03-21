@@ -7,7 +7,15 @@ namespace Tsutaeru.InGame
 
         public const int MAX_QUESTION = 10;
     }
-    
+
+    public sealed class ProgressConfig
+    {
+        public const int EASY = 3;
+        public const int NORMAL = 6;
+        public const int HARD = 9;
+        public const int SPECIAL = 10;
+    }
+
     public sealed class WordConfig
     {
         public const int INTERVAL = 90;

@@ -19,5 +19,15 @@ namespace Tsutaeru.InGame.Data.Entity
         {
             return value == count;
         }
+
+        public Difficulty GetDifficulty()
+        {
+            if (value < ProgressConfig.EASY) return Difficulty.Easy;
+            if (value < ProgressConfig.NORMAL) return Difficulty.Normal;
+            if (value < ProgressConfig.HARD) return Difficulty.Hard;
+            if (value < ProgressConfig.SPECIAL) return Difficulty.Special;
+
+            throw new Exception($"ProgressConfig is invalid. (progress: {value})");
+        }
     }
 }

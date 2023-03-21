@@ -16,8 +16,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public Data.DataStore.QuestionData Lot()
         {
-            // TODO: 問題クリア数から難易度を取得する
-            var difficulty = Difficulty.Easy;
+            var difficulty = _progressEntity.GetDifficulty();
             return _questionRepository.Find(difficulty);
         }
 

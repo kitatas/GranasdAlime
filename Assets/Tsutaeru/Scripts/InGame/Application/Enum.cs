@@ -13,6 +13,9 @@ namespace Tsutaeru.InGame
     {
         None,
         Easy,
+        Normal,
+        Hard,
+        Special,
     }
 
     public enum HintType
