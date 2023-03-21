@@ -3,6 +3,7 @@ namespace Tsutaeru.InGame
     public enum GameState
     {
         None,
+        Input,
     }
 
     public enum Difficulty

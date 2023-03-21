@@ -15,7 +15,8 @@ namespace Tsutaeru.InGame.Presentation.View
         [HideInInspector] public int wordIndex;
         [HideInInspector] public WordStatus wordStatus;
 
-        public void Init(char message, int index, WordStatus status, Action<(int index, MoveStatus move)> shift)
+        public void Init(char message, int index, WordStatus status, Func<bool> isInputState,
+            Action<(int index, MoveStatus move)> shift)
         {
             word.text = $"{message}";
 
@@ -25,6 +26,11 @@ namespace Tsutaeru.InGame.Presentation.View
             wordStatus = status;
 
             this.OnBeginDragAsObservable()
+                .Where(_ =>
+                {
+                    var isInput = isInputState?.Invoke();
+                    return isInput.HasValue && isInput.Value;
+                })
                 .Subscribe(x =>
                 {
                     // 移動前の位置
@@ -33,6 +39,11 @@ namespace Tsutaeru.InGame.Presentation.View
                 .AddTo(this);
 
             this.OnDragAsObservable()
+                .Where(_ =>
+                {
+                    var isInput = isInputState?.Invoke();
+                    return isInput.HasValue && isInput.Value;
+                })
                 .Subscribe(x =>
                 {
                     var cursorPoint = mainCamera.ScreenToWorldPoint(x.position);
@@ -61,6 +72,11 @@ namespace Tsutaeru.InGame.Presentation.View
                 .AddTo(this);
 
             this.OnEndDragAsObservable()
+                .Where(_ =>
+                {
+                    var isInput = isInputState?.Invoke();
+                    return isInput.HasValue && isInput.Value;
+                })
                 .Subscribe(x =>
                 {
                     // TODO: 操作完了通知
