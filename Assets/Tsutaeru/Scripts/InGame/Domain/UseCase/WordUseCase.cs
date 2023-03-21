@@ -11,6 +11,8 @@ namespace Tsutaeru.InGame.Domain.UseCase
 {
     public sealed class WordUseCase
     {
+        private AnswerEntity _answerEntity;
+
         private readonly Subject<Unit> _execShift;
         private readonly WordContainer _wordContainer;
         private readonly StateEntity _stateEntity;
@@ -30,6 +32,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
         public void Build(Data.DataStore.QuestionData data)
         {
             _wordContainer.Clear();
+            _answerEntity = new AnswerEntity(data);
 
             var length = data.origin.Length;
             var pointX = length.IsEven()
@@ -59,5 +62,11 @@ namespace Tsutaeru.InGame.Domain.UseCase
         }
         
         public IObservable<Unit> ExecShift() => _execShift;
+
+        public bool IsCorrect()
+        {
+            var userAnswer = _wordContainer.GetUserAnswer();
+            return _answerEntity.IsCorrect(userAnswer);
+        }
     }
 }

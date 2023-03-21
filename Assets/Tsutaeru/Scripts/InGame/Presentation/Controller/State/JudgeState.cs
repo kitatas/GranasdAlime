@@ -4,16 +4,16 @@ using Tsutaeru.InGame.Domain.UseCase;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
-    public sealed class InputState : BaseState
+    public sealed class JudgeState : BaseState
     {
         private readonly WordUseCase _wordUseCase;
 
-        public InputState(WordUseCase wordUseCase)
+        public JudgeState(WordUseCase wordUseCase)
         {
             _wordUseCase = wordUseCase;
         }
 
-        public override GameState state => GameState.Input;
+        public override GameState state => GameState.Judge;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
@@ -22,9 +22,16 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await _wordUseCase.ExecShift().ToUniTask(true, token);
+            await UniTask.Yield(token);
 
-            return GameState.Judge;
+            if (_wordUseCase.IsCorrect())
+            {
+                return GameState.None;
+            }
+            else
+            {
+                return GameState.Input;
+            }
         }
     }
 }

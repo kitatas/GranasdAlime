@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Tsutaeru.Common.Data.Container;
 using UniEx;
 
@@ -23,6 +24,12 @@ namespace Tsutaeru.InGame.Data.Container
                 (_list[index + addIndex].wordStatus, _list[index].wordStatus);
 
             _list[index].transform.AddLocalPositionX(WordConfig.INTERVAL * -addIndex);
+        }
+
+        public string GetUserAnswer()
+        {
+            var chars = _list.Select(x => x.wordChar).ToArray();
+            return new string(chars);
         }
     }
 }

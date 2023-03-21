@@ -12,19 +12,21 @@ namespace Tsutaeru.InGame.Presentation.View
     {
         [SerializeField] private TextMeshProUGUI word = default;
 
+        [HideInInspector] public char wordChar;
         [HideInInspector] public int wordIndex;
         [HideInInspector] public WordStatus wordStatus;
 
         public void Init(char message, int index, WordStatus status, Func<bool> isInputState,
             Action<(int index, MoveStatus move)> shift, Action execShift)
         {
-            word.text = $"{message}";
-
             var mainCamera = FindObjectOfType<Camera>();
             var startPointX = (int)transform.localPosition.x;
             var updatePointX = startPointX;
+            wordChar = message;
             wordIndex = index;
             wordStatus = status;
+
+            word.text = $"{wordChar}";
 
             this.OnBeginDragAsObservable()
                 .Where(_ =>
