@@ -32,6 +32,7 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<QuestionTable>(questionTable);
 
             // Entity
+            builder.Register<ProgressEntity>(Lifetime.Scoped);
             builder.Register<StateEntity>(Lifetime.Scoped);
 
             // Factory
@@ -48,6 +49,7 @@ namespace Tsutaeru.InGame.Installer
 
             // Controller
             builder.Register<StateController>(Lifetime.Scoped);
+            builder.Register<ClearState>(Lifetime.Scoped);
             builder.Register<InputState>(Lifetime.Scoped);
             builder.Register<JudgeState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);

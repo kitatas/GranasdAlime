@@ -6,6 +6,7 @@ namespace Tsutaeru.InGame
         SetUp,
         Input,
         Judge,
+        Clear,
     }
 
     public enum Difficulty
