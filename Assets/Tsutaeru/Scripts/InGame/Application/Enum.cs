@@ -23,6 +23,21 @@ namespace Tsutaeru.InGame
         None,
         Drink,
         Jewel,
+        Food,
+        Fluid,
+        Sport,
+        Item,
+        Country,
+        Action,
+        Service,
+        Metal,
+        Creature,
+        Grain,
+        Data,
+        Human,
+        Vehicle,
+        Rule,
+        Title,
     }
 
     public enum WordStatus
