@@ -36,7 +36,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
             var length = data.origin.Length;
             var pointX = length.IsEven()
-                ? -1.0f * (WordConfig.INTERVAL * length / 2.0f + WordConfig.INTERVAL / 2.0f)
+                ? -1.0f * (WordConfig.INTERVAL * (length / 2.0f - 1.0f) + WordConfig.INTERVAL / 2.0f)
                 : -1.0f * (WordConfig.INTERVAL * Mathf.Floor(length / 2.0f));
 
             for (int i = 0; i < length; i++)
