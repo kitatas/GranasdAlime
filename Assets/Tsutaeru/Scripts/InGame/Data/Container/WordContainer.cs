@@ -23,7 +23,7 @@ namespace Tsutaeru.InGame.Data.Container
             (_list[index].wordStatus, _list[index + addIndex].wordStatus) =
                 (_list[index + addIndex].wordStatus, _list[index].wordStatus);
 
-            _list[index].transform.AddLocalPositionX(WordConfig.INTERVAL * -addIndex);
+            _list[index].TweenShift(WordConfig.INTERVAL * -addIndex);
         }
 
         public string GetUserAnswer()

@@ -20,5 +20,7 @@ namespace Tsutaeru.InGame
     {
         public const int INTERVAL = 90;
         public const int SHIFT_RANGE = WordConfig.INTERVAL - 15;
+        public const float FOCUS_SPEED = 0.05f;
+        public const float SHIFT_SPEED = 0.1f;
     }
 }

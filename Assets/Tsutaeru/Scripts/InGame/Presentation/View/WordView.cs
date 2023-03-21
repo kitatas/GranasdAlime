@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using TMPro;
 using UniEx;
 using UniRx;
@@ -22,13 +23,14 @@ namespace Tsutaeru.InGame.Presentation.View
             var mainCamera = FindObjectOfType<Camera>();
             var startPointX = (int)transform.localPosition.x;
             var updatePointX = startPointX;
+            var focusScale = Vector3.one * 1.2f;
             wordChar = message;
             wordIndex = index;
             wordStatus = status;
 
             word.text = $"{wordChar}";
 
-            this.OnBeginDragAsObservable()
+            this.OnPointerDownAsObservable()
                 .Where(_ =>
                 {
                     var isInput = isInputState?.Invoke();
@@ -39,6 +41,11 @@ namespace Tsutaeru.InGame.Presentation.View
                     // 移動前の位置
                     startPointX = (int)transform.localPosition.x;
                     updatePointX = startPointX;
+
+                    transform.ToRectTransform()
+                        .DOScale(focusScale, WordConfig.FOCUS_SPEED)
+                        .SetEase(Ease.OutBack)
+                        .SetLink(gameObject);
                 })
                 .AddTo(this);
 
@@ -52,8 +59,8 @@ namespace Tsutaeru.InGame.Presentation.View
                 {
                     var cursorPoint = mainCamera.ScreenToWorldPoint(x.position);
                     cursorPoint.y = 0.0f;
-                    cursorPoint.z = -5.0f;
                     transform.position = cursorPoint;
+                    transform.SetLocalPositionZ(0.0f);
 
                     var currentX = transform.localPosition.x;
                     if (currentX >= updatePointX + WordConfig.SHIFT_RANGE)
@@ -75,7 +82,7 @@ namespace Tsutaeru.InGame.Presentation.View
                 })
                 .AddTo(this);
 
-            this.OnEndDragAsObservable()
+            this.OnPointerUpAsObservable()
                 .Where(_ =>
                 {
                     var isInput = isInputState?.Invoke();
@@ -88,9 +95,25 @@ namespace Tsutaeru.InGame.Presentation.View
                         execShift?.Invoke();
                     }
 
-                    transform.SetLocalPositionX(updatePointX);
+                    transform.ToRectTransform()
+                        .DOScale(Vector3.one, WordConfig.FOCUS_SPEED)
+                        .SetEase(Ease.OutQuart)
+                        .SetLink(gameObject);
+                    transform.ToRectTransform()
+                        .DOLocalMoveX(updatePointX, WordConfig.FOCUS_SPEED)
+                        .SetEase(Ease.OutQuart)
+                        .SetLink(gameObject);
                 })
                 .AddTo(this);
+        }
+
+        public void TweenShift(float addValue)
+        {
+            var endValue = transform.localPosition.x + addValue;
+            transform.ToRectTransform()
+                .DOLocalMoveX(endValue, WordConfig.SHIFT_SPEED)
+                .SetEase(Ease.OutQuint)
+                .SetLink(gameObject);
         }
     }
 }
