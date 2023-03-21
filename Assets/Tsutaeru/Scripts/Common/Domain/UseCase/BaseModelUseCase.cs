@@ -13,7 +13,7 @@ namespace Tsutaeru.Common.Domain.UseCase
 
         public IReadOnlyReactiveProperty<T> property => _property;
 
-        public void Set(T value)
+        public virtual void Set(T value)
         {
             _property.Value = value;
         }

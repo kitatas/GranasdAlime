@@ -1,5 +1,6 @@
 using Tsutaeru.InGame.Data.Container;
 using Tsutaeru.InGame.Data.DataStore;
+using Tsutaeru.InGame.Data.Entity;
 using Tsutaeru.InGame.Domain.Factory;
 using Tsutaeru.InGame.Domain.Repository;
 using Tsutaeru.InGame.Domain.UseCase;
@@ -26,6 +27,9 @@ namespace Tsutaeru.InGame.Installer
             // DataStore
             builder.RegisterInstance<PrefabTable>(prefabTable);
             builder.RegisterInstance<QuestionTable>(questionTable);
+
+            // Entity
+            builder.Register<StateEntity>(Lifetime.Scoped);
 
             // Factory
             builder.Register<WordFactory>(Lifetime.Scoped).WithParameter(wordParent);

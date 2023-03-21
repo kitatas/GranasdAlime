@@ -1,11 +1,25 @@
 using System;
 using Tsutaeru.Common.Domain.UseCase;
+using Tsutaeru.InGame.Data.Entity;
 using UniRx;
 
 namespace Tsutaeru.InGame.Domain.UseCase
 {
     public sealed class StateUseCase : BaseModelUseCase<GameState>
     {
+        private readonly StateEntity _stateEntity;
+
+        public StateUseCase(StateEntity stateEntity)
+        {
+            _stateEntity = stateEntity;
+        }
+
         public IObservable<GameState> gameState => property.Where(x => x != GameState.None);
+
+        public override void Set(GameState state)
+        {
+            base.Set(state);
+            _stateEntity.Set(state);
+        }
     }
 }
