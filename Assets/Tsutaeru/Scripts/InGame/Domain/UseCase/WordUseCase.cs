@@ -1,14 +1,17 @@
+using System;
 using Tsutaeru.InGame.Data.Container;
 using Tsutaeru.InGame.Data.Entity;
 using Tsutaeru.InGame.Domain.Factory;
 using Tsutaeru.InGame.Domain.Repository;
 using UniEx;
+using UniRx;
 using UnityEngine;
 
 namespace Tsutaeru.InGame.Domain.UseCase
 {
     public sealed class WordUseCase
     {
+        private readonly Subject<Unit> _execShift;
         private readonly WordContainer _wordContainer;
         private readonly StateEntity _stateEntity;
         private readonly WordFactory _wordFactory;
@@ -17,6 +20,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
         public WordUseCase(WordContainer wordContainer, StateEntity stateEntity,
             WordFactory wordFactory, PrefabRepository prefabRepository)
         {
+            _execShift = new Subject<Unit>();
             _wordContainer = wordContainer;
             _stateEntity = stateEntity;
             _wordFactory = wordFactory;
@@ -45,12 +49,15 @@ namespace Tsutaeru.InGame.Domain.UseCase
                     x =>
                     {
                         _wordContainer.Shift(x.index, x.move);
-                    });
+                    },
+                    () => _execShift?.OnNext(Unit.Default));
 
                 _wordContainer.Add(instance);
 
                 pointX += WordConfig.INTERVAL;
             }
         }
+        
+        public IObservable<Unit> ExecShift() => _execShift;
     }
 }

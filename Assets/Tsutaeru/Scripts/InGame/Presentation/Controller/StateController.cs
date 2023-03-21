@@ -9,11 +9,12 @@ namespace Tsutaeru.InGame.Presentation.Controller
     {
         private readonly List<BaseState> _states;
 
-        public StateController(SetUpState setUpState)
+        public StateController(SetUpState setUpState, InputState inputState)
         {
             _states = new List<BaseState>
             {
                 setUpState,
+                inputState,
             };
         }
 

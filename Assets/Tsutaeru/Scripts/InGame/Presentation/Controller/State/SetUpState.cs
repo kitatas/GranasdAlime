@@ -36,7 +36,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             await UniTask.Yield(token);
 
-            return GameState.None;
+            return GameState.Input;
         }
     }
 }

@@ -48,6 +48,7 @@ namespace Tsutaeru.InGame.Installer
 
             // Controller
             builder.Register<StateController>(Lifetime.Scoped);
+            builder.Register<InputState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);
 
             // Presenter

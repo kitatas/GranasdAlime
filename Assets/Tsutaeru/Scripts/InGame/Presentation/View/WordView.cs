@@ -16,12 +16,13 @@ namespace Tsutaeru.InGame.Presentation.View
         [HideInInspector] public WordStatus wordStatus;
 
         public void Init(char message, int index, WordStatus status, Func<bool> isInputState,
-            Action<(int index, MoveStatus move)> shift)
+            Action<(int index, MoveStatus move)> shift, Action execShift)
         {
             word.text = $"{message}";
 
             var mainCamera = FindObjectOfType<Camera>();
             var startPointX = (int)transform.localPosition.x;
+            var updatePointX = startPointX;
             wordIndex = index;
             wordStatus = status;
 
@@ -35,6 +36,7 @@ namespace Tsutaeru.InGame.Presentation.View
                 {
                     // 移動前の位置
                     startPointX = (int)transform.localPosition.x;
+                    updatePointX = startPointX;
                 })
                 .AddTo(this);
 
@@ -52,20 +54,20 @@ namespace Tsutaeru.InGame.Presentation.View
                     transform.position = cursorPoint;
 
                     var currentX = transform.localPosition.x;
-                    if (currentX >= startPointX + WordConfig.SHIFT_RANGE)
-                    {
-                        // 先頭の文字である場合は処理しない
-                        if (wordStatus == WordStatus.Last) return;
-
-                        startPointX += WordConfig.INTERVAL;
-                        shift?.Invoke((index: wordIndex, move: MoveStatus.Left));
-                    }
-                    else if (currentX <= startPointX - WordConfig.SHIFT_RANGE)
+                    if (currentX >= updatePointX + WordConfig.SHIFT_RANGE)
                     {
                         // 末尾の文字である場合は処理しない
+                        if (wordStatus == WordStatus.Last) return;
+
+                        updatePointX += WordConfig.INTERVAL;
+                        shift?.Invoke((index: wordIndex, move: MoveStatus.Left));
+                    }
+                    else if (currentX <= updatePointX - WordConfig.SHIFT_RANGE)
+                    {
+                        // 先頭の文字である場合は処理しない
                         if (wordStatus == WordStatus.First) return;
 
-                        startPointX -= WordConfig.INTERVAL;
+                        updatePointX -= WordConfig.INTERVAL;
                         shift?.Invoke((index: wordIndex, move: MoveStatus.Right));
                     }
                 })
@@ -79,8 +81,12 @@ namespace Tsutaeru.InGame.Presentation.View
                 })
                 .Subscribe(x =>
                 {
-                    // TODO: 操作完了通知
-                    transform.SetLocalPositionX(startPointX);
+                    if (startPointX != updatePointX)
+                    {
+                        execShift?.Invoke();
+                    }
+
+                    transform.SetLocalPositionX(updatePointX);
                 })
                 .AddTo(this);
         }
