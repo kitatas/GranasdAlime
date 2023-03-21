@@ -3,6 +3,7 @@ namespace Tsutaeru.InGame
     public enum GameState
     {
         None,
+        SetUp,
         Input,
     }
 
@@ -15,6 +16,8 @@ namespace Tsutaeru.InGame
     public enum HintType
     {
         None,
+        Drink,
+        Jewel,
     }
 
     public enum WordStatus

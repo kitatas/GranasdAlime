@@ -6,6 +6,7 @@ using Tsutaeru.InGame.Domain.Repository;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.Controller;
 using Tsutaeru.InGame.Presentation.Presenter;
+using Tsutaeru.InGame.Presentation.View;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,8 @@ namespace Tsutaeru.InGame.Installer
     {
         [SerializeField] private PrefabTable prefabTable = default;
         [SerializeField] private QuestionTable questionTable = default;
+
+        [SerializeField] private HintView hintView = default;
 
         [SerializeField] private RectTransform wordParent = default;
 
@@ -45,9 +48,13 @@ namespace Tsutaeru.InGame.Installer
 
             // Controller
             builder.Register<StateController>(Lifetime.Scoped);
+            builder.Register<SetUpState>(Lifetime.Scoped);
 
             // Presenter
             builder.RegisterEntryPoint<StatePresenter>();
+
+            // View
+            builder.RegisterInstance<HintView>(hintView);
         }
     }
 }

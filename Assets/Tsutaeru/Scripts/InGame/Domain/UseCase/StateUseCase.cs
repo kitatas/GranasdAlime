@@ -12,6 +12,8 @@ namespace Tsutaeru.InGame.Domain.UseCase
         public StateUseCase(StateEntity stateEntity)
         {
             _stateEntity = stateEntity;
+
+            Set(GameConfig.INIT_STATE);
         }
 
         public IObservable<GameState> gameState => property.Where(x => x != GameState.None);
