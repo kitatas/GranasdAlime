@@ -125,5 +125,17 @@ namespace Tsutaeru.InGame.Presentation.View
                 .SetEase(Ease.OutQuint)
                 .SetLink(gameObject);
         }
+
+        public void Hide()
+        {
+            DOTween.Sequence()
+                .Append(transform
+                    .DOScale(Vector3.one, WordConfig.GENERATE_SPEED)
+                    .SetEase(Ease.OutQuart))
+                .Join(canvasGroup
+                    .DOFade(0.0f, WordConfig.GENERATE_SPEED)
+                    .SetEase(Ease.OutQuart))
+                .SetLink(gameObject);
+        }
     }
 }

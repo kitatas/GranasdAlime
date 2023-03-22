@@ -1,16 +1,21 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
+using Tsutaeru.InGame.Presentation.View;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class ClearState : BaseState
     {
         private readonly QuestionUseCase _questionUseCase;
+        private readonly WordUseCase _wordUseCase;
+        private readonly HintView _hintView;
 
-        public ClearState(QuestionUseCase questionUseCase)
+        public ClearState(QuestionUseCase questionUseCase, WordUseCase wordUseCase, HintView hintView)
         {
             _questionUseCase = questionUseCase;
+            _wordUseCase = wordUseCase;
+            _hintView = hintView;
         }
 
         public override GameState state => GameState.Clear;
@@ -30,6 +35,11 @@ namespace Tsutaeru.InGame.Presentation.Controller
             }
             else
             {
+                await (
+                    _wordUseCase.HideAllWordAsync(token),
+                    _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token)
+                );
+
                 return GameState.SetUp;
             }
         }

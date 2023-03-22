@@ -1,3 +1,5 @@
+using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -24,6 +26,29 @@ namespace Tsutaeru.InGame.Presentation.View
                 .SetLink(gameObject)
                 .SetEase(Ease.Linear)
                 .WithCancellation(token);
+        }
+
+        public async UniTask ResetAsync(float animationTime, CancellationToken token)
+        {
+            // タグを除外した文字列
+            var hintText = Regex.Replace(hint.text, @"[^\p{IsKatakana}\s]", "");
+
+            var deleteInterval = animationTime / hintText.Length;
+
+            while (hint.text != "")
+            {
+                var text = hint.text;
+                var c = text[^1];
+
+                // 末尾の文字を削除
+                hint.text = text.Remove(text.Length - 1);
+
+                // タグ以外の文字を削除した場合
+                if (char.IsWhiteSpace(c) || (c >= '\u30A1' && c <= '\u30F6'))
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(deleteInterval), cancellationToken: token);
+                }
+            }
         }
 
         private void Set(string message)

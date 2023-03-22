@@ -37,5 +37,10 @@ namespace Tsutaeru.InGame.Data.Container
             _list.Select(x => x.gameObject).ToList().DestroyAll();
             _list.Clear();
         }
+
+        public void HideAll()
+        {
+            _list.Each(x => x.Hide());
+        }
     }
 }
