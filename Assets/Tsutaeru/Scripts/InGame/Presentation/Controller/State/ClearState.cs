@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
@@ -31,6 +32,14 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             if (_questionUseCase.IsAllClear())
             {
+                await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
+                await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
+
+                await _hintView.RenderAsync("Thank you for playing!!", UiConfig.ANIMATION_TIME, token);
+                await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
+
+                await _wordUseCase.HideAllWordAsync(token);
+
                 return GameState.None;
             }
             else

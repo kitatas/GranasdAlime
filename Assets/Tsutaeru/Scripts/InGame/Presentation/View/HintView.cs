@@ -20,7 +20,11 @@ namespace Tsutaeru.InGame.Presentation.View
         public async UniTask RenderAsync(Data.DataStore.QuestionData data, float animationTime, CancellationToken token)
         {
             var message = $"{data.originHint.ToWord()} <size=-10>カラ<size=+0> {data.answerHint.ToWord()} <size=-10>ヘ";
+            await RenderAsync(message, animationTime, token);
+        }
 
+        public async UniTask RenderAsync(string message, float animationTime, CancellationToken token)
+        {
             await hint
                 .DOText(message, animationTime)
                 .SetLink(gameObject)
