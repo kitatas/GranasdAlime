@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7432438391783501313}
   - component: {fileID: 7432438391783501312}
   - component: {fileID: 7432438391783501343}
+  - component: {fileID: 3854693119847885550}
   m_Layer: 5
   m_Name: Image - Word
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 7432438391783501341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4975488566521411489}
@@ -91,6 +92,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   word: {fileID: 2615569620616219027}
+  canvasGroup: {fileID: 3854693119847885550}
+  wordChar: 0
+  wordIndex: 0
+  wordStatus: 0
+--- !u!225 &3854693119847885550
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7432438391783501341}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &7432438393104654412
 PrefabInstance:
   m_ObjectHideFlags: 0
