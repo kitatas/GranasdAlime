@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Data.Container;
 using Tsutaeru.InGame.Data.Entity;
 using Tsutaeru.InGame.Domain.Factory;
@@ -29,7 +31,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
             _prefabRepository = prefabRepository;
         }
 
-        public void Build(Data.DataStore.QuestionData data)
+        public async UniTask BuildAsync(Data.DataStore.QuestionData data, CancellationToken token)
         {
             _wordContainer.Refresh();
             _answerEntity = new AnswerEntity(data);
@@ -58,6 +60,8 @@ namespace Tsutaeru.InGame.Domain.UseCase
                 _wordContainer.Add(instance);
 
                 pointX += WordConfig.INTERVAL;
+
+                await UniTask.Delay(TimeSpan.FromSeconds(WordConfig.GENERATE_SPEED), cancellationToken: token);
             }
         }
         

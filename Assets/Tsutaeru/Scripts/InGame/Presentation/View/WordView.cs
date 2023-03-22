@@ -12,6 +12,7 @@ namespace Tsutaeru.InGame.Presentation.View
     public sealed class WordView : UIBehaviour
     {
         [SerializeField] private TextMeshProUGUI word = default;
+        [SerializeField] private CanvasGroup canvasGroup = default;
 
         [HideInInspector] public char wordChar;
         [HideInInspector] public int wordIndex;
@@ -29,6 +30,15 @@ namespace Tsutaeru.InGame.Presentation.View
             wordStatus = status;
 
             word.text = $"{wordChar}";
+
+            DOTween.Sequence()
+                .Append(transform
+                    .DOScale(Vector3.one, WordConfig.GENERATE_SPEED)
+                    .SetEase(Ease.OutBack))
+                .Join(canvasGroup
+                    .DOFade(1.0f, WordConfig.GENERATE_SPEED)
+                    .SetEase(Ease.Linear))
+                .SetLink(gameObject);
 
             this.OnPointerDownAsObservable()
                 .Where(_ =>

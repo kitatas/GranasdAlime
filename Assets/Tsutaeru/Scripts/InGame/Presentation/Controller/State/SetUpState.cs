@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
@@ -31,8 +32,11 @@ namespace Tsutaeru.InGame.Presentation.Controller
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             var data = _questionUseCase.Lot();
-            _hintView.Render(data);
-            _wordUseCase.Build(data);
+
+            await _hintView.RenderAsync(data, UiConfig.ANIMATION_TIME, token);
+            await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
+
+            await _wordUseCase.BuildAsync(data, token);
 
             await UniTask.Yield(token);
 

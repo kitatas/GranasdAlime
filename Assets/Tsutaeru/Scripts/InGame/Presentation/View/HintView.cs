@@ -1,3 +1,6 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -12,9 +15,15 @@ namespace Tsutaeru.InGame.Presentation.View
             Set("");
         }
 
-        public void Render(Data.DataStore.QuestionData data)
+        public async UniTask RenderAsync(Data.DataStore.QuestionData data, float animationTime, CancellationToken token)
         {
-            Set($"{data.originHint.ToWord()} <size=-10>カラ<size=+0> {data.answerHint.ToWord()} <size=-10>ヘ");
+            var message = $"{data.originHint.ToWord()} <size=-10>カラ<size=+0> {data.answerHint.ToWord()} <size=-10>ヘ";
+
+            await hint
+                .DOText(message, animationTime)
+                .SetLink(gameObject)
+                .SetEase(Ease.Linear)
+                .WithCancellation(token);
         }
 
         private void Set(string message)
