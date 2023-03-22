@@ -18,6 +18,7 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private PrefabTable prefabTable = default;
         [SerializeField] private QuestionTable questionTable = default;
 
+        [SerializeField] private TimeView timeView = default;
         [SerializeField] private HintView hintView = default;
 
         [SerializeField] private RectTransform wordParent = default;
@@ -45,6 +46,7 @@ namespace Tsutaeru.InGame.Installer
             // UseCase
             builder.Register<QuestionUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
+            builder.Register<TimeUseCase>(Lifetime.Scoped);
             builder.Register<WordUseCase>(Lifetime.Scoped);
 
             // Controller
@@ -56,8 +58,10 @@ namespace Tsutaeru.InGame.Installer
 
             // Presenter
             builder.RegisterEntryPoint<StatePresenter>();
+            builder.RegisterEntryPoint<TimePresenter>();
 
             // View
+            builder.RegisterInstance<TimeView>(timeView);
             builder.RegisterInstance<HintView>(hintView);
         }
     }
