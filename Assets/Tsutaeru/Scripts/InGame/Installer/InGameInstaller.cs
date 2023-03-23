@@ -19,6 +19,7 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private QuestionTable questionTable = default;
 
         [SerializeField] private TimeView timeView = default;
+        [SerializeField] private ProgressView progressView = default;
         [SerializeField] private HintView hintView = default;
 
         [SerializeField] private RectTransform wordParent = default;
@@ -62,6 +63,7 @@ namespace Tsutaeru.InGame.Installer
 
             // View
             builder.RegisterInstance<TimeView>(timeView);
+            builder.RegisterInstance<ProgressView>(progressView);
             builder.RegisterInstance<HintView>(hintView);
         }
     }

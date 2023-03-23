@@ -20,6 +20,8 @@ namespace Tsutaeru.InGame.Domain.UseCase
             return _questionRepository.Find(difficulty);
         }
 
+        public int progress => _progressEntity.value + 1;
+
         public bool IsAllClear()
         {
             _progressEntity.Increase();
