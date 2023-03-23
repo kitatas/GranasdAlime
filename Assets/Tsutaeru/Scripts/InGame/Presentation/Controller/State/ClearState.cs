@@ -11,18 +11,23 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly QuestionUseCase _questionUseCase;
         private readonly WordUseCase _wordUseCase;
         private readonly HintView _hintView;
+        private readonly TimeView _timeView;
 
-        public ClearState(QuestionUseCase questionUseCase, WordUseCase wordUseCase, HintView hintView)
+        public ClearState(QuestionUseCase questionUseCase, WordUseCase wordUseCase, HintView hintView,
+            TimeView timeView)
         {
             _questionUseCase = questionUseCase;
             _wordUseCase = wordUseCase;
             _hintView = hintView;
+            _timeView = timeView;
         }
 
         public override GameState state => GameState.Clear;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
+            _timeView.ResetBackground();
+
             await UniTask.Yield(token);
         }
 
@@ -30,10 +35,15 @@ namespace Tsutaeru.InGame.Presentation.Controller
         {
             await _wordUseCase.HideAllWordBackgroundAsync(token);
 
+            await _timeView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token);
+            await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
+
             if (_questionUseCase.IsAllClear())
             {
                 await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
                 await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
+
+                await _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 
                 await _hintView.RenderAsync("Thank you for playing!!", UiConfig.ANIMATION_TIME, token);
                 await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
@@ -48,6 +58,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
                     _wordUseCase.HideAllWordAsync(token),
                     _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token)
                 );
+
+                await _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 
                 return GameState.SetUp;
             }
