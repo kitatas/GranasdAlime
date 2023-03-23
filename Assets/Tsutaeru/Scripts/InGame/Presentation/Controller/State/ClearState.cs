@@ -28,7 +28,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await UniTask.Yield(token);
+            await _wordUseCase.HideAllWordBackgroundAsync(token);
 
             if (_questionUseCase.IsAllClear())
             {

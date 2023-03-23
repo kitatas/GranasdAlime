@@ -42,5 +42,10 @@ namespace Tsutaeru.InGame.Data.Container
         {
             _list.Each(x => x.Hide());
         }
+
+        public void HideBackgroundAll()
+        {
+            _list.Each(x => x.HideBackground());
+        }
     }
 }

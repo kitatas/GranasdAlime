@@ -6,12 +6,14 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Tsutaeru.InGame.Presentation.View
 {
     public sealed class WordView : UIBehaviour
     {
         [SerializeField] private TextMeshProUGUI word = default;
+        [SerializeField] private Image background = default;
         [SerializeField] private CanvasGroup canvasGroup = default;
 
         [HideInInspector] public char wordChar;
@@ -135,6 +137,14 @@ namespace Tsutaeru.InGame.Presentation.View
                 .Join(canvasGroup
                     .DOFade(0.0f, WordConfig.GENERATE_SPEED)
                     .SetEase(Ease.OutQuart))
+                .SetLink(gameObject);
+        }
+
+        public void HideBackground()
+        {
+            background
+                .DOFade(0.0f, WordConfig.GENERATE_SPEED)
+                .SetEase(Ease.OutQuart)
                 .SetLink(gameObject);
         }
     }

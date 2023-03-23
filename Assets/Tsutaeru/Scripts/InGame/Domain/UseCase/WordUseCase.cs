@@ -70,6 +70,12 @@ namespace Tsutaeru.InGame.Domain.UseCase
             _wordContainer.HideAll();
             await UniTask.Delay(TimeSpan.FromSeconds(WordConfig.GENERATE_SPEED), cancellationToken: token);
         }
+        
+        public async UniTask HideAllWordBackgroundAsync(CancellationToken token)
+        {
+            _wordContainer.HideBackgroundAll();
+            await UniTask.Delay(TimeSpan.FromSeconds(WordConfig.GENERATE_SPEED), cancellationToken: token);
+        }
 
         public IObservable<Unit> ExecShift() => _execShift;
 
