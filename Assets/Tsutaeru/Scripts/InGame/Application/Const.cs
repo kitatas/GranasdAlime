@@ -2,8 +2,7 @@ namespace Tsutaeru.InGame
 {
     public sealed class GameConfig
     {
-        // TODO: fix init state
-        public const GameState INIT_STATE = GameState.SetUp;
+        public const GameState INIT_STATE = GameState.Title;
 
         public const int MAX_QUESTION = 10;
     }

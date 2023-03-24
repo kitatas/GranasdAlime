@@ -21,6 +21,7 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private TimeView timeView = default;
         [SerializeField] private ProgressView progressView = default;
         [SerializeField] private ReloadButtonView reloadButtonView = default;
+        [SerializeField] private StartButtonView startButtonView = default;
         [SerializeField] private HintView hintView = default;
 
         [SerializeField] private RectTransform wordParent = default;
@@ -58,6 +59,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<JudgeState>(Lifetime.Scoped);
             builder.Register<ResultState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);
+            builder.Register<TitleState>(Lifetime.Scoped);
 
             // Presenter
             builder.RegisterEntryPoint<ButtonPresenter>();
@@ -68,6 +70,7 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<TimeView>(timeView);
             builder.RegisterInstance<ProgressView>(progressView);
             builder.RegisterInstance<ReloadButtonView>(reloadButtonView);
+            builder.RegisterInstance<StartButtonView>(startButtonView);
             builder.RegisterInstance<HintView>(hintView);
         }
     }
