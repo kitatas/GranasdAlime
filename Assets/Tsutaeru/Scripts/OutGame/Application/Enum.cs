@@ -4,5 +4,6 @@ namespace Tsutaeru.OutGame
     {
         None,
         Main,
+        Ranking,
     }
 }

@@ -56,7 +56,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
                 await _wordUseCase.HideAllWordAsync(token);
 
-                return GameState.None;
+                return GameState.Result;
             }
             else
             {

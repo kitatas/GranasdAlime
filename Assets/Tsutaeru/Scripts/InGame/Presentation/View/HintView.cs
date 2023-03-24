@@ -35,29 +35,46 @@ namespace Tsutaeru.InGame.Presentation.View
         public async UniTask ResetAsync(float animationTime, CancellationToken token)
         {
             // タグを除外した文字列
-            var hintText = Regex.Replace(hint.text, @"[^\p{IsKatakana}\s]", "");
+            var hintText = Regex.Replace(hint.text, "<.*?>", "");
 
             var deleteInterval = animationTime / hintText.Length;
 
             while (hint.text != "")
             {
                 var text = hint.text;
-                var c = text[^1];
-
-                // 末尾の文字を削除
-                hint.text = text.Remove(text.Length - 1);
-
-                // タグ以外の文字を削除した場合
-                if (char.IsWhiteSpace(c) || (c >= '\u30A1' && c <= '\u30F6'))
+                if (text.EndsWith(">"))
                 {
-                    await UniTask.Delay(TimeSpan.FromSeconds(deleteInterval), cancellationToken: token);
+                    var index = text.LastIndexOf("<", StringComparison.Ordinal);
+                    if (index != -1)
+                    {
+                        Set(text.Remove(index, text.Length - index));
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+                else
+                {
+                    Set(text.Remove(text.Length - 1));
+                }
+
+                await UniTask.Delay(TimeSpan.FromSeconds(deleteInterval), cancellationToken: token);
             }
         }
 
         private void Set(string message)
         {
             hint.text = message;
+        }
+
+        public async UniTask TweenHeightAsync(float y, float animationTime, CancellationToken token)
+        {
+            await hint.rectTransform
+                .DOAnchorPosY(y, animationTime)
+                .SetLink(gameObject)
+                .SetEase(Ease.Linear)
+                .WithCancellation(token);
         }
     }
 }

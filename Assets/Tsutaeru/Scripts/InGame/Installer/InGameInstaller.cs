@@ -55,6 +55,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<ClearState>(Lifetime.Scoped);
             builder.Register<InputState>(Lifetime.Scoped);
             builder.Register<JudgeState>(Lifetime.Scoped);
+            builder.Register<ResultState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);
 
             // Presenter
