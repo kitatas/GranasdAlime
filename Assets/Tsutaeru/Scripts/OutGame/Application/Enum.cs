@@ -7,6 +7,11 @@ namespace Tsutaeru.OutGame
         Ranking,
     }
 
+    public enum BgmType
+    {
+        None,
+    }
+
     public enum SeType
     {
         None,

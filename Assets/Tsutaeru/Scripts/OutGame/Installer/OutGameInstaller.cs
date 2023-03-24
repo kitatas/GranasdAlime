@@ -11,11 +11,13 @@ namespace Tsutaeru.OutGame.Installer
 {
     public sealed class OutGameInstaller : LifetimeScope
     {
+        [SerializeField] private BgmTable bgmTable = default;
         [SerializeField] private SeTable seTable = default;
 
         protected override void Configure(IContainerBuilder builder)
         {
             // DataStore
+            builder.RegisterInstance<BgmTable>(bgmTable);
             builder.RegisterInstance<SeTable>(seTable);
 
             // Repository
