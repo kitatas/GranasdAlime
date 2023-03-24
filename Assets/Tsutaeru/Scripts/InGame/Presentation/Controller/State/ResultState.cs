@@ -12,12 +12,15 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly SceneUseCase _sceneUseCase;
         private readonly TimeUseCase _timeUseCase;
         private readonly HintView _hintView;
+        private readonly ReloadButtonView _reloadButtonView;
 
-        public ResultState(SceneUseCase sceneUseCase, TimeUseCase timeUseCase, HintView hintView)
+        public ResultState(SceneUseCase sceneUseCase, TimeUseCase timeUseCase, HintView hintView,
+            ReloadButtonView reloadButtonView)
         {
             _sceneUseCase = sceneUseCase;
             _timeUseCase = timeUseCase;
             _hintView = hintView;
+            _reloadButtonView = reloadButtonView;
         }
 
         public override GameState state => GameState.Result;
@@ -38,8 +41,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
             var score = _timeUseCase.value;
             RankingLoader.Instance.SendScoreAndShowRanking(score);
 
-            // TODO: push button
-            await UniTask.Yield(token);
+            await _reloadButtonView.ShowAsync(UiConfig.ANIMATION_TIME, token);
+            await _reloadButtonView.push.ToUniTask(true, token);
 
             await UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(SceneName.Ranking.ToString());
             _sceneUseCase.Load(SceneName.Main);
