@@ -44,7 +44,6 @@ namespace Tsutaeru.InGame.Presentation.Controller
             await _reloadButtonView.ShowAsync(UiConfig.ANIMATION_TIME, token);
             await _reloadButtonView.push.ToUniTask(true, token);
 
-            await UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(SceneName.Ranking.ToString());
             _sceneUseCase.Load(SceneName.Main);
 
             return GameState.None;
