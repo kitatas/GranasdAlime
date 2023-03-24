@@ -13,7 +13,7 @@ namespace Tsutaeru.InGame
                 HintType.Food  => "タベモノ",
                 HintType.Fluid => "リュウタイ",
                 HintType.Sport => "スポーツ",
-                HintType.Item => "アイテム",
+                HintType.Item => "ドウグ",
                 HintType.Country => "クニ",
                 HintType.Action => "コウドウ",
                 HintType.Service => "サービス",
@@ -25,6 +25,7 @@ namespace Tsutaeru.InGame
                 HintType.Vehicle => "ノリモノ",
                 HintType.Rule => "ゲームルール",
                 HintType.Title => "ゲームタイトル",
+                HintType.Unit => "タンイ",
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }

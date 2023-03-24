@@ -40,6 +40,7 @@ namespace Tsutaeru.InGame
         Vehicle,
         Rule,
         Title,
+        Unit,
     }
 
     public enum WordStatus
