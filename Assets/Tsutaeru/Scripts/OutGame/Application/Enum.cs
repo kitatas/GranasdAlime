@@ -6,4 +6,9 @@ namespace Tsutaeru.OutGame
         Main,
         Ranking,
     }
+
+    public enum SeType
+    {
+        None,
+    }
 }
