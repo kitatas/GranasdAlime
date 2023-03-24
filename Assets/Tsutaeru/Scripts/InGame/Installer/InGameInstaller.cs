@@ -59,6 +59,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<SetUpState>(Lifetime.Scoped);
 
             // Presenter
+            builder.RegisterEntryPoint<ButtonPresenter>();
             builder.RegisterEntryPoint<StatePresenter>();
             builder.RegisterEntryPoint<TimePresenter>();
 
