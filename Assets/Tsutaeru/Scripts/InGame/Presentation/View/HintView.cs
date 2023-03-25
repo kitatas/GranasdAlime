@@ -48,9 +48,11 @@ namespace Tsutaeru.InGame.Presentation.View
                     if (index != -1)
                     {
                         Set(text.Remove(index, text.Length - index));
+                        continue;
                     }
                     else
                     {
+                        Set("");
                         break;
                     }
                 }

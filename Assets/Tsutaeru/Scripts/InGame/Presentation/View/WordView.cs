@@ -132,7 +132,7 @@ namespace Tsutaeru.InGame.Presentation.View
         {
             DOTween.Sequence()
                 .Append(transform
-                    .DOScale(Vector3.one, WordConfig.GENERATE_SPEED)
+                    .DOScale(Vector3.one * 0.5f, WordConfig.GENERATE_SPEED)
                     .SetEase(Ease.OutQuart))
                 .Join(canvasGroup
                     .DOFade(0.0f, WordConfig.GENERATE_SPEED)
