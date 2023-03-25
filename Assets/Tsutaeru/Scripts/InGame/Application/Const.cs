@@ -2,6 +2,8 @@ namespace Tsutaeru.InGame
 {
     public sealed class GameConfig
     {
+        public const string GAME_ID = "granasd_alime";
+
         public const GameState INIT_STATE = GameState.Title;
 
         public const int MAX_QUESTION = 20;
