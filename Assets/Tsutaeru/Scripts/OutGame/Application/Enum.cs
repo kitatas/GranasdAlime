@@ -24,5 +24,6 @@ namespace Tsutaeru.OutGame
         ProgressUp,
         Hint,
         Slide,
+        Pop,
     }
 }

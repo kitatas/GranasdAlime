@@ -5,6 +5,7 @@ using Tsutaeru.InGame.Data.Container;
 using Tsutaeru.InGame.Data.Entity;
 using Tsutaeru.InGame.Domain.Factory;
 using Tsutaeru.InGame.Domain.Repository;
+using Tsutaeru.OutGame;
 using UniEx;
 using UniRx;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
             _prefabRepository = prefabRepository;
         }
 
-        public async UniTask BuildAsync(Data.DataStore.QuestionData data, CancellationToken token)
+        public async UniTask BuildAsync(Data.DataStore.QuestionData data, Action<SeType> playSe, CancellationToken token)
         {
             _wordContainer.Refresh();
             _answerEntity = new AnswerEntity(data);
@@ -58,6 +59,8 @@ namespace Tsutaeru.InGame.Domain.UseCase
                     () => _execShift?.OnNext(Unit.Default));
 
                 _wordContainer.Add(instance);
+
+                playSe?.Invoke(SeType.Pop);
 
                 pointX += WordConfig.INTERVAL;
 

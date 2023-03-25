@@ -41,7 +41,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             await _hintView.RenderAsync(data, UiConfig.ANIMATION_TIME, token);
             await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 
-            await _wordUseCase.BuildAsync(data, token);
+            await _wordUseCase.BuildAsync(data, _soundUseCase.PlaySe, token);
 
             await UniTask.Yield(token);
 
