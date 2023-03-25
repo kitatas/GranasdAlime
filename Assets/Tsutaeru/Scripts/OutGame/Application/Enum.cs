@@ -18,5 +18,6 @@ namespace Tsutaeru.OutGame
     public enum SeType
     {
         None,
+        Transition,
     }
 }

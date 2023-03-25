@@ -12,12 +12,14 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
     public sealed class ScenePresenter : IInitializable, IDisposable
     {
         private readonly SceneUseCase _sceneUseCase;
+        private readonly SoundUseCase _soundUseCase;
         private readonly TransitionView _transitionView;
         private readonly CancellationTokenSource _tokenSource;
 
-        public ScenePresenter(SceneUseCase sceneUseCase, TransitionView transitionView)
+        public ScenePresenter(SceneUseCase sceneUseCase, SoundUseCase soundUseCase, TransitionView transitionView)
         {
             _sceneUseCase = sceneUseCase;
+            _soundUseCase = soundUseCase;
             _transitionView = transitionView;
             _tokenSource = new CancellationTokenSource();
         }
@@ -37,9 +39,13 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
 
         private async UniTaskVoid FadeLoadAsync(SceneName sceneName, CancellationToken token)
         {
+            _soundUseCase.PlaySe(SeType.Transition);
+            _soundUseCase.StopBgm();
             await _transitionView.FadeInAsync(SceneConfig.FADE_IN_TIME, token);
             await SceneManager.LoadSceneAsync(sceneName.ToString()).WithCancellation(token);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: token);
+
+            _soundUseCase.PlayBgm(BgmType.Title);
             await _transitionView.FadeOutAsync(SceneConfig.FADE_OUT_TIME, token);
         }
 
