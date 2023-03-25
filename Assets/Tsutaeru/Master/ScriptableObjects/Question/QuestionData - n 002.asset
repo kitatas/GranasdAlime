@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyType: 2
   originMessage: "\u30D0\u30D6\u30EB"
-  originHintType: 4
+  originHintType: 12
   answerMessage: "\u30D0\u30EB\u30D6"
   answerHintType: 6

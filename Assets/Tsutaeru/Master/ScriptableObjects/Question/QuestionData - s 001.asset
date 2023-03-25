@@ -15,5 +15,5 @@ MonoBehaviour:
   difficultyType: 4
   originMessage: "\u30B9\u30E9\u30A4\u30C9\u30A2\u30CA\u30B0\u30E9\u30E0"
   originHintType: 16
-  answerMessage: "\u30B0\u30E9\u30B9\u30E9\u30A2\u30C9\u30CA\u30A4\u30E0"
+  answerMessage: "\u30B0\u30E9\u30CA\u30B9\u30C9\u30A2\u30E9\u30A4\u30E0"
   answerHintType: 17
