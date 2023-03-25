@@ -3,18 +3,22 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
+using Tsutaeru.OutGame;
+using Tsutaeru.OutGame.Domain.UseCase;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class SetUpState : BaseState
     {
+        private readonly SoundUseCase _soundUseCase;
         private readonly QuestionUseCase _questionUseCase;
         private readonly WordUseCase _wordUseCase;
         private readonly HintView _hintView;
 
-        public SetUpState(QuestionUseCase questionUseCase, WordUseCase wordUseCase,
+        public SetUpState(SoundUseCase soundUseCase, QuestionUseCase questionUseCase, WordUseCase wordUseCase,
             HintView hintView)
         {
+            _soundUseCase = soundUseCase;
             _questionUseCase = questionUseCase;
             _wordUseCase = wordUseCase;
             _hintView = hintView;
@@ -33,6 +37,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
         {
             var data = _questionUseCase.Lot();
 
+            _soundUseCase.PlaySe(SeType.Hint);
             await _hintView.RenderAsync(data, UiConfig.ANIMATION_TIME, token);
             await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 

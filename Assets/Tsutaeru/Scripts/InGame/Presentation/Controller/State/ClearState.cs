@@ -48,6 +48,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             if (_questionUseCase.IsAllClear())
             {
+                _soundUseCase.PlaySe(SeType.Hint);
                 await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
                 await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 
@@ -59,6 +60,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
                 _soundUseCase.PlayBgm(BgmType.Result);
 
+                _soundUseCase.PlaySe(SeType.Hint);
                 await _hintView.RenderAsync("Thank you for playing!!", UiConfig.ANIMATION_TIME, token);
                 await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 
@@ -68,6 +70,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             }
             else
             {
+                _soundUseCase.PlaySe(SeType.Hint);
                 await (
                     _wordUseCase.HideAllWordAsync(token),
                     _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token)
