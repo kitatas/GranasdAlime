@@ -126,7 +126,7 @@ MonoBehaviour:
   m_ImageType: 0
   m_MaterialMode: 0
   m_StrokeWidth: 0
-  m_OutlineWidth: 3
+  m_OutlineWidth: 2.5
   m_OutlineColor: {r: 0.08235294, g: 0.9882353, b: 0.007843138, a: 1}
   m_FalloffDistance: 0
   m_ConstrainRotation: 1
