@@ -17,6 +17,10 @@ namespace Tsutaeru.OutGame.Presentation.View
             raycastBlocker.raycastTarget = true;
 
             await DOTween.Sequence()
+                .Append(maskUp
+                    .DOFade(1.0f, 0.0f))
+                .Join(maskDown
+                    .DOFade(1.0f, 0.0f))
                 .Append(maskUp.rectTransform
                     .DOAnchorPosY(0.0f, animationTime))
                 .Join(maskDown.rectTransform
@@ -29,11 +33,15 @@ namespace Tsutaeru.OutGame.Presentation.View
         public async UniTask FadeOutAsync(float animationTime, CancellationToken token)
         {
             await DOTween.Sequence()
+                .Append(maskUp
+                    .DOFade(0.0f, animationTime))
+                .Join(maskDown
+                    .DOFade(0.0f, animationTime))
                 .Append(maskUp.rectTransform
-                    .DOAnchorPosY(270.0f, animationTime))
+                    .DOAnchorPosY(270.0f, 0.0f))
                 .Join(maskDown.rectTransform
-                    .DOAnchorPosY(-270.0f, animationTime))
-                .SetEase(Ease.OutQuart)
+                    .DOAnchorPosY(-270.0f, 0.0f))
+                .SetEase(Ease.Linear)
                 .SetLink(gameObject)
                 .WithCancellation(token);
 

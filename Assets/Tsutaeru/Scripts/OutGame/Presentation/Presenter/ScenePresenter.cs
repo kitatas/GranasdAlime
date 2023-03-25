@@ -37,9 +37,10 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
 
         private async UniTaskVoid FadeLoadAsync(SceneName sceneName, CancellationToken token)
         {
-            await _transitionView.FadeInAsync(SceneConfig.FADE_TIME, token);
+            await _transitionView.FadeInAsync(SceneConfig.FADE_IN_TIME, token);
             await SceneManager.LoadSceneAsync(sceneName.ToString()).WithCancellation(token);
-            await _transitionView.FadeOutAsync(SceneConfig.FADE_TIME, token);
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: token);
+            await _transitionView.FadeOutAsync(SceneConfig.FADE_OUT_TIME, token);
         }
 
         public void Dispose()
