@@ -13,6 +13,11 @@ namespace Tsutaeru.OutGame.Presentation.View
             bgmSource.Play();
         }
 
+        public void StopBgm()
+        {
+            bgmSource.Stop();
+        }
+
         public void PlaySe(AudioClip clip)
         {
             seSource.PlayOneShot(clip);

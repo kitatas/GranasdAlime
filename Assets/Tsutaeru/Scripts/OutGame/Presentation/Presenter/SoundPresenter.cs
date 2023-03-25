@@ -22,6 +22,10 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
                 .Subscribe(_soundView.PlayBgm)
                 .AddTo(_soundView);
 
+            _soundUseCase.stopBgm
+                .Subscribe(_ => _soundView.StopBgm())
+                .AddTo(_soundView);
+
             _soundUseCase.playSe
                 .Subscribe(_soundView.PlaySe)
                 .AddTo(_soundView);
