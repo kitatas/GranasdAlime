@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 namespace Tsutaeru.OutGame.Presentation.Presenter
 {
-    public sealed class SoundPresenter : IInitializable
+    public sealed class SoundPresenter : IInitializable, IStartable
     {
         private readonly SoundUseCase _soundUseCase;
         private readonly SoundView _soundView;
@@ -25,6 +25,11 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
             _soundUseCase.playSe
                 .Subscribe(_soundView.PlaySe)
                 .AddTo(_soundView);
+        }
+
+        public void Start()
+        {
+            _soundUseCase.PlayBgm(BgmType.Title);
         }
     }
 }

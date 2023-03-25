@@ -3,20 +3,24 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
+using Tsutaeru.OutGame;
+using Tsutaeru.OutGame.Domain.UseCase;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class ClearState : BaseState
     {
+        private readonly SoundUseCase _soundUseCase;
         private readonly QuestionUseCase _questionUseCase;
         private readonly WordUseCase _wordUseCase;
         private readonly HintView _hintView;
         private readonly ProgressView _progressView;
         private readonly TimeView _timeView;
 
-        public ClearState(QuestionUseCase questionUseCase, WordUseCase wordUseCase, HintView hintView,
-            ProgressView progressView, TimeView timeView)
+        public ClearState(SoundUseCase soundUseCase, QuestionUseCase questionUseCase, WordUseCase wordUseCase,
+            HintView hintView, ProgressView progressView, TimeView timeView)
         {
+            _soundUseCase = soundUseCase;
             _questionUseCase = questionUseCase;
             _wordUseCase = wordUseCase;
             _hintView = hintView;
@@ -50,6 +54,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
                     _progressView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token),
                     _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token)
                 );
+
+                _soundUseCase.PlayBgm(BgmType.Result);
 
                 await _hintView.RenderAsync("Thank you for playing!!", UiConfig.ANIMATION_TIME, token);
                 await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);

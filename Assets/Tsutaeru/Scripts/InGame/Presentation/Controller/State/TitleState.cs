@@ -1,20 +1,24 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Presentation.View;
+using Tsutaeru.OutGame;
+using Tsutaeru.OutGame.Domain.UseCase;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class TitleState : BaseState
     {
+        private readonly SoundUseCase _soundUseCase;
         private readonly ConfigView _configView;
         private readonly LicenseView _licenseView;
         private readonly TopView _topView;
         private readonly ProgressView _progressView;
         private readonly StartButtonView _startButtonView;
 
-        public TitleState(ConfigView configView, LicenseView licenseView, TopView topView, ProgressView progressView,
-            StartButtonView startButtonView)
+        public TitleState(SoundUseCase soundUseCase, ConfigView configView, LicenseView licenseView, TopView topView,
+            ProgressView progressView, StartButtonView startButtonView)
         {
+            _soundUseCase = soundUseCase;
             _configView = configView;
             _licenseView = licenseView;
             _topView = topView;
@@ -44,6 +48,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
         {
             await _startButtonView.push.ToUniTask(true, token);
             await _topView.HideAsync(UiConfig.POPUP_TIME, token);
+
+            _soundUseCase.PlayBgm(BgmType.Main);
 
             await _progressView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 

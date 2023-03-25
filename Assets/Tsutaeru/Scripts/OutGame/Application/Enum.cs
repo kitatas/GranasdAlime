@@ -10,6 +10,9 @@ namespace Tsutaeru.OutGame
     public enum BgmType
     {
         None,
+        Title,
+        Main,
+        Result,
     }
 
     public enum SeType
