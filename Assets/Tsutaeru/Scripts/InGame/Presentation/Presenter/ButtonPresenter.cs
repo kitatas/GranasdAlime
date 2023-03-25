@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Tsutaeru.Common.Presentation.View;
+using Tsutaeru.OutGame.Domain.UseCase;
 using VContainer.Unity;
 using Object = UnityEngine.Object;
 
@@ -8,10 +9,12 @@ namespace Tsutaeru.InGame.Presentation.Presenter
 {
     public sealed class ButtonPresenter : IInitializable, IDisposable
     {
+        private readonly SoundUseCase _soundUseCase;
         private readonly CancellationTokenSource _tokenSource;
 
-        public ButtonPresenter()
+        public ButtonPresenter(SoundUseCase soundUseCase)
         {
+            _soundUseCase = soundUseCase;
             _tokenSource = new CancellationTokenSource();
         }
 
@@ -19,7 +22,7 @@ namespace Tsutaeru.InGame.Presentation.Presenter
         {
             foreach (var buttonView in Object.FindObjectsOfType<BaseButtonView>())
             {
-                buttonView.InitAsync(_tokenSource.Token).Forget();
+                buttonView.InitAsync(_soundUseCase.PlaySe, _tokenSource.Token).Forget();
             }
         }
 

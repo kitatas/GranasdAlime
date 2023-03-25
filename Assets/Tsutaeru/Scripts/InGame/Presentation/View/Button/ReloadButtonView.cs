@@ -1,16 +1,18 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using Tsutaeru.Common.Presentation.View;
+using Tsutaeru.OutGame;
 
 namespace Tsutaeru.InGame.Presentation.View
 {
     public sealed class ReloadButtonView : BaseButtonView
     {
-        public override async UniTaskVoid InitAsync(CancellationToken token)
+        public override async UniTaskVoid InitAsync(Action<SeType> playSe, CancellationToken token)
         {
-            base.InitAsync(token).Forget();
+            base.InitAsync(playSe, token).Forget();
             await (
                 HideAsync(0.0f, token)
             );

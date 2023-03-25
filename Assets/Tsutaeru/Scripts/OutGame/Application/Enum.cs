@@ -18,6 +18,8 @@ namespace Tsutaeru.OutGame
     public enum SeType
     {
         None,
+        Decision,
+        Cancel,
         Transition,
         ProgressUp,
         Hint,

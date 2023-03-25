@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Tsutaeru.OutGame;
 using UniEx;
 using UniRx;
 using UnityEngine;
@@ -12,10 +13,11 @@ namespace Tsutaeru.Common.Presentation.View
     public abstract class BaseButtonView : MonoBehaviour
     {
         [SerializeField] private Button button = default;
+        [SerializeField] private bool isPlaySe = true;
 
         private readonly float _animationTime = 0.1f;
 
-        public virtual async UniTaskVoid InitAsync(CancellationToken token)
+        public virtual async UniTaskVoid InitAsync(Action<SeType> playSe, CancellationToken token)
         {
             var rectTransform = button.transform.ToRectTransform();
             var scale = rectTransform.localScale;
@@ -30,6 +32,10 @@ namespace Tsutaeru.Common.Presentation.View
                             .DOScale(scale, _animationTime))
                         .SetLink(gameObject);
                 })
+                .AddTo(this);
+
+            push.Where(_ => isPlaySe)
+                .Subscribe(_ => playSe?.Invoke(SeType.Decision))
                 .AddTo(this);
 
             await UniTask.Yield(token);
