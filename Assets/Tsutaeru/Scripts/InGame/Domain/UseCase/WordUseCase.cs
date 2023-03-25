@@ -54,6 +54,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
                     () => _stateEntity.IsState(GameState.Input),
                     x =>
                     {
+                        playSe?.Invoke(SeType.Pop);
                         _wordContainer.Shift(x.index, x.move);
                     },
                     () => _execShift?.OnNext(Unit.Default));
