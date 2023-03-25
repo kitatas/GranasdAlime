@@ -7,7 +7,7 @@ namespace Tsutaeru.OutGame.Domain.UseCase
 {
     public sealed class SoundUseCase
     {
-        private readonly ReactiveProperty<Data.DataStore.BgmData> _playBgm;
+        private readonly Subject<Data.DataStore.BgmData> _playBgm;
         private readonly Subject<Unit> _stopBgm;
         private readonly Subject<Data.DataStore.SeData> _playSe;
         private readonly ReactiveProperty<float> _bgmVolume;
@@ -17,7 +17,7 @@ namespace Tsutaeru.OutGame.Domain.UseCase
 
         public SoundUseCase(SoundRepository soundRepository)
         {
-            _playBgm = new ReactiveProperty<Data.DataStore.BgmData>();
+            _playBgm = new Subject<Data.DataStore.BgmData>();
             _stopBgm = new Subject<Unit>();
             _playSe = new Subject<Data.DataStore.SeData>();
             _bgmVolume = new ReactiveProperty<float>(SoundConfig.INIT_VOLUME);
@@ -25,7 +25,7 @@ namespace Tsutaeru.OutGame.Domain.UseCase
             _soundRepository = soundRepository;
         }
 
-        public IObservable<AudioClip> playBgm => _playBgm.SkipLatestValueOnSubscribe().Select(x => x.clip);
+        public IObservable<AudioClip> playBgm => _playBgm.Select(x => x.clip);
         public IObservable<Unit> stopBgm => _stopBgm;
         public IObservable<AudioClip> playSe => _playSe.Select(x => x.clip);
         public IObservable<float> bgmVolume => _bgmVolume.Select(x => x / 10.0f);
@@ -36,7 +36,7 @@ namespace Tsutaeru.OutGame.Domain.UseCase
         public void PlayBgm(BgmType type)
         {
             var data = _soundRepository.Find(type);
-            _playBgm.Value = data;
+            _playBgm?.OnNext(data);
         }
 
         public void StopBgm()

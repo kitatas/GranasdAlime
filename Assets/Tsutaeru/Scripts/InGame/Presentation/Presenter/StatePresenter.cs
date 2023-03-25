@@ -37,6 +37,9 @@ namespace Tsutaeru.InGame.Presentation.Presenter
                 var nextState = await _stateController.TickAsync(state, token);
                 _stateUseCase.Set(nextState);
             }
+            catch (OperationCanceledException)
+            {
+            }
             catch (Exception e)
             {
                 UnityEngine.Debug.LogError($"{state}: {e}");
