@@ -40,6 +40,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
+            _soundUseCase.PlaySe(SeType.Correct);
             await _wordUseCase.HideAllWordBackgroundAsync(token);
 
             _soundUseCase.PlaySe(SeType.Slide);

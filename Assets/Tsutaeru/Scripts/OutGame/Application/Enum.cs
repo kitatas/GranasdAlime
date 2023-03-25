@@ -25,5 +25,6 @@ namespace Tsutaeru.OutGame
         Hint,
         Slide,
         Pop,
+        Correct,
     }
 }
