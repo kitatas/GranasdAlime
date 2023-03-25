@@ -20,16 +20,18 @@ namespace Tsutaeru.OutGame.Domain.UseCase
             _playBgm = new ReactiveProperty<Data.DataStore.BgmData>();
             _stopBgm = new Subject<Unit>();
             _playSe = new Subject<Data.DataStore.SeData>();
-            _bgmVolume = new ReactiveProperty<float>(0.5f);
-            _seVolume = new ReactiveProperty<float>(0.5f);
+            _bgmVolume = new ReactiveProperty<float>(SoundConfig.INIT_VOLUME);
+            _seVolume = new ReactiveProperty<float>(SoundConfig.INIT_VOLUME);
             _soundRepository = soundRepository;
         }
 
         public IObservable<AudioClip> playBgm => _playBgm.SkipLatestValueOnSubscribe().Select(x => x.clip);
         public IObservable<Unit> stopBgm => _stopBgm;
         public IObservable<AudioClip> playSe => _playSe.Select(x => x.clip);
-        public IReadOnlyReactiveProperty<float> bgmVolume => _bgmVolume;
-        public IReadOnlyReactiveProperty<float> seVolume => _seVolume;
+        public IObservable<float> bgmVolume => _bgmVolume.Select(x => x / 10.0f);
+        public IObservable<float> seVolume => _seVolume.Select(x => x / 10.0f);
+        public float bgmVolumeValue => _bgmVolume.Value;
+        public float seVolumeValue => _seVolume.Value;
 
         public void PlayBgm(BgmType type)
         {
