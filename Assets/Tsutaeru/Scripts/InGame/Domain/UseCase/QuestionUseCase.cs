@@ -22,9 +22,13 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public int progress => _progressEntity.value + 1;
 
-        public bool IsAllClear()
+        public void IncreaseProgress()
         {
             _progressEntity.Increase();
+        }
+
+        public bool IsAllClear()
+        {
             return _progressEntity.IsCount(GameConfig.MAX_QUESTION);
         }
     }

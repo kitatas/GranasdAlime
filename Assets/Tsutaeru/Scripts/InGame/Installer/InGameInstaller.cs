@@ -52,6 +52,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<QuestionRepository>(Lifetime.Scoped);
 
             // UseCase
+            builder.Register<ClearUseCase>(Lifetime.Scoped);
             builder.Register<QuestionUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<TimeUseCase>(Lifetime.Scoped);

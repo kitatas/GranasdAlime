@@ -10,6 +10,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class ClearState : BaseState
     {
+        private readonly ClearUseCase _clearUseCase;
         private readonly SoundUseCase _soundUseCase;
         private readonly QuestionUseCase _questionUseCase;
         private readonly WordUseCase _wordUseCase;
@@ -17,9 +18,10 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly ProgressView _progressView;
         private readonly TimeView _timeView;
 
-        public ClearState(SoundUseCase soundUseCase, QuestionUseCase questionUseCase, WordUseCase wordUseCase,
-            HintView hintView, ProgressView progressView, TimeView timeView)
+        public ClearState(ClearUseCase clearUseCase, SoundUseCase soundUseCase, QuestionUseCase questionUseCase,
+            WordUseCase wordUseCase, HintView hintView, ProgressView progressView, TimeView timeView)
         {
+            _clearUseCase = clearUseCase;
             _soundUseCase = soundUseCase;
             _questionUseCase = questionUseCase;
             _wordUseCase = wordUseCase;
@@ -41,10 +43,18 @@ namespace Tsutaeru.InGame.Presentation.Controller
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
             _soundUseCase.PlaySe(SeType.Correct);
+            _questionUseCase.IncreaseProgress();
             await _wordUseCase.HideAllWordBackgroundAsync(token);
 
             _soundUseCase.PlaySe(SeType.Slide);
-            await _timeView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token);
+            _soundUseCase.PlaySe(SeType.Hint);
+            await (
+                _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token),
+                _timeView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token)
+            );
+
+            _soundUseCase.PlaySe(SeType.Hint);
+            await _hintView.RenderAsync(_clearUseCase.GetClearMessage(), UiConfig.ANIMATION_TIME, token);
             await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 
             if (_questionUseCase.IsAllClear())
