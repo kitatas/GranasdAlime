@@ -79,6 +79,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                 _soundUseCase.PlaySe(SeType.Slide);
                 await _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 
+                _soundUseCase.PlaySe(SeType.ProgressUp);
                 _progressView.Render(_questionUseCase.progress);
 
                 return GameState.SetUp;
