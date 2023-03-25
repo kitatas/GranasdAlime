@@ -51,6 +51,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             _soundUseCase.PlayBgm(BgmType.Main);
 
+            _soundUseCase.PlaySe(SeType.Slide);
             await _progressView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 
             return GameState.SetUp;

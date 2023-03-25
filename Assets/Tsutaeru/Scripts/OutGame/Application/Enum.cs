@@ -19,5 +19,6 @@ namespace Tsutaeru.OutGame
     {
         None,
         Transition,
+        Slide,
     }
 }

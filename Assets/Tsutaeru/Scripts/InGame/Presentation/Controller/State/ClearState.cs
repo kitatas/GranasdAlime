@@ -42,6 +42,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
         {
             await _wordUseCase.HideAllWordBackgroundAsync(token);
 
+            _soundUseCase.PlaySe(SeType.Slide);
             await _timeView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token);
             await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 
@@ -50,6 +51,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                 await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
                 await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: token);
 
+                _soundUseCase.PlaySe(SeType.Slide);
                 await (
                     _progressView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token),
                     _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token)
@@ -71,6 +73,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                     _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token)
                 );
 
+                _soundUseCase.PlaySe(SeType.Slide);
                 await _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 
                 _progressView.Render(_questionUseCase.progress);
