@@ -19,7 +19,7 @@ namespace Tsutaeru.InGame
                 HintType.Service => "サービス",
                 HintType.Metal => "キンゾク",
                 HintType.Creature => "セイブツ",
-                HintType.Grain => "リュウシ",
+                HintType.Object => "ブッタイ",
                 HintType.Data => "データ",
                 HintType.Human => "ヒト",
                 HintType.Vehicle => "ノリモノ",

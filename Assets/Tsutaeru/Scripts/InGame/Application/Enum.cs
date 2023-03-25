@@ -34,7 +34,7 @@ namespace Tsutaeru.InGame
         Service,
         Metal,
         Creature,
-        Grain,
+        Object,
         Data,
         Human,
         Vehicle,
