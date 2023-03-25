@@ -58,6 +58,8 @@ namespace Tsutaeru.InGame.Presentation.View
                         .DOScale(focusScale, WordConfig.FOCUS_SPEED)
                         .SetEase(Ease.OutBack)
                         .SetLink(gameObject);
+
+                    transform.SetAsLastSibling();
                 })
                 .AddTo(this);
 
