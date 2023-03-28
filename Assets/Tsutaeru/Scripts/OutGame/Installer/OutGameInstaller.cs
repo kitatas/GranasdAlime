@@ -20,6 +20,9 @@ namespace Tsutaeru.OutGame.Installer
             builder.RegisterInstance<BgmTable>(bgmTable);
             builder.RegisterInstance<SeTable>(seTable);
 
+            // Entity
+            builder.Register<InGame.Data.Entity.StateEntity>(Lifetime.Singleton);
+
             // Repository
             builder.Register<SoundRepository>(Lifetime.Singleton);
 

@@ -63,7 +63,7 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                _sceneUseCase.Load(SceneName.Main);
+                _sceneUseCase.Reload();
             }
         }
 
