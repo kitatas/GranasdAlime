@@ -5,29 +5,35 @@ using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 using Tsutaeru.OutGame;
 using Tsutaeru.OutGame.Domain.UseCase;
+using UniRx;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class ClearState : BaseState
     {
         private readonly ClearUseCase _clearUseCase;
+        private readonly SceneUseCase _sceneUseCase;
         private readonly SoundUseCase _soundUseCase;
         private readonly QuestionUseCase _questionUseCase;
         private readonly WordUseCase _wordUseCase;
         private readonly HintView _hintView;
         private readonly ProgressView _progressView;
         private readonly TimeView _timeView;
+        private readonly RetryButtonView _retryButtonView;
 
-        public ClearState(ClearUseCase clearUseCase, SoundUseCase soundUseCase, QuestionUseCase questionUseCase,
-            WordUseCase wordUseCase, HintView hintView, ProgressView progressView, TimeView timeView)
+        public ClearState(ClearUseCase clearUseCase, SceneUseCase sceneUseCase, SoundUseCase soundUseCase,
+            QuestionUseCase questionUseCase, WordUseCase wordUseCase, HintView hintView, ProgressView progressView,
+            TimeView timeView, RetryButtonView retryButtonView)
         {
             _clearUseCase = clearUseCase;
+            _sceneUseCase = sceneUseCase;
             _soundUseCase = soundUseCase;
             _questionUseCase = questionUseCase;
             _wordUseCase = wordUseCase;
             _hintView = hintView;
             _progressView = progressView;
             _timeView = timeView;
+            _retryButtonView = retryButtonView;
         }
 
         public override GameState state => GameState.Clear;
@@ -36,6 +42,11 @@ namespace Tsutaeru.InGame.Presentation.Controller
         {
             _progressView.Render(_questionUseCase.progress);
             _timeView.ResetBackground();
+
+            _retryButtonView.ShowAsync(0.0f, token).Forget();
+            _retryButtonView.push
+                .Subscribe(_ => _sceneUseCase.Reload())
+                .AddTo(_retryButtonView);
 
             await UniTask.Yield(token);
         }
@@ -66,7 +77,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
                 _soundUseCase.PlaySe(SeType.Slide);
                 await (
                     _progressView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token),
-                    _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token)
+                    _timeView.HideBackgroundAsync(UiConfig.ANIMATION_TIME, token),
+                    _retryButtonView.HideAsync(UiConfig.ANIMATION_TIME, token)
                 );
 
                 _soundUseCase.PlayBgm(BgmType.Result);
