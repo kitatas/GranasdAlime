@@ -16,7 +16,6 @@ namespace Tsutaeru.InGame.Installer
     public sealed class InGameInstaller : LifetimeScope
     {
         [SerializeField] private PrefabTable prefabTable = default;
-        [SerializeField] private QuestionTable questionTable = default;
 
         [SerializeField] private ReloadButtonView reloadButtonView = default;
         [SerializeField] private RetryButtonView retryButtonView = default;
@@ -38,7 +37,6 @@ namespace Tsutaeru.InGame.Installer
 
             // DataStore
             builder.RegisterInstance<PrefabTable>(prefabTable);
-            builder.RegisterInstance<QuestionTable>(questionTable);
 
             // Entity
             builder.Register<ProgressEntity>(Lifetime.Scoped);
