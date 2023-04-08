@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7b3dea20e071e46e7bc7d8c6f4fc7b75
+  m_SerializeEntries:
+  - m_GUID: b0f60cf18f0ad4927966e3000dc0d412
+    m_Address: Assets/Tsutaeru-Assets/Master/Json/unity1week.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: bcc0f42a274324d82ab205f096057318, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f50d5acf47694465586d87013af80567, type: 2}
+    - {fileID: 11400000, guid: 99461a749228445b0bcf52126a29e5a1, type: 2}
