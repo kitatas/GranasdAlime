@@ -1,22 +1,21 @@
-using UnityEngine;
+using System;
 
 namespace Tsutaeru.InGame.Data.DataStore
 {
-    [CreateAssetMenu(fileName = nameof(QuestionData), menuName = "DataTable/" + nameof(QuestionData))]
-    public sealed class QuestionData : ScriptableObject
+    [Serializable]
+    public sealed class QuestionTable
     {
-        [SerializeField] private Difficulty difficultyType = default;
+        public QuestionData[] data_list;
+    }
 
-        [SerializeField] private string originMessage = default;
-        [SerializeField] private HintType originHintType = default;
-
-        [SerializeField] private string answerMessage = default;
-        [SerializeField] private HintType answerHintType = default;
-
-        public Difficulty difficulty => difficultyType;
-        public string origin => originMessage;
-        public HintType originHint => originHintType;
-        public string answer => answerMessage;
-        public HintType answerHint => answerHintType;
+    [Serializable]
+    public sealed class QuestionData
+    {
+        public int question_id;
+        public Difficulty difficulty;
+        public string origin;
+        public HintType originHint;
+        public string answer;
+        public HintType answerHint;
     }
 }

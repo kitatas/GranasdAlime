@@ -31,4 +31,10 @@ namespace Tsutaeru.InGame
         public const float SHIFT_SPEED = 0.1f;
         public const float GENERATE_SPEED = 0.25f;
     }
+
+    public sealed class ResourceConfig
+    {
+        public const string BASE_PATH = "Assets/Tsutaeru-Assets/";
+        public const string JSON_PATH = BASE_PATH + "Master/Json/";
+    }
 }
