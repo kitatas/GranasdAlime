@@ -1,0 +1,26 @@
+{
+    "name": "Tsutaeru",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e93948cd1c9514662bcad21825e304c3",
+        "GUID:c4037b9ac201c467e9fc47df5af9b334",
+        "GUID:827f47054e407413e9663c748e13f0a6",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e",
+        "GUID:a631bfd384b444d059de74fd2da1eda3",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
