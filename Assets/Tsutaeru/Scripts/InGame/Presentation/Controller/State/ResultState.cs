@@ -44,7 +44,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
             await _hintView.TweenHeightAsync(-50.0f, UiConfig.ANIMATION_TIME, token);
 
             var score = _timeUseCase.value;
-            RankingLoader.Instance.SendScoreAndShowRanking(score);
+            var rankingSceneManager = await RankingLoader.Instance.SendScoreAndShowRankingAsync(score, 0, token);
+            rankingSceneManager.Init(GameConfig.GAME_ID, () => _soundUseCase.PlaySe(SeType.Decision));
 
             await _reloadButtonView.ShowAsync(UiConfig.ANIMATION_TIME, token);
             await _reloadButtonView.push.ToUniTask(true, token);
