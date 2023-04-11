@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: Assets/Tsutaeru-Assets/Master/Json/unity1week.json
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3d6f333efbcb947c3b0680c641bbfe3d
+    m_Address: Assets/Tsutaeru/Master/ScriptableObjects/Sound/Bgm/BgmTable.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 960c96653505049f289baa350284ddd2
+    m_Address: Assets/Tsutaeru/Master/ScriptableObjects/Sound/Se/SeTable.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: bcc0f42a274324d82ab205f096057318, type: 2}
   m_SchemaSet:
