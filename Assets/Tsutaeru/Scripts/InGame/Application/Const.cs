@@ -36,5 +36,9 @@ namespace Tsutaeru.InGame
     {
         public const string BASE_PATH = "Assets/Tsutaeru-Assets/";
         public const string JSON_PATH = BASE_PATH + "Master/Json/";
+
+        public const string BASE_PATH2 = "Assets/Tsutaeru/";
+        public const string TABLE_PATH = BASE_PATH2 + "Master/ScriptableObjects/";
+        public const string SOUND_TABLE_PATH = TABLE_PATH + "Sound/";
     }
 }
