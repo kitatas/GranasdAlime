@@ -20,10 +20,8 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private ReloadButtonView reloadButtonView = default;
         [SerializeField] private RetryButtonView retryButtonView = default;
         [SerializeField] private StartButtonView startButtonView = default;
-        [SerializeField] private ConfigView configView = default;
-        [SerializeField] private LicenseView licenseView = default;
-        [SerializeField] private TopView topView = default;
         [SerializeField] private TimeView timeView = default;
+        [SerializeField] private TitleView titleView = default;
         [SerializeField] private ProgressView progressView = default;
         [SerializeField] private HintView hintView = default;
         [SerializeField] private VolumeView volumeView = default;
@@ -73,10 +71,8 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<ReloadButtonView>(reloadButtonView);
             builder.RegisterInstance<RetryButtonView>(retryButtonView);
             builder.RegisterInstance<StartButtonView>(startButtonView);
-            builder.RegisterInstance<ConfigView>(configView);
-            builder.RegisterInstance<LicenseView>(licenseView);
-            builder.RegisterInstance<TopView>(topView);
             builder.RegisterInstance<TimeView>(timeView);
+            builder.RegisterInstance<TitleView>(titleView);
             builder.RegisterInstance<ProgressView>(progressView);
             builder.RegisterInstance<HintView>(hintView);
             builder.RegisterInstance<VolumeView>(volumeView);
