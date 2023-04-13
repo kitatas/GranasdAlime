@@ -7,6 +7,17 @@ namespace Tsutaeru.InGame
         public const GameState INIT_STATE = GameState.Title;
 
         public const int MAX_QUESTION = 20;
+
+    }
+
+    public sealed class UrlConfig
+    {
+        public const string DEVELOPER_APP = "https://play.google.com/store/apps/developer?id=KitaLab";
+
+        public const string INFORMATION = "https://kitatas.github.io/GranasdAlime/";
+        public const string CREDIT = INFORMATION + "credit";
+        public const string LICENSE = INFORMATION + "license";
+        public const string POLICY = INFORMATION + "policy";
     }
 
     public sealed class ProgressConfig
