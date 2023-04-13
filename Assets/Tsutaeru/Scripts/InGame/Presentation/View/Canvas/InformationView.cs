@@ -7,19 +7,19 @@ using UnityEngine;
 
 namespace Tsutaeru.InGame.Presentation.View
 {
-    public sealed class LicenseView : BaseCanvasGroupView
+    public sealed class InformationView : BaseCanvasGroupView
     {
         [SerializeField] private CanvasButtonView close = default;
 
-        public Action hideLicense;
+        public Action hideInformation;
 
         public async UniTaskVoid InitAsync(float animationTime, CancellationToken token)
         {
             close.push
-                .Subscribe(_ => hideLicense?.Invoke())
+                .Subscribe(_ => hideInformation?.Invoke())
                 .AddTo(this);
 
-            hideLicense += () => HideAsync(animationTime, token).Forget();
+            hideInformation += () => HideAsync(animationTime, token).Forget();
 
             HideAsync(0.0f, token).Forget();
 
