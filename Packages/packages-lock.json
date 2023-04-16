@@ -21,6 +21,13 @@
       "dependencies": {},
       "hash": "284d5c50d3f1ddd9fa7df3d382ea904732a9c2ff"
     },
+    "com.nifcloud.mbaas.unity": {
+      "version": "https://github.com/NIFCLOUD-mbaas/ncmb_unity.git?path=/ncmb_unity/Assets",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1b143269e111718be3ccb4a3352a3f10f6ffad60"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.6",
       "depth": 1,

@@ -3,6 +3,7 @@
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.kitatas.uniex": "https://github.com/kitatas/UniEx.git?path=/Assets/UniEx",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=/Assets/Plugins/UniRx/Scripts",
+    "com.nifcloud.mbaas.unity": "https://github.com/NIFCLOUD-mbaas/ncmb_unity.git?path=/ncmb_unity/Assets",
     "com.unity.addressables": "1.19.19",
     "com.unity.feature.2d": "1.0.0",
     "com.unity.ide.rider": "3.0.18",
