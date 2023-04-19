@@ -12,4 +12,9 @@ namespace Tsutaeru.OutGame
         public const int MIN_VOLUME = 0;
         public const int MAX_VOLUME = 10;
     }
+
+    public sealed class SaveKeyConfig
+    {
+        public const string ES3_KEY = "";
+    }
 }

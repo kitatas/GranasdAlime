@@ -13,16 +13,20 @@ namespace Tsutaeru.OutGame.Domain.UseCase
         private readonly ReactiveProperty<float> _bgmVolume;
         private readonly ReactiveProperty<float> _seVolume;
 
+        private readonly SaveRepository _saveRepository;
         private readonly SoundRepository _soundRepository;
 
-        public SoundUseCase(SoundRepository soundRepository)
+        public SoundUseCase(SaveRepository saveRepository, SoundRepository soundRepository)
         {
+            _saveRepository = saveRepository;
+            _soundRepository = soundRepository;
+
+            var data = _saveRepository.Load();
             _playBgm = new Subject<Data.DataStore.BgmData>();
             _stopBgm = new Subject<Unit>();
             _playSe = new Subject<Data.DataStore.SeData>();
-            _bgmVolume = new ReactiveProperty<float>(SoundConfig.INIT_VOLUME);
-            _seVolume = new ReactiveProperty<float>(SoundConfig.INIT_VOLUME);
-            _soundRepository = soundRepository;
+            _bgmVolume = new ReactiveProperty<float>(data.bgmVolume);
+            _seVolume = new ReactiveProperty<float>(data.seVolume);
         }
 
         public IObservable<AudioClip> playBgm => _playBgm.Select(x => x.clip);
@@ -53,11 +57,13 @@ namespace Tsutaeru.OutGame.Domain.UseCase
         public void SetBgmVolume(float value)
         {
             _bgmVolume.Value = value;
+            _saveRepository.SaveBgm(value);
         }
 
         public void SetSeVolume(float value)
         {
             _seVolume.Value = value;
+            _saveRepository.SaveSe(value);
         }
     }
 }
