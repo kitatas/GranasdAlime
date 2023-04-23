@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.kitatas.playfab-csharpsdk": "https://github.com/kitatas/PlayFab-CSharpSDK.git?path=/PlayFabSDK/source#feature/upm",
     "com.kitatas.uniex": "https://github.com/kitatas/UniEx.git?path=/Assets/UniEx",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=/Assets/Plugins/UniRx/Scripts",
     "com.nifcloud.mbaas.unity": "https://github.com/NIFCLOUD-mbaas/ncmb_unity.git?path=/ncmb_unity/Assets",

@@ -7,6 +7,15 @@
       "dependencies": {},
       "hash": "73d86259ce31ce7f4dfe1d028ea1c3edf96c23e4"
     },
+    "com.kitatas.playfab-csharpsdk": {
+      "version": "https://github.com/kitatas/PlayFab-CSharpSDK.git?path=/PlayFabSDK/source#feature/upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.1.0"
+      },
+      "hash": "27b47e797ac8d7b9014e66f7f90d79e41e5a7423"
+    },
     "com.kitatas.uniex": {
       "version": "https://github.com/kitatas/UniEx.git?path=/Assets/UniEx",
       "depth": 0,
@@ -175,6 +184,13 @@
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.10.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.1.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
