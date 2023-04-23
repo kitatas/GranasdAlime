@@ -30,13 +30,20 @@ namespace Tsutaeru.OutGame.Domain.Repository
             return newData;
         }
 
+        public void SaveUid(string uid)
+        {
+            var loadData = Load();
+            loadData.uid = uid;
+            Save(loadData);
+        }
+
         public void SaveBgm(float bgmVolume)
         {
             var loadData = Load();
             loadData.bgmVolume = bgmVolume;
             Save(loadData);
         }
-        
+
         public void SaveSe(float seVolume)
         {
             var loadData = Load();
