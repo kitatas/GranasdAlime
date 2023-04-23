@@ -17,4 +17,10 @@ namespace Tsutaeru.OutGame
     {
         public const string ES3_KEY = "";
     }
+
+    public sealed class PlayFabConfig
+    {
+        public const string TITLE_ID = "";
+        public const string USER_KEY = "";
+    }
 }

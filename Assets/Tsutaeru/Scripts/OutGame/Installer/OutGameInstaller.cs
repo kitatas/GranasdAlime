@@ -24,6 +24,7 @@ namespace Tsutaeru.OutGame.Installer
             builder.Register<InGame.Data.Entity.StateEntity>(Lifetime.Singleton);
 
             // Repository
+            builder.Register<BackendRepository>(Lifetime.Singleton);
             builder.Register<SaveRepository>(Lifetime.Singleton);
             builder.Register<SoundRepository>(Lifetime.Singleton);
 
