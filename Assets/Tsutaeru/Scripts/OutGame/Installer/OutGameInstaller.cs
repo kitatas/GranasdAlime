@@ -1,4 +1,5 @@
 using Tsutaeru.OutGame.Data.DataStore;
+using Tsutaeru.OutGame.Data.Entity;
 using Tsutaeru.OutGame.Domain.Repository;
 using Tsutaeru.OutGame.Domain.UseCase;
 using Tsutaeru.OutGame.Presentation.Presenter;
@@ -22,6 +23,7 @@ namespace Tsutaeru.OutGame.Installer
 
             // Entity
             builder.Register<InGame.Data.Entity.StateEntity>(Lifetime.Singleton);
+            builder.Register<UserEntity>(Lifetime.Singleton);
 
             // Repository
             builder.Register<BackendRepository>(Lifetime.Singleton);

@@ -27,7 +27,11 @@ namespace Tsutaeru.Boot.Presentation.Controller
         {
             try
             {
-                await _loginUseCase.LoginAsync(token);
+                var isLoginSuccess = await _loginUseCase.LoginAsync(token);
+                if (isLoginSuccess == false)
+                {
+                    UnityEngine.Debug.Log($"register user name");
+                }
             }
             catch (Exception e)
             {

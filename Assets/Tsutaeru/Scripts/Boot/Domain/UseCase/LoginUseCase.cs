@@ -1,17 +1,20 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using PlayFab.ClientModels;
+using Tsutaeru.OutGame.Data.Entity;
 using Tsutaeru.OutGame.Domain.Repository;
 
 namespace Tsutaeru.Boot.Domain.UseCase
 {
     public sealed class LoginUseCase
     {
+        private readonly UserEntity _userEntity;
         private readonly BackendRepository _backendRepository;
         private readonly SaveRepository _saveRepository;
 
-        public LoginUseCase(BackendRepository backendRepository, SaveRepository saveRepository)
+        public LoginUseCase(UserEntity userEntity, BackendRepository backendRepository, SaveRepository saveRepository)
         {
+            _userEntity = userEntity;
             _backendRepository = backendRepository;
             _saveRepository = saveRepository;
         }
@@ -20,10 +23,10 @@ namespace Tsutaeru.Boot.Domain.UseCase
         {
             var response = await LoginOrCreateAsync(token);
             var userData = _backendRepository.FetchUserData(response);
+            _userEntity.Set(userData.user);
 
-            // TODO: check user name
-
-            return true;
+            // 名前が空であれば未登録ユーザー
+            return _userEntity.IsEmptyUserName() == false;
         }
 
         private async UniTask<LoginResult> LoginOrCreateAsync(CancellationToken token)
