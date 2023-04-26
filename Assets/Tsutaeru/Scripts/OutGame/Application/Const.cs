@@ -21,6 +21,6 @@ namespace Tsutaeru.OutGame
     public sealed class PlayFabConfig
     {
         public const string TITLE_ID = "";
-        public const string USER_KEY = "";
+        public const string USER_TIME_ATTACK_KEY = "";
     }
 }

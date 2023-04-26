@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
@@ -66,15 +65,24 @@ namespace Tsutaeru.OutGame.Domain.Repository
                 throw new Exception($"login result payload is null.");
             }
 
-            var userData = payload.UserData;
-            if (userData == null)
+            var profile = payload.PlayerProfile;
+            if (profile == null)
+            {
+                throw new Exception($"login result profile is null.");
+            }
+
+            var userDataRecord = payload.UserData;
+            if (userDataRecord == null)
             {
                 throw new Exception($"login result user data is null.");
             }
 
-            return userData.TryGetValue(PlayFabConfig.USER_KEY, out var user)
-                ? JsonConvert.DeserializeObject<UserData>(user.Value)
-                : UserData.Default();
+            var userName = profile.DisplayName;
+            var timeAttackData = userDataRecord.TryGetValue(PlayFabConfig.USER_TIME_ATTACK_KEY, out var user)
+                ? JsonConvert.DeserializeObject<UserTimeAttackData>(user.Value)
+                : UserTimeAttackData.Default();
+
+            return new UserData(userName, timeAttackData);
         }
     }
 }
