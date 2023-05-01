@@ -50,7 +50,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             await _reloadButtonView.ShowAsync(UiConfig.ANIMATION_TIME, token);
             await _reloadButtonView.push.ToUniTask(true, token);
 
-            _sceneUseCase.Load(SceneName.Main);
+            _sceneUseCase.Load(SceneName.Main, LoadType.None);
 
             return GameState.None;
         }

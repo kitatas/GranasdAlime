@@ -7,6 +7,13 @@ namespace Tsutaeru.OutGame
         Ranking,
     }
 
+    public enum LoadType
+    {
+        None,
+        Direct,
+        Fade,
+    }
+
     public enum BgmType
     {
         None,

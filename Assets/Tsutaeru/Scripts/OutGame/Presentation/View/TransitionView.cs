@@ -12,6 +12,9 @@ namespace Tsutaeru.OutGame.Presentation.View
         [SerializeField] private Image maskDown = default;
         [SerializeField] private Image raycastBlocker = default;
 
+        // Blocker が有効になっている時は Fade 中である
+        public bool isFading => raycastBlocker.raycastTarget;
+
         public async UniTask FadeInAsync(float animationTime, CancellationToken token)
         {
             raycastBlocker.raycastTarget = true;

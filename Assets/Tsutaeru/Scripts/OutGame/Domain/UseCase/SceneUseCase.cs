@@ -1,24 +1,26 @@
 using System;
+using Tsutaeru.OutGame.Data.Entity;
 using UniRx;
 
 namespace Tsutaeru.OutGame.Domain.UseCase
 {
     public sealed class SceneUseCase
     {
-        private readonly Subject<SceneName> _load;
+        private readonly Subject<LoadEntity> _load;
         private readonly InGame.Data.Entity.StateEntity _stateEntity;
 
         public SceneUseCase(InGame.Data.Entity.StateEntity stateEntity)
         {
-            _load = new Subject<SceneName>();
+            _load = new Subject<LoadEntity>();
             _stateEntity = stateEntity;
         }
 
-        public IObservable<SceneName> load => _load.Where(x => x != SceneName.None);
+        public IObservable<LoadEntity> load => _load.Where(x => x.sceneName != SceneName.None);
 
-        public void Load(SceneName sceneName)
+        public void Load(SceneName sceneName, LoadType loadType)
         {
-            _load?.OnNext(sceneName);
+            var loadEntity = new LoadEntity(sceneName, loadType);
+            _load?.OnNext(loadEntity);
         }
 
         public void Reload()
@@ -28,7 +30,7 @@ namespace Tsutaeru.OutGame.Domain.UseCase
                 return;
             }
 
-            Load(SceneName.Main);
+            Load(SceneName.Main, LoadType.Fade);
         }
     }
 }

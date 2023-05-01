@@ -16,7 +16,6 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
         private readonly SoundUseCase _soundUseCase;
         private readonly TransitionView _transitionView;
         private readonly CancellationTokenSource _tokenSource;
-        private bool _isFade;
 
         public ScenePresenter(SceneUseCase sceneUseCase, SoundUseCase soundUseCase, TransitionView transitionView)
         {
@@ -24,7 +23,6 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
             _soundUseCase = soundUseCase;
             _transitionView = transitionView;
             _tokenSource = new CancellationTokenSource();
-            _isFade = false;
         }
 
         public void Initialize()
@@ -35,14 +33,23 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
                 .Subscribe(x =>
                 {
                     // シーン遷移
-                    FadeLoadAsync(x, _tokenSource.Token).Forget();
+                    switch (x.loadType)
+                    {
+                        case LoadType.Direct:
+                            SceneManager.LoadScene(x.sceneName.ToString());
+                            break;
+                        case LoadType.Fade:
+                            FadeLoadAsync(x.sceneName, _tokenSource.Token).Forget();
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(x.loadType), x.loadType, null);
+                    }
                 })
                 .AddTo(_transitionView);
         }
 
         private async UniTaskVoid FadeLoadAsync(SceneName sceneName, CancellationToken token)
         {
-            _isFade = true;
             _soundUseCase.PlaySe(SeType.Transition);
             _soundUseCase.StopBgm();
             await _transitionView.FadeInAsync(SceneConfig.FADE_IN_TIME, token);
@@ -51,12 +58,11 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
 
             _soundUseCase.PlayBgm(BgmType.Title);
             await _transitionView.FadeOutAsync(SceneConfig.FADE_OUT_TIME, token);
-            _isFade = false;
         }
 
         public void Tick()
         {
-            if (_isFade)
+            if (_transitionView.isFading)
             {
                 return;
             }

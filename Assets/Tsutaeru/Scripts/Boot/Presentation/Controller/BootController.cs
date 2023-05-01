@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using Tsutaeru.Boot.Domain.UseCase;
 using Tsutaeru.Boot.Presentation.View;
 using Tsutaeru.InGame;
+using Tsutaeru.OutGame;
+using Tsutaeru.OutGame.Domain.UseCase;
 using VContainer.Unity;
 
 namespace Tsutaeru.Boot.Presentation.Controller
@@ -11,12 +13,14 @@ namespace Tsutaeru.Boot.Presentation.Controller
     public sealed class BootController : IInitializable, IDisposable
     {
         private readonly LoginUseCase _loginUseCase;
+        private readonly SceneUseCase _sceneUseCase;
         private readonly RegisterView _registerView;
         private readonly CancellationTokenSource _tokenSource;
 
-        public BootController(LoginUseCase loginUseCase, RegisterView registerView)
+        public BootController(LoginUseCase loginUseCase, SceneUseCase sceneUseCase, RegisterView registerView)
         {
             _loginUseCase = loginUseCase;
+            _sceneUseCase = sceneUseCase;
             _registerView = registerView;
 
             _tokenSource = new CancellationTokenSource();
@@ -38,6 +42,8 @@ namespace Tsutaeru.Boot.Presentation.Controller
                 {
                     await RegisterAsync(_tokenSource.Token);
                 }
+
+                _sceneUseCase.Load(SceneName.Main, LoadType.Direct);
             }
             catch (Exception e)
             {
