@@ -45,5 +45,19 @@ namespace Tsutaeru.Boot.Domain.UseCase
                 return await _backendRepository.LoginUserAsync(saveData.uid, token);
             }
         }
+
+        public async UniTask<bool> RegisterAsync(string name, CancellationToken token)
+        {
+            var isSuccess = await _backendRepository.UpdateUserNameAsync(name, token);
+            if (isSuccess)
+            {
+                _userEntity.SetUserName(name);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using Tsutaeru.OutGame.Data.DataStore;
+using UniEx;
 
 namespace Tsutaeru.OutGame.Domain.Repository
 {
@@ -83,6 +84,32 @@ namespace Tsutaeru.OutGame.Domain.Repository
                 : UserTimeAttackData.Default();
 
             return new UserData(userName, timeAttackData);
+        }
+
+        public async UniTask<bool> UpdateUserNameAsync(string name, CancellationToken token)
+        {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                throw new Exception($"invalid name: null or empty or white space.");
+            }
+
+            if (name.Length.IsBetween(3, 10) == false)
+            {
+                throw new Exception($"invalid name length: ${name.Length}");
+            }
+
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = name,
+            };
+
+            var response = await PlayFabClientAPI.UpdateUserTitleDisplayNameAsync(request);
+            if (response.Error != null)
+            {
+                throw new Exception($"update name failed: {response.Error}");
+            }
+
+            return true;
         }
     }
 }
