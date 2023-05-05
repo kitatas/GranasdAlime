@@ -14,6 +14,7 @@ namespace Tsutaeru.Boot.Installer
         protected override void Configure(IContainerBuilder builder)
         {
             // UseCase
+            builder.Register<AppVersionUseCase>(Lifetime.Scoped);
             builder.Register<LoginUseCase>(Lifetime.Scoped);
 
             // Controller

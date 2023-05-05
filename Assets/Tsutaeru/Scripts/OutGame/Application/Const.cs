@@ -1,5 +1,11 @@
 namespace Tsutaeru.OutGame
 {
+    public sealed class AppConfig
+    {
+        public const int MAJOR_VERSION = 1;
+        public const int MINOR_VERSION = 0;
+    }
+    
     public sealed class SceneConfig
     {
         public const float FADE_IN_TIME = 0.5f;
@@ -22,5 +28,6 @@ namespace Tsutaeru.OutGame
     {
         public const string TITLE_ID = "";
         public const string USER_TIME_ATTACK_KEY = "";
+        public const string MASTER_APP_VERSION_KEY = "";
     }
 }

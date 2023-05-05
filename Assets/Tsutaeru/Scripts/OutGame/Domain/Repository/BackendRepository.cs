@@ -111,5 +111,29 @@ namespace Tsutaeru.OutGame.Domain.Repository
 
             return true;
         }
+
+        public async UniTask<MasterData> FetchMasterDataAsync(CancellationToken token)
+        {
+            var request = new GetTitleDataRequest();
+            var response = await PlayFabClientAPI.GetTitleDataAsync(request);
+            if (response.Error != null)
+            {
+                throw new Exception($"get title data failed: {response.Error}");
+            }
+
+            var result = response.Result;
+            if (result == null)
+            {
+                throw new Exception($"title data result is null.");
+            }
+
+            var data = result.Data;
+            if (data == null)
+            {
+                throw new Exception($"title data is null.");
+            }
+
+            return new MasterData(data);
+        }
     }
 }

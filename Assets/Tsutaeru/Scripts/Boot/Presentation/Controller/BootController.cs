@@ -12,13 +12,16 @@ namespace Tsutaeru.Boot.Presentation.Controller
 {
     public sealed class BootController : IInitializable, IDisposable
     {
+        private readonly AppVersionUseCase _appVersionUseCase;
         private readonly LoginUseCase _loginUseCase;
         private readonly SceneUseCase _sceneUseCase;
         private readonly RegisterView _registerView;
         private readonly CancellationTokenSource _tokenSource;
 
-        public BootController(LoginUseCase loginUseCase, SceneUseCase sceneUseCase, RegisterView registerView)
+        public BootController(AppVersionUseCase appVersionUseCase, LoginUseCase loginUseCase, SceneUseCase sceneUseCase,
+            RegisterView registerView)
         {
+            _appVersionUseCase = appVersionUseCase;
             _loginUseCase = loginUseCase;
             _sceneUseCase = sceneUseCase;
             _registerView = registerView;
@@ -41,6 +44,13 @@ namespace Tsutaeru.Boot.Presentation.Controller
                 if (isLoginSuccess == false)
                 {
                     await RegisterAsync(_tokenSource.Token);
+                }
+
+                var isUpdate = await _appVersionUseCase.CheckUpdateAsync(token);
+                if (isUpdate)
+                {
+                    // 強制アップデート
+                    return;
                 }
 
                 _sceneUseCase.Load(SceneName.Main, LoadType.Direct);
