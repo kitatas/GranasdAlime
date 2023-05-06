@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using Tsutaeru.OutGame.Data.DataStore;
@@ -79,11 +78,7 @@ namespace Tsutaeru.OutGame.Domain.Repository
             }
 
             var userName = profile.DisplayName;
-            var timeAttackData = userDataRecord.TryGetValue(PlayFabConfig.USER_TIME_ATTACK_KEY, out var user)
-                ? JsonConvert.DeserializeObject<UserTimeAttackData>(user.Value)
-                : UserTimeAttackData.Default();
-
-            return new UserData(userName, timeAttackData);
+            return new UserData(userName, userDataRecord);
         }
 
         public async UniTask<bool> UpdateUserNameAsync(string name, CancellationToken token)
