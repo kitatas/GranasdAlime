@@ -15,15 +15,17 @@ namespace Tsutaeru.Boot.Presentation.Controller
         private readonly LoginUseCase _loginUseCase;
         private readonly SceneUseCase _sceneUseCase;
         private readonly RegisterView _registerView;
+        private readonly UpdateView _updateView;
         private readonly CancellationTokenSource _tokenSource;
 
         public BootController(AppVersionUseCase appVersionUseCase, LoginUseCase loginUseCase, SceneUseCase sceneUseCase,
-            RegisterView registerView)
+            RegisterView registerView, UpdateView updateView)
         {
             _appVersionUseCase = appVersionUseCase;
             _loginUseCase = loginUseCase;
             _sceneUseCase = sceneUseCase;
             _registerView = registerView;
+            _updateView = updateView;
 
             _tokenSource = new CancellationTokenSource();
         }
@@ -31,6 +33,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
         public void Initialize()
         {
             _registerView.HideAsync(0.0f, _tokenSource.Token).Forget();
+            _updateView.InitAsync(_tokenSource.Token).Forget();
 
             BootAsync(_tokenSource.Token).Forget();
         }
@@ -49,6 +52,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
                 if (isUpdate)
                 {
                     // 強制アップデート
+                    _updateView.ShowAsync(InGame.UiConfig.POPUP_TIME, token).Forget();
                     return;
                 }
 

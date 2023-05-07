@@ -12,6 +12,7 @@ namespace Tsutaeru.InGame
 
     public sealed class UrlConfig
     {
+        public const string APP = "https://play.google.com/store/apps/details?id=com.KitaLab.GranasdAlime";
         public const string DEVELOPER_APP = "https://play.google.com/store/apps/developer?id=KitaLab";
 
         public const string INFORMATION = "https://kitatas.github.io/GranasdAlime/";
