@@ -14,11 +14,16 @@ namespace Tsutaeru.Boot.Presentation.View
 
         private string inputName => inputField.text;
 
-        public UniTask<string> DecisionAsync(CancellationToken token)
+        public async UniTask<string> DecisionNameAsync(float animationTime, CancellationToken token)
         {
-            return decision.push
-                .Select(_ => inputName)
-                .ToUniTask(true, token);
+            inputField.text = $"";
+            await ShowAsync(animationTime, token);
+
+            // 決定ボタン押下待ち
+            var userName = await decision.push.Select(_ => inputName).ToUniTask(true, token);
+            await HideAsync(animationTime, token);
+
+            return userName;
         }
     }
 }

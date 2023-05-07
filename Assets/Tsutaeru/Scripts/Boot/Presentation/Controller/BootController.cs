@@ -3,7 +3,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Boot.Domain.UseCase;
 using Tsutaeru.Boot.Presentation.View;
-using Tsutaeru.InGame;
 using Tsutaeru.OutGame;
 using Tsutaeru.OutGame.Domain.UseCase;
 using VContainer.Unity;
@@ -66,11 +65,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
         {
             while (true)
             {
-                await _registerView.ShowAsync(UiConfig.POPUP_TIME, token);
-
-                // 決定ボタン押下待ち
-                var userName = await _registerView.DecisionAsync(token);
-                await _registerView.HideAsync(UiConfig.POPUP_TIME, token);
+                var userName = await _registerView.DecisionNameAsync(InGame.UiConfig.POPUP_TIME, token);
 
                 // 名前登録
                 var isSuccess = await _loginUseCase.RegisterAsync(userName, token);
