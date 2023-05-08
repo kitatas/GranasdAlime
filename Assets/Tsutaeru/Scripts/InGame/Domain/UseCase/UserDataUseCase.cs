@@ -1,0 +1,38 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Tsutaeru.OutGame.Data.Entity;
+using Tsutaeru.OutGame.Domain.Repository;
+
+namespace Tsutaeru.InGame.Domain.UseCase
+{
+    public sealed class UserDataUseCase
+    {
+        private readonly UserEntity _userEntity;
+        private readonly BackendRepository _backendRepository;
+
+        public UserDataUseCase(UserEntity userEntity, BackendRepository backendRepository)
+        {
+            _userEntity = userEntity;
+            _backendRepository = backendRepository;
+        }
+
+        public string GetUserName()
+        {
+            return _userEntity.userName;
+        }
+
+        public async UniTask<bool> UpdateUserNameAsync(string name, CancellationToken token)
+        {
+            var isSuccess = await _backendRepository.UpdateUserNameAsync(name, token);
+            if (isSuccess)
+            {
+                _userEntity.SetUserName(name);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+}

@@ -25,6 +25,7 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private ProgressView progressView = default;
         [SerializeField] private HintView hintView = default;
         [SerializeField] private VolumeView volumeView = default;
+        [SerializeField] private NameInputView nameInputView = default;
 
         [SerializeField] private RectTransform wordParent = default;
 
@@ -51,6 +52,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<QuestionUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<TimeUseCase>(Lifetime.Scoped);
+            builder.Register<UserDataUseCase>(Lifetime.Scoped);
             builder.Register<WordUseCase>(Lifetime.Scoped);
 
             // Controller
@@ -61,6 +63,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<ResultState>(Lifetime.Scoped);
             builder.Register<SetUpState>(Lifetime.Scoped);
             builder.Register<TitleState>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<UserDataController>();
 
             // Presenter
             builder.RegisterEntryPoint<ButtonPresenter>();
@@ -76,6 +79,7 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<ProgressView>(progressView);
             builder.RegisterInstance<HintView>(hintView);
             builder.RegisterInstance<VolumeView>(volumeView);
+            builder.RegisterInstance<NameInputView>(nameInputView);
         }
     }
 }
