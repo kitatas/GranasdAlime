@@ -51,6 +51,11 @@ namespace Tsutaeru.OutGame.Domain.Repository
             Save(loadData);
         }
 
+        public void Delete()
+        {
+            ES3.DeleteKey(SaveKeyConfig.ES3_KEY);
+        }
+
         private void Save(SaveData saveData)
         {
             var data = JsonUtility.ToJson(saveData);

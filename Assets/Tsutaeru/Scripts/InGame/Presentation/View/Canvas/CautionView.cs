@@ -10,10 +10,8 @@ namespace Tsutaeru.InGame.Presentation.View
     public sealed class CautionView : BaseCanvasGroupView
     {
         [SerializeField] private CanvasButtonView close = default;
-        [SerializeField] private CanvasButtonView decision = default;
 
         public Action hideCaution;
-        public Action delete;
 
         public async UniTaskVoid InitAsync(float animationTime, CancellationToken token)
         {
@@ -21,15 +19,7 @@ namespace Tsutaeru.InGame.Presentation.View
                 .Subscribe(_ => hideCaution?.Invoke())
                 .AddTo(this);
 
-            decision.push
-                .Subscribe(_ => delete?.Invoke())
-                .AddTo(this);
-
             hideCaution += () => HideAsync(animationTime, token).Forget();
-            delete += () =>
-            {
-                // TODO: delete function
-            };
 
             HideAsync(0.0f, token).Forget();
 

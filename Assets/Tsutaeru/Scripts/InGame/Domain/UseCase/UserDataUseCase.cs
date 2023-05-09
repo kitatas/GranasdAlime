@@ -9,11 +9,13 @@ namespace Tsutaeru.InGame.Domain.UseCase
     {
         private readonly UserEntity _userEntity;
         private readonly BackendRepository _backendRepository;
+        private readonly SaveRepository _saveRepository;
 
-        public UserDataUseCase(UserEntity userEntity, BackendRepository backendRepository)
+        public UserDataUseCase(UserEntity userEntity, BackendRepository backendRepository, SaveRepository saveRepository)
         {
             _userEntity = userEntity;
             _backendRepository = backendRepository;
+            _saveRepository = saveRepository;
         }
 
         public string GetUserName()
@@ -33,6 +35,11 @@ namespace Tsutaeru.InGame.Domain.UseCase
             {
                 return false;
             }
+        }
+
+        public void Delete()
+        {
+            _saveRepository.Delete();
         }
     }
 }

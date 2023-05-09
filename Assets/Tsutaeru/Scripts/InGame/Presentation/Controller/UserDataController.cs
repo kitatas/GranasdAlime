@@ -11,6 +11,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
     public sealed class UserDataController : IInitializable, IDisposable
     {
         private readonly UserDataUseCase _userDataUseCase;
+        private readonly AccountDeleteView _accountDeleteView;
         private readonly NameInputView _nameInputView;
 
         private readonly CancellationTokenSource _tokenSource;
@@ -18,6 +19,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
         public UserDataController(UserDataUseCase userDataUseCase, NameInputView nameInputView)
         {
             _userDataUseCase = userDataUseCase;
+            _accountDeleteView = accountDeleteView;
             _nameInputView = nameInputView;
 
             _tokenSource = new CancellationTokenSource();
@@ -25,6 +27,13 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public void Initialize()
         {
+            _accountDeleteView.DeleteDecision()
+                .Subscribe(_ =>
+                {
+                    _userDataUseCase.Delete();
+                })
+                .AddTo(_tokenSource.Token);
+
             _nameInputView.Init(_userDataUseCase.GetUserName());
             _nameInputView.UpdateName()
                 .Subscribe(x =>
