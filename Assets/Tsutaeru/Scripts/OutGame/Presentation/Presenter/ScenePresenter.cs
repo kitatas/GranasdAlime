@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace Tsutaeru.OutGame.Presentation.Presenter
 {
-    public sealed class ScenePresenter : IInitializable, ITickable, IDisposable
+    public sealed class ScenePresenter : IInitializable, IDisposable
     {
         private readonly SceneUseCase _sceneUseCase;
         private readonly SoundUseCase _soundUseCase;
@@ -58,19 +58,6 @@ namespace Tsutaeru.OutGame.Presentation.Presenter
 
             _soundUseCase.PlayBgm(BgmType.Title);
             await _transitionView.FadeOutAsync(SceneConfig.FADE_OUT_TIME, token);
-        }
-
-        public void Tick()
-        {
-            if (_transitionView.isFading)
-            {
-                return;
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                _sceneUseCase.Reload();
-            }
         }
 
         public void Dispose()

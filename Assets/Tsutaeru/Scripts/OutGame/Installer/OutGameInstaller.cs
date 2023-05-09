@@ -22,7 +22,6 @@ namespace Tsutaeru.OutGame.Installer
             builder.RegisterInstance<SeTable>(seTable);
 
             // Entity
-            builder.Register<InGame.Data.Entity.StateEntity>(Lifetime.Singleton);
             builder.Register<UserEntity>(Lifetime.Singleton);
 
             // Repository
