@@ -3,6 +3,8 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
+using Tsutaeru.OutGame;
+using Tsutaeru.OutGame.Domain.UseCase;
 using UniRx;
 using VContainer.Unity;
 
@@ -10,14 +12,17 @@ namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class UserDataController : IInitializable, IDisposable
     {
+        private readonly SceneUseCase _sceneUseCase;
         private readonly UserDataUseCase _userDataUseCase;
         private readonly AccountDeleteView _accountDeleteView;
         private readonly NameInputView _nameInputView;
 
         private readonly CancellationTokenSource _tokenSource;
 
-        public UserDataController(UserDataUseCase userDataUseCase, NameInputView nameInputView)
+        public UserDataController(SceneUseCase sceneUseCase, UserDataUseCase userDataUseCase,
+            AccountDeleteView accountDeleteView, NameInputView nameInputView)
         {
+            _sceneUseCase = sceneUseCase;
             _userDataUseCase = userDataUseCase;
             _accountDeleteView = accountDeleteView;
             _nameInputView = nameInputView;
@@ -30,6 +35,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _accountDeleteView.DeleteDecision()
                 .Subscribe(_ =>
                 {
+                    _sceneUseCase.Load(SceneName.Boot, LoadType.Fade);
                     _userDataUseCase.Delete();
                 })
                 .AddTo(_tokenSource.Token);
@@ -44,6 +50,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                     }
                     catch (Exception e)
                     {
+                        // TODO: リトライ
                         UnityEngine.Debug.LogError($"update user name: {e}");
                         throw;
                     }

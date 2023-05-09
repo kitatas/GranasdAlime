@@ -3,6 +3,7 @@ namespace Tsutaeru.OutGame
     public enum SceneName
     {
         None,
+        Boot,
         Main,
         Ranking,
     }
