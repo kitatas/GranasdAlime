@@ -65,19 +65,15 @@ namespace Tsutaeru.OutGame.Domain.Repository
                 throw new Exception($"login result payload is null.");
             }
 
-            var profile = payload.PlayerProfile;
-            if (profile == null)
-            {
-                throw new Exception($"login result profile is null.");
-            }
-
             var userDataRecord = payload.UserData;
             if (userDataRecord == null)
             {
                 throw new Exception($"login result user data is null.");
             }
 
-            var userName = profile.DisplayName;
+            var profile = payload.PlayerProfile;
+            var userName = profile == null ? "" : profile.DisplayName;
+
             return new UserData(userName, userDataRecord);
         }
 
