@@ -1,6 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Tsutaeru.OutGame.Domain.Repository;
+using Tsutaeru.Common.Domain.Repository;
 
 namespace Tsutaeru.Boot.Domain.UseCase
 {

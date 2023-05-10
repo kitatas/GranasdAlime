@@ -1,5 +1,5 @@
 using System;
-using Tsutaeru.OutGame;
+using Tsutaeru.Common;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;

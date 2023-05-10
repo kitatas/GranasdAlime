@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Tsutaeru.Common;
 using Tsutaeru.InGame.Data.Container;
 using Tsutaeru.InGame.Data.Entity;
 using Tsutaeru.InGame.Domain.Factory;
 using Tsutaeru.InGame.Domain.Repository;
-using Tsutaeru.OutGame;
 using UniEx;
 using UniRx;
 using UnityEngine;

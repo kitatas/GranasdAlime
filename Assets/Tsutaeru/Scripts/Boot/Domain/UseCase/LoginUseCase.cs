@@ -1,8 +1,8 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using PlayFab.ClientModels;
-using Tsutaeru.OutGame.Data.Entity;
-using Tsutaeru.OutGame.Domain.Repository;
+using Tsutaeru.Common.Data.Entity;
+using Tsutaeru.Common.Domain.Repository;
 
 namespace Tsutaeru.Boot.Domain.UseCase
 {

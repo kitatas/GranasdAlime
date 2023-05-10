@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Tsutaeru.OutGame;
+using Tsutaeru.Common;
 using UniEx;
 using UniRx;
 using UnityEngine;

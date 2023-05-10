@@ -3,8 +3,8 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Boot.Domain.UseCase;
 using Tsutaeru.Boot.Presentation.View;
-using Tsutaeru.OutGame;
-using Tsutaeru.OutGame.Domain.UseCase;
+using Tsutaeru.Common;
+using Tsutaeru.Common.Domain.UseCase;
 using VContainer.Unity;
 
 namespace Tsutaeru.Boot.Presentation.Controller

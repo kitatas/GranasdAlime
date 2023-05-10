@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Tsutaeru.Common;
+using Tsutaeru.Common.Domain.UseCase;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
-using Tsutaeru.OutGame;
-using Tsutaeru.OutGame.Domain.UseCase;
 using UniRx;
 
 namespace Tsutaeru.InGame.Presentation.Controller

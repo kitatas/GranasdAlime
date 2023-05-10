@@ -1,8 +1,8 @@
 using System;
 using System.Threading;
 using Tsutaeru.Base.Presentation.View;
+using Tsutaeru.Common.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
-using Tsutaeru.OutGame.Domain.UseCase;
 using UniRx;
 using VContainer.Unity;
 using Object = UnityEngine.Object;
