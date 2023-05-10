@@ -25,7 +25,7 @@ namespace Tsutaeru.Common.Installer
             builder.Register<UserEntity>(Lifetime.Singleton);
 
             // Repository
-            builder.Register<BackendRepository>(Lifetime.Singleton);
+            builder.Register<PlayFabRepository>(Lifetime.Singleton);
             builder.Register<SaveRepository>(Lifetime.Singleton);
             builder.Register<SoundRepository>(Lifetime.Singleton);
 

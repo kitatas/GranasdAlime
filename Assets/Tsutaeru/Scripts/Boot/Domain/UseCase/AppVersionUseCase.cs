@@ -6,16 +6,16 @@ namespace Tsutaeru.Boot.Domain.UseCase
 {
     public sealed class AppVersionUseCase
     {
-        private readonly BackendRepository _backendRepository;
+        private readonly PlayFabRepository _playFabRepository;
 
-        public AppVersionUseCase(BackendRepository backendRepository)
+        public AppVersionUseCase(PlayFabRepository playFabRepository)
         {
-            _backendRepository = backendRepository;
+            _playFabRepository = playFabRepository;
         }
 
         public async UniTask<bool> CheckUpdateAsync(CancellationToken token)
         {
-            var masterData = await _backendRepository.FetchMasterDataAsync(token);
+            var masterData = await _playFabRepository.FetchMasterDataAsync(token);
             var appVersion = masterData.GetAppVersion();
             return appVersion.IsForceUpdate();
         }

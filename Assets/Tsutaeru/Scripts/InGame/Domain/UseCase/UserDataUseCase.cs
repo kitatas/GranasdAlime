@@ -8,13 +8,13 @@ namespace Tsutaeru.InGame.Domain.UseCase
     public sealed class UserDataUseCase
     {
         private readonly UserEntity _userEntity;
-        private readonly BackendRepository _backendRepository;
+        private readonly PlayFabRepository _playFabRepository;
         private readonly SaveRepository _saveRepository;
 
-        public UserDataUseCase(UserEntity userEntity, BackendRepository backendRepository, SaveRepository saveRepository)
+        public UserDataUseCase(UserEntity userEntity, PlayFabRepository playFabRepository, SaveRepository saveRepository)
         {
             _userEntity = userEntity;
-            _backendRepository = backendRepository;
+            _playFabRepository = playFabRepository;
             _saveRepository = saveRepository;
         }
 
@@ -25,7 +25,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public async UniTask<bool> UpdateUserNameAsync(string name, CancellationToken token)
         {
-            var isSuccess = await _backendRepository.UpdateUserNameAsync(name, token);
+            var isSuccess = await _playFabRepository.UpdateUserNameAsync(name, token);
             if (isSuccess)
             {
                 _userEntity.SetUserName(name);

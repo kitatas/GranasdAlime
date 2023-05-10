@@ -8,9 +8,9 @@ using UniEx;
 
 namespace Tsutaeru.Common.Domain.Repository
 {
-    public sealed class BackendRepository
+    public sealed class PlayFabRepository
     {
-        public BackendRepository()
+        public PlayFabRepository()
         {
             PlayFabSettings.staticSettings.TitleId = PlayFabConfig.TITLE_ID;
         }
