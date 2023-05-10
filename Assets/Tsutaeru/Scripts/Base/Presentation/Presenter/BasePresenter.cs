@@ -1,9 +1,9 @@
-using Tsutaeru.Common.Domain.UseCase;
-using Tsutaeru.Common.Presentation.View;
+using Tsutaeru.Base.Domain.UseCase;
+using Tsutaeru.Base.Presentation.View;
 using UniRx;
 using VContainer.Unity;
 
-namespace Tsutaeru.Common.Presentation.Presenter
+namespace Tsutaeru.Base.Presentation.Presenter
 {
     public abstract class BasePresenter<T> : IInitializable where T : new()
     {

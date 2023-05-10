@@ -1,6 +1,6 @@
 using UniRx;
 
-namespace Tsutaeru.Common.Domain.UseCase
+namespace Tsutaeru.Base.Domain.UseCase
 {
     public abstract class BaseModelUseCase<T> where T : new()
     {

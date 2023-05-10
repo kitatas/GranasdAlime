@@ -1,4 +1,4 @@
-using Tsutaeru.Common.Presentation.View;
+using Tsutaeru.Base.Presentation.View;
 
 namespace Tsutaeru.Boot.Presentation.View
 {

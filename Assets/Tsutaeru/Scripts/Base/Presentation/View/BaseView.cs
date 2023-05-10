@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Tsutaeru.Common.Presentation.View
+namespace Tsutaeru.Base.Presentation.View
 {
     public abstract class BaseView<T> : MonoBehaviour where T : new()
     {

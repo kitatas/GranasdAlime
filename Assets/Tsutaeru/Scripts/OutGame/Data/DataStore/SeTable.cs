@@ -1,4 +1,4 @@
-using Tsutaeru.Common.Data.DataStore;
+using Tsutaeru.Base.Data.DataStore;
 using UnityEngine;
 
 namespace Tsutaeru.OutGame.Data.DataStore

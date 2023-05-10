@@ -4,7 +4,7 @@ using DG.Tweening;
 using UniEx;
 using UnityEngine;
 
-namespace Tsutaeru.Common.Presentation.View
+namespace Tsutaeru.Base.Presentation.View
 {
     public abstract class BaseCanvasGroupView : MonoBehaviour
     {

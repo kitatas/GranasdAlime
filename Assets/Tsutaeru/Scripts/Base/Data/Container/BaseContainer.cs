@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tsutaeru.Common.Data.Container
+namespace Tsutaeru.Base.Data.Container
 {
     public abstract class BaseContainer<T> where T : MonoBehaviour
     {

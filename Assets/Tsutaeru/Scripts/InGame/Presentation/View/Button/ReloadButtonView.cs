@@ -3,7 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
-using Tsutaeru.Common.Presentation.View;
+using Tsutaeru.Base.Presentation.View;
 using Tsutaeru.OutGame;
 
 namespace Tsutaeru.InGame.Presentation.View

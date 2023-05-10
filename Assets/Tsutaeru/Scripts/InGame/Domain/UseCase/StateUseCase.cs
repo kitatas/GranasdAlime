@@ -1,5 +1,5 @@
 using System;
-using Tsutaeru.Common.Domain.UseCase;
+using Tsutaeru.Base.Domain.UseCase;
 using Tsutaeru.InGame.Data.Entity;
 using UniRx;
 

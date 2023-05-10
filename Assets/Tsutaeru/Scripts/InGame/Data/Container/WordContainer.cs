@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Tsutaeru.Common.Data.Container;
+using Tsutaeru.Base.Data.Container;
 using UniEx;
 
 namespace Tsutaeru.InGame.Data.Container

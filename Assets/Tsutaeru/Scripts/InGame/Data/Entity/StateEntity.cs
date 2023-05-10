@@ -1,4 +1,4 @@
-using Tsutaeru.Common.Data.Entity;
+using Tsutaeru.Base.Data.Entity;
 
 namespace Tsutaeru.InGame.Data.Entity
 {

@@ -1,4 +1,4 @@
-using Tsutaeru.Common.Presentation.Presenter;
+using Tsutaeru.Base.Presentation.Presenter;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 using UnityEngine;

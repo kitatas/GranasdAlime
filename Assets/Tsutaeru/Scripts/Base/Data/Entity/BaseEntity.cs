@@ -1,4 +1,4 @@
-namespace Tsutaeru.Common.Data.Entity
+namespace Tsutaeru.Base.Data.Entity
 {
     public abstract class BaseEntity<T>
     {

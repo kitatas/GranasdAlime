@@ -8,7 +8,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tsutaeru.Common.Presentation.View
+namespace Tsutaeru.Base.Presentation.View
 {
     public abstract class BaseButtonView : MonoBehaviour
     {

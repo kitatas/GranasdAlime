@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using Tsutaeru.Common.Presentation.View;
+using Tsutaeru.Base.Presentation.View;
 using Tsutaeru.InGame.Presentation.View;
 using Tsutaeru.OutGame.Domain.UseCase;
 using UniRx;
