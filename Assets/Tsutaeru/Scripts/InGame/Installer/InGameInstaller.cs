@@ -41,6 +41,7 @@ namespace Tsutaeru.InGame.Installer
             // Entity
             builder.Register<ProgressEntity>(Lifetime.Scoped);
             builder.Register<StateEntity>(Lifetime.Scoped);
+            builder.Register<TimeEntity>(Lifetime.Scoped);
 
             // Factory
             builder.Register<WordFactory>(Lifetime.Scoped).WithParameter(wordParent);
