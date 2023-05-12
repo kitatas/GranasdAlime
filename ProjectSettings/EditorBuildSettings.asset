@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Tsutaeru/Scenes/Boot.unity
+    guid: 549e775f9bc7f4223b9a2b809901d7d8
+  - enabled: 1
     path: Assets/Tsutaeru/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
