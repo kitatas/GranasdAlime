@@ -11,16 +11,16 @@ namespace Tsutaeru.InGame.Presentation.Controller
     {
         private readonly SceneUseCase _sceneUseCase;
         private readonly SoundUseCase _soundUseCase;
-        private readonly TimeUseCase _timeUseCase;
+        private readonly UserRecordUseCase _userRecordUseCase;
         private readonly HintView _hintView;
         private readonly ReloadButtonView _reloadButtonView;
 
-        public ResultState(SceneUseCase sceneUseCase, SoundUseCase soundUseCase, TimeUseCase timeUseCase,
+        public ResultState(SceneUseCase sceneUseCase, SoundUseCase soundUseCase, UserRecordUseCase userRecordUseCase,
             HintView hintView, ReloadButtonView reloadButtonView)
         {
             _sceneUseCase = sceneUseCase;
             _soundUseCase = soundUseCase;
-            _timeUseCase = timeUseCase;
+            _userRecordUseCase = userRecordUseCase;
             _hintView = hintView;
             _reloadButtonView = reloadButtonView;
         }
@@ -43,10 +43,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
             await _hintView.RenderAsync("タイムアタック ランキング", UiConfig.ANIMATION_TIME, token);
             await _hintView.TweenHeightAsync(-50.0f, UiConfig.ANIMATION_TIME, token);
 
-            // TODO: ユーザーの記録更新 + ランキング送信
-            // var score = _timeUseCase.value;
-            // var rankingSceneManager = await RankingLoader.Instance.SendScoreAndShowRankingAsync(score, 0, token);
-            // rankingSceneManager.Init(GameConfig.GAME_ID, () => _soundUseCase.PlaySe(SeType.Decision));
+            // ユーザーの記録更新 + ランキング送信
+            await _userRecordUseCase.SendTimeAttackScoreAsync(token);
 
             await _reloadButtonView.ShowAsync(UiConfig.ANIMATION_TIME, token);
             await _reloadButtonView.push.ToUniTask(true, token);

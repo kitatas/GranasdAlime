@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using PlayFab;
@@ -125,6 +126,25 @@ namespace Tsutaeru.Common.Domain.Repository
             }
 
             return new MasterData(data);
+        }
+
+        public async UniTask<UpdateUserDataResult> UpdateTimeAttackRecordAsync(Data.Entity.UserTimeAttackEntity timeAttackEntity, CancellationToken token)
+        {
+            var request = new UpdateUserDataRequest
+            {
+                Data = new Dictionary<string, string>
+                {
+                    { PlayFabConfig.USER_TIME_ATTACK_KEY, timeAttackEntity.ToJson() },
+                },
+            };
+
+            var response = await PlayFabClientAPI.UpdateUserDataAsync(request);
+            if (response.Error != null)
+            {
+                throw new Exception($"update time attack user failed: {response.Error}");
+            }
+
+            return response.Result;
         }
     }
 }

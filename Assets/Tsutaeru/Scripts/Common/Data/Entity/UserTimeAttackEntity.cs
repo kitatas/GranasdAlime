@@ -1,10 +1,12 @@
+using Newtonsoft.Json;
+
 namespace Tsutaeru.Common.Data.Entity
 {
     public sealed class UserTimeAttackEntity
     {
-        public float current { get; private set; }
-        public float high { get; private set; }
-        public int playCount { get; private set; }
+        public float current;
+        public float high;
+        public int playCount;
 
         public static UserTimeAttackEntity Default()
         {
@@ -21,9 +23,14 @@ namespace Tsutaeru.Common.Data.Entity
             return new UserTimeAttackEntity
             {
                 current = score,
-                high = score > high ? score : high,
+                high = score < high ? score : high,
                 playCount = playCount + 1,
             };
+        }
+
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

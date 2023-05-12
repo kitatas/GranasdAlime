@@ -56,6 +56,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<TimeUseCase>(Lifetime.Scoped);
             builder.Register<UserDataUseCase>(Lifetime.Scoped);
+            builder.Register<UserRecordUseCase>(Lifetime.Scoped);
             builder.Register<WordUseCase>(Lifetime.Scoped);
 
             // Controller
