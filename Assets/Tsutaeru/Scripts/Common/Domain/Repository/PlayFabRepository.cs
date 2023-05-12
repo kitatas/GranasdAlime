@@ -146,5 +146,26 @@ namespace Tsutaeru.Common.Domain.Repository
 
             return response.Result;
         }
+
+        public async UniTask SendToTimeAttackRankingAsync(Data.Entity.UserTimeAttackEntity timeAttackEntity, CancellationToken token)
+        {
+            var request = new UpdatePlayerStatisticsRequest
+            {
+                Statistics = new List<StatisticUpdate>
+                {
+                    new StatisticUpdate
+                    {
+                        StatisticName = PlayFabConfig.RANKING_TIME_ATTACK_KEY,
+                        Value = timeAttackEntity.GetCurrentForRanking(),
+                    },
+                },
+            };
+
+            var response = await PlayFabClientAPI.UpdatePlayerStatisticsAsync(request);
+            if (response.Error != null)
+            {
+                throw new Exception($"send time attack ranking failed: {response.Error}");
+            }
+        }
     }
 }

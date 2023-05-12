@@ -32,5 +32,10 @@ namespace Tsutaeru.Common.Data.Entity
         {
             return JsonConvert.SerializeObject(this);
         }
+
+        public int GetCurrentForRanking()
+        {
+            return (int)(current * PlayFabConfig.SCORE_RATE);
+        }
     }
 }

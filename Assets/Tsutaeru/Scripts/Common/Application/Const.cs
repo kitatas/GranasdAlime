@@ -27,7 +27,9 @@ namespace Tsutaeru.Common
     public sealed class PlayFabConfig
     {
         public const string TITLE_ID = "";
+        public const string RANKING_TIME_ATTACK_KEY = "";
         public const string USER_TIME_ATTACK_KEY = "";
         public const string MASTER_APP_VERSION_KEY = "";
+        public const int SCORE_RATE = 10000;
     }
 }
