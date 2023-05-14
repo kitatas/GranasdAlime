@@ -167,5 +167,39 @@ namespace Tsutaeru.Common.Domain.Repository
                 throw new Exception($"send time attack ranking failed: {response.Error}");
             }
         }
+
+        public async UniTask<RankingRecordData> GetRankDataAsync(RankingType type, CancellationToken token)
+        {
+            var request = new GetLeaderboardRequest
+            {
+                StatisticName = type.ToRankingKey(),
+                ProfileConstraints = new PlayerProfileViewConstraints
+                {
+                    ShowDisplayName = true,
+                    ShowStatistics = true,
+                },
+                MaxResultsCount = PlayFabConfig.SHOW_MAX_RANKING,
+            };
+
+            var response = await PlayFabClientAPI.GetLeaderboardAsync(request);
+            if (response.Error != null)
+            {
+                throw new Exception($"get ranking data failed: {response.Error}");
+            }
+
+            var result = response.Result;
+            if (result == null)
+            {
+                throw new Exception($"ranking data result is null.");
+            }
+
+            var leaderboard = result.Leaderboard;
+            if (leaderboard == null)
+            {
+                throw new Exception($"leaderboard is null.");
+            }
+
+            return new RankingRecordData(leaderboard, type);
+        }
     }
 }

@@ -31,5 +31,6 @@ namespace Tsutaeru.Common
         public const string USER_TIME_ATTACK_KEY = "";
         public const string MASTER_APP_VERSION_KEY = "";
         public const int SCORE_RATE = 10000;
+        public const int SHOW_MAX_RANKING = 100;
     }
 }

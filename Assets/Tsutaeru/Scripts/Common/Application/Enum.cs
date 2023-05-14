@@ -35,4 +35,10 @@ namespace Tsutaeru.Common
         Pop,
         Correct,
     }
+
+    public enum RankingType
+    {
+        None,
+        TimeAttack,
+    }
 }
