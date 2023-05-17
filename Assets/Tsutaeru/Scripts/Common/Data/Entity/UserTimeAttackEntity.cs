@@ -35,7 +35,7 @@ namespace Tsutaeru.Common.Data.Entity
 
         public int GetCurrentForRanking()
         {
-            return (int)(current * PlayFabConfig.SCORE_RATE);
+            return (int)(current * PlayFabConfig.SCORE_RATE) * -1;
         }
     }
 }

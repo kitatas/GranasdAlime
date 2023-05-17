@@ -12,7 +12,7 @@ namespace Tsutaeru.Common.Data.Entity
 
         public override float GetScore()
         {
-            return base.GetScore() / PlayFabConfig.SCORE_RATE;
+            return (base.GetScore() / PlayFabConfig.SCORE_RATE) * -1;
         }
     }
 }
