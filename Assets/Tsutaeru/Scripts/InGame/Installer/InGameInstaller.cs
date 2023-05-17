@@ -27,6 +27,7 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private VolumeView volumeView = default;
         [SerializeField] private AccountDeleteView accountDeleteView = default;
         [SerializeField] private NameInputView nameInputView = default;
+        [SerializeField] private RankingView rankingView = default;
 
         [SerializeField] private RectTransform wordParent = default;
 
@@ -55,6 +56,7 @@ namespace Tsutaeru.InGame.Installer
             builder.Register<QuestionUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<TimeUseCase>(Lifetime.Scoped);
+            builder.Register<RankingUseCase>(Lifetime.Scoped);
             builder.Register<UserDataUseCase>(Lifetime.Scoped);
             builder.Register<UserRecordUseCase>(Lifetime.Scoped);
             builder.Register<WordUseCase>(Lifetime.Scoped);
@@ -85,6 +87,7 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<VolumeView>(volumeView);
             builder.RegisterInstance<AccountDeleteView>(accountDeleteView);
             builder.RegisterInstance<NameInputView>(nameInputView);
+            builder.RegisterInstance<RankingView>(rankingView);
         }
     }
 }
