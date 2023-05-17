@@ -2,21 +2,17 @@ using PlayFab.ClientModels;
 
 namespace Tsutaeru.Common.Data.Entity
 {
-    public sealed class TimeAttackRecordEntity
+    public sealed class TimeAttackRecordEntity : RankingRecordEntity
     {
-        public readonly string id;
-        public readonly int rank;
-        public readonly string name;
-        public readonly float score;
-
-        public TimeAttackRecordEntity(PlayerLeaderboardEntry entry, RankingType type)
+        public TimeAttackRecordEntity(PlayerLeaderboardEntry entry) : base(entry)
         {
-            id = entry.PlayFabId;
-            rank = entry.Position + 1;
-            name = entry.DisplayName;
+        }
 
-            float rankingScore = entry.Profile.Statistics?.Find(x => x.Name == type.ToRankingKey())?.Value ?? 0;
-            score = rankingScore / PlayFabConfig.SCORE_RATE;
+        protected override RankingType type => RankingType.TimeAttack;
+
+        public override float GetScore()
+        {
+            return base.GetScore() / PlayFabConfig.SCORE_RATE;
         }
     }
 }

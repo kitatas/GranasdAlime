@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PlayFab.ClientModels;
@@ -18,8 +19,13 @@ namespace Tsutaeru.Common.Data.DataStore
 
         public List<TimeAttackRecordEntity> GetTimeAttackRanking()
         {
+            if (_type != RankingType.TimeAttack)
+            {
+                throw new Exception($"unmatched ranking type: {_type}");
+            }
+
             return _leaderboard
-                .Select(x => new TimeAttackRecordEntity(x, _type))
+                .Select(x => new TimeAttackRecordEntity(x))
                 .ToList();
         }
     }
