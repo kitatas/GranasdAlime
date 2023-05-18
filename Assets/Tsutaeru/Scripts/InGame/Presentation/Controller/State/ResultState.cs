@@ -55,12 +55,12 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             var records = await _rankingUseCase.GetTimeAttackRankingAsync(token);
             _rankingView.SetUp(records);
-            await _rankingView.ShowAsync(UiConfig.ANIMATION_TIME, token);
+            await _rankingView.ShowAsync(UiConfig.POPUP_TIME, token);
 
             await _reloadButtonView.ShowAsync(UiConfig.ANIMATION_TIME, token);
             await _reloadButtonView.push.ToUniTask(true, token);
 
-            _sceneUseCase.Load(SceneName.Main, LoadType.None);
+            _sceneUseCase.Load(SceneName.Main, LoadType.Fade);
 
             return GameState.None;
         }
