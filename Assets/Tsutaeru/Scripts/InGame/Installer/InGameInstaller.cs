@@ -28,6 +28,7 @@ namespace Tsutaeru.InGame.Installer
         [SerializeField] private AccountDeleteView accountDeleteView = default;
         [SerializeField] private NameInputView nameInputView = default;
         [SerializeField] private RankingView rankingView = default;
+        [SerializeField] private UserRecordView userRecordView = default;
 
         [SerializeField] private RectTransform wordParent = default;
 
@@ -88,6 +89,7 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<AccountDeleteView>(accountDeleteView);
             builder.RegisterInstance<NameInputView>(nameInputView);
             builder.RegisterInstance<RankingView>(rankingView);
+            builder.RegisterInstance<UserRecordView>(userRecordView);
         }
     }
 }

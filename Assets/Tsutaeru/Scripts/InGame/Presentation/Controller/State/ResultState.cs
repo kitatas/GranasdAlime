@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
@@ -17,10 +16,11 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly HintView _hintView;
         private readonly ReloadButtonView _reloadButtonView;
         private readonly RankingView _rankingView;
+        private readonly UserRecordView _userRecordView;
 
         public ResultState(RankingUseCase rankingUseCase, SceneUseCase sceneUseCase, SoundUseCase soundUseCase,
             UserRecordUseCase userRecordUseCase, HintView hintView, ReloadButtonView reloadButtonView,
-            RankingView rankingView)
+            RankingView rankingView, UserRecordView userRecordView)
         {
             _rankingUseCase = rankingUseCase;
             _sceneUseCase = sceneUseCase;
@@ -29,6 +29,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _hintView = hintView;
             _reloadButtonView = reloadButtonView;
             _rankingView = rankingView;
+            _userRecordView = userRecordView;
         }
 
         public override GameState state => GameState.Result;
@@ -48,6 +49,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             // ユーザーの記録更新 + ランキング送信
             await _userRecordUseCase.SendTimeAttackScoreAsync(token);
+            var score = _userRecordUseCase.GetUserScore();
+            _userRecordView.SetScore(score.current, score.high);
 
             _soundUseCase.PlaySe(SeType.Hint);
             await _hintView.RenderAsync("タイムアタック ランキング", UiConfig.ANIMATION_TIME, token);

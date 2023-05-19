@@ -21,10 +21,20 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public async UniTask SendTimeAttackScoreAsync(CancellationToken token)
         {
-            var entity = _userEntity.timeAttackEntity.UpdateByPlay(_timeEntity.value);
+            var timeAttackEntity = _userEntity.timeAttackEntity.UpdateByPlay(_timeEntity.value);
             await UniTask.WhenAll(
-                _playFabRepository.UpdateTimeAttackRecordAsync(entity, token),
-                _playFabRepository.SendToTimeAttackRankingAsync(entity, token)
+                _playFabRepository.UpdateTimeAttackRecordAsync(timeAttackEntity, token),
+                _playFabRepository.SendToTimeAttackRankingAsync(timeAttackEntity, token)
+            );
+
+            _userEntity.SetTimeAttack(timeAttackEntity);
+        }
+
+        public (float current, float high) GetUserScore()
+        {
+            return (
+                current: _userEntity.timeAttackEntity.current,
+                high: _userEntity.timeAttackEntity.high
             );
         }
     }

@@ -12,8 +12,8 @@ namespace Tsutaeru.Common.Data.Entity
         {
             return new UserTimeAttackEntity
             {
-                current = 0.0f,
-                high = 0.0f,
+                current = float.MaxValue,
+                high = float.MaxValue,
                 playCount = 0,
             };
         }
