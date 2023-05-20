@@ -14,7 +14,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
             _questionRepository = questionRepository;
         }
 
-        public Data.DataStore.QuestionData Lot()
+        public QuestionEntity Lot()
         {
             var difficulty = _progressEntity.GetDifficulty();
             return _questionRepository.Find(difficulty);

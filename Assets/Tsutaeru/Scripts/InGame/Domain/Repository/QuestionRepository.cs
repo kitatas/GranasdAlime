@@ -8,14 +8,14 @@ namespace Tsutaeru.InGame.Domain.Repository
 {
     public sealed class QuestionRepository
     {
-        private List<QuestionData> _questionTable;
+        private List<Data.Entity.QuestionEntity> _questionTable;
 
         public QuestionRepository()
         {
             Addressables.LoadAssetAsync<TextAsset>(GetKey("unity1week")).Completed += x =>
             {
                 var table = JsonUtility.FromJson<QuestionTable>(x.Result.text);
-                _questionTable = new List<QuestionData>(table.data_list);
+                _questionTable = new List<Data.Entity.QuestionEntity>(table.data_list);
             };
         }
 
@@ -29,7 +29,7 @@ namespace Tsutaeru.InGame.Domain.Repository
         /// </summary>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public QuestionData Find(Difficulty difficulty)
+        public Data.Entity.QuestionEntity Find(Difficulty difficulty)
         {
             var data = _questionTable
                 .FindAll(x => x.difficulty == difficulty)

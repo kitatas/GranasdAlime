@@ -14,7 +14,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 {
     public sealed class WordUseCase
     {
-        private AnswerEntity _answerEntity;
+        private QuestionEntity _questionEntity;
 
         private readonly Subject<Unit> _execShift;
         private readonly WordContainer _wordContainer;
@@ -32,12 +32,12 @@ namespace Tsutaeru.InGame.Domain.UseCase
             _prefabRepository = prefabRepository;
         }
 
-        public async UniTask BuildAsync(Data.DataStore.QuestionData data, Action<SeType> playSe, CancellationToken token)
+        public async UniTask BuildAsync(QuestionEntity question, Action<SeType> playSe, CancellationToken token)
         {
             _wordContainer.Refresh();
-            _answerEntity = new AnswerEntity(data);
+            _questionEntity = question;
 
-            var length = data.origin.Length;
+            var length = _questionEntity.questionLength;
             var pointX = length.IsEven()
                 ? -1.0f * (WordConfig.INTERVAL * (length / 2.0f - 1.0f) + WordConfig.INTERVAL / 2.0f)
                 : -1.0f * (WordConfig.INTERVAL * Mathf.Floor(length / 2.0f));
@@ -50,7 +50,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
                 var view = _prefabRepository.GetWordView();
                 var instance = _wordFactory.Generate(view, pointX);
-                instance.Init(data.origin[i], i, status,
+                instance.Init(_questionEntity.GetQuestionChar(i), i, status,
                     () => _stateEntity.IsState(GameState.Input),
                     x =>
                     {
@@ -74,7 +74,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
             _wordContainer.HideAll();
             await UniTask.Delay(TimeSpan.FromSeconds(WordConfig.GENERATE_SPEED), cancellationToken: token);
         }
-        
+
         public async UniTask HideAllWordBackgroundAsync(CancellationToken token)
         {
             _wordContainer.HideBackgroundAll();
@@ -86,7 +86,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
         public bool IsCorrect()
         {
             var userAnswer = _wordContainer.GetUserAnswer();
-            return _answerEntity.IsCorrect(userAnswer);
+            return _questionEntity.IsCorrectAnswer(userAnswer);
         }
     }
 }
