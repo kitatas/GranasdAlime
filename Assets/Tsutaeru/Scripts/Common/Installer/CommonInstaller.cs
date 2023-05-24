@@ -30,14 +30,17 @@ namespace Tsutaeru.Common.Installer
             builder.Register<SoundRepository>(Lifetime.Singleton);
 
             // UseCase
+            builder.Register<LoadingUseCase>(Lifetime.Singleton);
             builder.Register<SceneUseCase>(Lifetime.Singleton);
             builder.Register<SoundUseCase>(Lifetime.Singleton);
 
             // Presenter
+            builder.RegisterEntryPoint<LoadingPresenter>();
             builder.RegisterEntryPoint<ScenePresenter>();
             builder.RegisterEntryPoint<SoundPresenter>();
 
             // View
+            builder.RegisterInstance<LoadingView>(FindObjectOfType<LoadingView>());
             builder.RegisterInstance<SoundView>(FindObjectOfType<SoundView>());
             builder.RegisterInstance<TransitionView>(FindObjectOfType<TransitionView>());
         }
