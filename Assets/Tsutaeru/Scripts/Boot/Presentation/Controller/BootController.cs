@@ -12,16 +12,18 @@ namespace Tsutaeru.Boot.Presentation.Controller
     public sealed class BootController : IInitializable, IDisposable
     {
         private readonly AppVersionUseCase _appVersionUseCase;
+        private readonly LoadingUseCase _loadingUseCase;
         private readonly LoginUseCase _loginUseCase;
         private readonly SceneUseCase _sceneUseCase;
         private readonly RegisterView _registerView;
         private readonly UpdateView _updateView;
         private readonly CancellationTokenSource _tokenSource;
 
-        public BootController(AppVersionUseCase appVersionUseCase, LoginUseCase loginUseCase, SceneUseCase sceneUseCase,
-            RegisterView registerView, UpdateView updateView)
+        public BootController(AppVersionUseCase appVersionUseCase, LoadingUseCase loadingUseCase,
+            LoginUseCase loginUseCase, SceneUseCase sceneUseCase, RegisterView registerView, UpdateView updateView)
         {
             _appVersionUseCase = appVersionUseCase;
+            _loadingUseCase = loadingUseCase;
             _loginUseCase = loginUseCase;
             _sceneUseCase = sceneUseCase;
             _registerView = registerView;
@@ -42,13 +44,21 @@ namespace Tsutaeru.Boot.Presentation.Controller
         {
             try
             {
+                // ロード表示
+                _loadingUseCase.Set(true);
+
                 var isLoginSuccess = await _loginUseCase.LoginAsync(token);
                 if (isLoginSuccess == false)
                 {
                     await RegisterAsync(_tokenSource.Token);
                 }
 
+                // マスタからバージョンチェック
                 var isUpdate = await _appVersionUseCase.CheckUpdateAsync(token);
+
+                // ロード非表示
+                _loadingUseCase.Set(false);
+
                 if (isUpdate)
                 {
                     // 強制アップデート
@@ -69,7 +79,13 @@ namespace Tsutaeru.Boot.Presentation.Controller
         {
             while (true)
             {
+                // ロード非表示
+                _loadingUseCase.Set(false);
+
                 var userName = await _registerView.DecisionNameAsync(InGame.UiConfig.POPUP_TIME, token);
+
+                // ロード表示
+                _loadingUseCase.Set(true);
 
                 // 名前登録
                 var isSuccess = await _loginUseCase.RegisterAsync(userName, token);
