@@ -12,6 +12,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class UserDataController : IInitializable, IDisposable
     {
+        private readonly LoadingUseCase _loadingUseCase;
         private readonly SceneUseCase _sceneUseCase;
         private readonly UserDataUseCase _userDataUseCase;
         private readonly AccountDeleteView _accountDeleteView;
@@ -19,9 +20,10 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         private readonly CancellationTokenSource _tokenSource;
 
-        public UserDataController(SceneUseCase sceneUseCase, UserDataUseCase userDataUseCase,
-            AccountDeleteView accountDeleteView, NameInputView nameInputView)
+        public UserDataController(LoadingUseCase loadingUseCase, SceneUseCase sceneUseCase,
+            UserDataUseCase userDataUseCase, AccountDeleteView accountDeleteView, NameInputView nameInputView)
         {
+            _loadingUseCase = loadingUseCase;
             _sceneUseCase = sceneUseCase;
             _userDataUseCase = userDataUseCase;
             _accountDeleteView = accountDeleteView;
@@ -44,23 +46,29 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _nameInputView.UpdateName()
                 .Subscribe(x =>
                 {
-                    try
-                    {
-                        UpdateAsync(x, _tokenSource.Token).Forget();
-                    }
-                    catch (Exception e)
-                    {
-                        // TODO: リトライ
-                        UnityEngine.Debug.LogError($"update user name: {e}");
-                        throw;
-                    }
+                    UpdateAsync(x, _tokenSource.Token).Forget();
                 })
                 .AddTo(_tokenSource.Token);
         }
 
         private async UniTaskVoid UpdateAsync(string name, CancellationToken token)
         {
-            await _userDataUseCase.UpdateUserNameAsync(name, token);
+            try
+            {
+                // ロード表示
+                _loadingUseCase.Set(true);
+
+                await _userDataUseCase.UpdateUserNameAsync(name, token);
+
+                // ロード非表示
+                _loadingUseCase.Set(false);
+            }
+            catch (Exception e)
+            {
+                // TODO: リトライ
+                UnityEngine.Debug.LogError($"update user name: {e}");
+                throw;
+            }
         }
 
         public void Dispose()
