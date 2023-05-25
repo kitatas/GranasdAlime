@@ -28,11 +28,11 @@ namespace Tsutaeru.Common.Presentation.Presenter
                 {
                     if (x)
                     {
-                        _loadingView.ShowAsync(InGame.UiConfig.POPUP_TIME, _tokenSource.Token).Forget();
+                        _loadingView.ShowAsync(UiConfig.POPUP_TIME, _tokenSource.Token).Forget();
                     }
                     else
                     {
-                        _loadingView.HideAsync(InGame.UiConfig.POPUP_TIME, _tokenSource.Token).Forget();
+                        _loadingView.HideAsync(UiConfig.POPUP_TIME, _tokenSource.Token).Forget();
                     }
                 })
                 .AddTo(_loadingView);

@@ -5,7 +5,13 @@ namespace Tsutaeru.Common
         public const int MAJOR_VERSION = 1;
         public const int MINOR_VERSION = 0;
     }
-    
+
+    public sealed class UiConfig
+    {
+        public const float ANIMATION_TIME = 0.5f;
+        public const float POPUP_TIME = 0.25f;
+    }
+
     public sealed class SceneConfig
     {
         public const float FADE_IN_TIME = 0.5f;

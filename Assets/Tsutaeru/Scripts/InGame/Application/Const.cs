@@ -29,12 +29,6 @@ namespace Tsutaeru.InGame
         public const int SPECIAL = GameConfig.MAX_QUESTION;
     }
 
-    public sealed class UiConfig
-    {
-        public const float ANIMATION_TIME = 0.5f;
-        public const float POPUP_TIME = 0.25f;
-    }
-
     public sealed class WordConfig
     {
         public const int INTERVAL = 90;

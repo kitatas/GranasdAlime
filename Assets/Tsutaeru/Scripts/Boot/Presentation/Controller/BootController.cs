@@ -62,7 +62,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
                 if (isUpdate)
                 {
                     // 強制アップデート
-                    _updateView.ShowAsync(InGame.UiConfig.POPUP_TIME, token).Forget();
+                    _updateView.ShowAsync(UiConfig.POPUP_TIME, token).Forget();
                     return;
                 }
 
@@ -82,7 +82,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
                 // ロード非表示
                 _loadingUseCase.Set(false);
 
-                var userName = await _registerView.DecisionNameAsync(InGame.UiConfig.POPUP_TIME, token);
+                var userName = await _registerView.DecisionNameAsync(UiConfig.POPUP_TIME, token);
 
                 // ロード表示
                 _loadingUseCase.Set(true);
