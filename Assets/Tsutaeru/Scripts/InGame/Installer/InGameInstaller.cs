@@ -65,6 +65,7 @@ namespace Tsutaeru.InGame.Installer
             // Controller
             builder.Register<StateController>(Lifetime.Scoped);
             builder.Register<ClearState>(Lifetime.Scoped);
+            builder.Register<FinishState>(Lifetime.Scoped);
             builder.Register<InputState>(Lifetime.Scoped);
             builder.Register<JudgeState>(Lifetime.Scoped);
             builder.Register<ResultState>(Lifetime.Scoped);

@@ -8,6 +8,7 @@ namespace Tsutaeru.InGame
         Input,
         Judge,
         Clear,
+        Finish,
         Result,
     }
 

@@ -10,7 +10,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly List<BaseState> _states;
 
         public StateController(TitleState titleState, SetUpState setUpState, InputState inputState,
-            JudgeState judgeState, ClearState clearState, ResultState resultState)
+            JudgeState judgeState, ClearState clearState, FinishState finishState, ResultState resultState)
         {
             _states = new List<BaseState>
             {
@@ -19,6 +19,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                 inputState,
                 judgeState,
                 clearState,
+                finishState,
                 resultState,
             };
         }

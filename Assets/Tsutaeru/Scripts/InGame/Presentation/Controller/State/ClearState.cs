@@ -89,7 +89,10 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
                 await _wordUseCase.HideAllWordAsync(token);
 
-                return GameState.Result;
+                _soundUseCase.PlaySe(SeType.Hint);
+                await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
+
+                return GameState.Finish;
             }
             else
             {

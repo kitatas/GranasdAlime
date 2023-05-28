@@ -14,25 +14,20 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly RankingUseCase _rankingUseCase;
         private readonly SceneUseCase _sceneUseCase;
         private readonly SoundUseCase _soundUseCase;
-        private readonly UserRecordUseCase _userRecordUseCase;
         private readonly HintView _hintView;
         private readonly ReloadButtonView _reloadButtonView;
         private readonly RankingView _rankingView;
-        private readonly UserRecordView _userRecordView;
 
         public ResultState(LoadingUseCase loadingUseCase, RankingUseCase rankingUseCase, SceneUseCase sceneUseCase,
-            SoundUseCase soundUseCase, UserRecordUseCase userRecordUseCase, HintView hintView,
-            ReloadButtonView reloadButtonView, RankingView rankingView, UserRecordView userRecordView)
+            SoundUseCase soundUseCase, HintView hintView, ReloadButtonView reloadButtonView, RankingView rankingView)
         {
             _loadingUseCase = loadingUseCase;
             _rankingUseCase = rankingUseCase;
             _sceneUseCase = sceneUseCase;
             _soundUseCase = soundUseCase;
-            _userRecordUseCase = userRecordUseCase;
             _hintView = hintView;
             _reloadButtonView = reloadButtonView;
             _rankingView = rankingView;
-            _userRecordView = userRecordView;
         }
 
         public override GameState state => GameState.Result;
@@ -47,19 +42,8 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            _soundUseCase.PlaySe(SeType.Hint);
-            await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
-
             // ロード表示
             _loadingUseCase.Set(true);
-
-            // ユーザーの記録更新 + ランキング送信
-            await _userRecordUseCase.SendTimeAttackScoreAsync(token);
-            var score = _userRecordUseCase.GetUserScore();
-            _userRecordView.SetScore(score.current, score.high);
-
-            // ランキング反映待ち
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: token);
 
             var records = await _rankingUseCase.GetTimeAttackRankingAsync(token);
             _rankingView.SetUp(records);
