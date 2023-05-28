@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Tsutaeru.Common;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.Controller;
 using UniRx;
@@ -30,12 +31,16 @@ namespace Tsutaeru.InGame.Presentation.Presenter
                 .AddTo(_tokenSource.Token);
         }
 
-        private async UniTaskVoid ExecAsync(GameState state, CancellationToken token)
+        private async UniTask ExecAsync(GameState state, CancellationToken token)
         {
             try
             {
                 var nextState = await _stateController.TickAsync(state, token);
                 _stateUseCase.Set(nextState);
+            }
+            catch (RetryException)
+            {
+                await ExecAsync(state, token);
             }
             catch (OperationCanceledException)
             {
