@@ -2,6 +2,7 @@ using Tsutaeru.Common.Data.DataStore;
 using Tsutaeru.Common.Data.Entity;
 using Tsutaeru.Common.Domain.Repository;
 using Tsutaeru.Common.Domain.UseCase;
+using Tsutaeru.Common.Presentation.Controller;
 using Tsutaeru.Common.Presentation.Presenter;
 using Tsutaeru.Common.Presentation.View;
 using UnityEngine;
@@ -34,6 +35,9 @@ namespace Tsutaeru.Common.Installer
             builder.Register<SceneUseCase>(Lifetime.Singleton);
             builder.Register<SoundUseCase>(Lifetime.Singleton);
 
+            // Controller
+            builder.RegisterEntryPoint<ExceptionController>();
+
             // Presenter
             builder.RegisterEntryPoint<LoadingPresenter>();
             builder.RegisterEntryPoint<ScenePresenter>();
@@ -41,6 +45,7 @@ namespace Tsutaeru.Common.Installer
 
             // View
             builder.RegisterInstance<LoadingView>(FindObjectOfType<LoadingView>());
+            builder.RegisterInstance<RetryView>(FindObjectOfType<RetryView>());
             builder.RegisterInstance<SoundView>(FindObjectOfType<SoundView>());
             builder.RegisterInstance<TransitionView>(FindObjectOfType<TransitionView>());
         }
