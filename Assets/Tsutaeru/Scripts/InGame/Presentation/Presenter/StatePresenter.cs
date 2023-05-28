@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
+using Tsutaeru.Common.Presentation.Controller;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.Controller;
 using UniRx;
@@ -13,12 +14,15 @@ namespace Tsutaeru.InGame.Presentation.Presenter
     {
         private readonly StateUseCase _stateUseCase;
         private readonly StateController _stateController;
+        private readonly ExceptionController _exceptionController;
         private readonly CancellationTokenSource _tokenSource;
 
-        public StatePresenter(StateUseCase stateUseCase, StateController stateController)
+        public StatePresenter(StateUseCase stateUseCase, StateController stateController,
+            ExceptionController exceptionController)
         {
             _stateUseCase = stateUseCase;
             _stateController = stateController;
+            _exceptionController = exceptionController;
             _tokenSource = new CancellationTokenSource();
         }
 
@@ -38,8 +42,9 @@ namespace Tsutaeru.InGame.Presentation.Presenter
                 var nextState = await _stateController.TickAsync(state, token);
                 _stateUseCase.Set(nextState);
             }
-            catch (RetryException)
+            catch (RetryException retryException)
             {
+                await _exceptionController.PopupRetryAsync(retryException.Message, _tokenSource.Token);
                 await ExecAsync(state, token);
             }
             catch (OperationCanceledException)
