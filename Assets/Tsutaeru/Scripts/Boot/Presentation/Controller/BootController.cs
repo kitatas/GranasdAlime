@@ -5,6 +5,7 @@ using Tsutaeru.Boot.Domain.UseCase;
 using Tsutaeru.Boot.Presentation.View;
 using Tsutaeru.Common;
 using Tsutaeru.Common.Domain.UseCase;
+using Tsutaeru.Common.Presentation.Controller;
 using VContainer.Unity;
 
 namespace Tsutaeru.Boot.Presentation.Controller
@@ -15,17 +16,20 @@ namespace Tsutaeru.Boot.Presentation.Controller
         private readonly LoadingUseCase _loadingUseCase;
         private readonly LoginUseCase _loginUseCase;
         private readonly SceneUseCase _sceneUseCase;
+        private readonly ExceptionController _exceptionController;
         private readonly RegisterView _registerView;
         private readonly UpdateView _updateView;
         private readonly CancellationTokenSource _tokenSource;
 
         public BootController(AppVersionUseCase appVersionUseCase, LoadingUseCase loadingUseCase,
-            LoginUseCase loginUseCase, SceneUseCase sceneUseCase, RegisterView registerView, UpdateView updateView)
+            LoginUseCase loginUseCase, SceneUseCase sceneUseCase, ExceptionController exceptionController, 
+            RegisterView registerView, UpdateView updateView)
         {
             _appVersionUseCase = appVersionUseCase;
             _loadingUseCase = loadingUseCase;
             _loginUseCase = loginUseCase;
             _sceneUseCase = sceneUseCase;
+            _exceptionController = exceptionController;
             _registerView = registerView;
             _updateView = updateView;
 
@@ -34,6 +38,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
 
         public void Initialize()
         {
+            _exceptionController.Init();
             _registerView.HideAsync(0.0f, _tokenSource.Token).Forget();
             _updateView.InitAsync(_tokenSource.Token).Forget();
 

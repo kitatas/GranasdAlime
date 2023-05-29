@@ -3,11 +3,10 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common.Domain.UseCase;
 using Tsutaeru.Common.Presentation.View;
-using VContainer.Unity;
 
 namespace Tsutaeru.Common.Presentation.Controller
 {
-    public sealed class ExceptionController : IInitializable, IDisposable
+    public sealed class ExceptionController : IDisposable
     {
         private readonly LoadingUseCase _loadingUseCase;
         private readonly RetryView _retryView;
@@ -20,7 +19,7 @@ namespace Tsutaeru.Common.Presentation.Controller
             _tokenSource = new CancellationTokenSource();
         }
 
-        public void Initialize()
+        public void Init()
         {
             _retryView.HideAsync(0.0f, _tokenSource.Token).Forget();
         }

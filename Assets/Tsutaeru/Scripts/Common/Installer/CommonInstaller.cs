@@ -36,7 +36,7 @@ namespace Tsutaeru.Common.Installer
             builder.Register<SoundUseCase>(Lifetime.Singleton);
 
             // Controller
-            builder.RegisterEntryPoint<ExceptionController>();
+            builder.Register<ExceptionController>(Lifetime.Singleton);
 
             // Presenter
             builder.RegisterEntryPoint<LoadingPresenter>();
