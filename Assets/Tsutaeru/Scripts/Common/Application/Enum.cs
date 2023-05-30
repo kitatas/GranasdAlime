@@ -41,4 +41,10 @@ namespace Tsutaeru.Common
         None,
         TimeAttack,
     }
+
+    public enum ExceptionType
+    {
+        None,
+        Retry,
+    }
 }

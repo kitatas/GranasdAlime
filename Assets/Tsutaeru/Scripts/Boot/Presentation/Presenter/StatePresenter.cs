@@ -28,7 +28,7 @@ namespace Tsutaeru.Boot.Presentation.Presenter
 
         public void Initialize()
         {
-            _exceptionController.Init();
+            _exceptionController.InitAsync(_tokenSource.Token).Forget();
             _stateController.InitAsync(_tokenSource.Token).Forget();
 
             _stateUseCase.bootState
@@ -43,17 +43,14 @@ namespace Tsutaeru.Boot.Presentation.Presenter
                 var nextState = await _stateController.TickAsync(state, token);
                 _stateUseCase.Set(nextState);
             }
-            catch (RetryException retryException)
-            {
-                await _exceptionController.PopupRetryAsync(retryException.Message, _tokenSource.Token);
-                await ExecAsync(state, token);
-            }
-            catch (OperationCanceledException)
-            {
-            }
             catch (Exception e)
             {
                 UnityEngine.Debug.LogError($"{state}: {e}");
+                var type = await _exceptionController.ShowExceptionAsync(e, _tokenSource.Token);
+                if (type == ExceptionType.Retry)
+                {
+                    await ExecAsync(state, token);
+                }
                 throw;
             }
         }

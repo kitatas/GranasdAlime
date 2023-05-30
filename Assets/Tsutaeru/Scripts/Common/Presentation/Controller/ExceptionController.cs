@@ -6,36 +6,38 @@ using Tsutaeru.Common.Presentation.View;
 
 namespace Tsutaeru.Common.Presentation.Controller
 {
-    public sealed class ExceptionController : IDisposable
+    public sealed class ExceptionController
     {
         private readonly LoadingUseCase _loadingUseCase;
         private readonly RetryView _retryView;
-        private readonly CancellationTokenSource _tokenSource;
 
         public ExceptionController(LoadingUseCase loadingUseCase, RetryView retryView)
         {
             _loadingUseCase = loadingUseCase;
             _retryView = retryView;
-            _tokenSource = new CancellationTokenSource();
         }
 
-        public void Init()
+        public async UniTaskVoid InitAsync(CancellationToken token)
         {
-            _retryView.HideAsync(0.0f, _tokenSource.Token).Forget();
+            _retryView.HideAsync(0.0f, token).Forget();
+            await UniTask.Yield(token);
         }
 
-        public void Dispose()
-        {
-            _tokenSource?.Cancel();
-            _tokenSource?.Dispose();
-        }
-
-        public async UniTask PopupRetryAsync(string message, CancellationToken token)
+        public async UniTask<ExceptionType> ShowExceptionAsync(Exception exception, CancellationToken token)
         {
             // ロード表示中の場合があるので、非表示にさせる
             _loadingUseCase.Set(false);
 
-            await _retryView.ShowAndHideAsync(message, UiConfig.POPUP_TIME, token);
+            switch (exception)
+            {
+                case OperationCanceledException:
+                    return ExceptionType.None;
+                case RetryException:
+                    await _retryView.ShowAndHideAsync(exception.Message, UiConfig.POPUP_TIME, token);
+                    return ExceptionType.Retry;
+                default:
+                    return ExceptionType.None;
+            }
         }
     }
 }

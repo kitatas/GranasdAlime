@@ -42,17 +42,14 @@ namespace Tsutaeru.InGame.Presentation.Presenter
                 var nextState = await _stateController.TickAsync(state, token);
                 _stateUseCase.Set(nextState);
             }
-            catch (RetryException retryException)
-            {
-                await _exceptionController.PopupRetryAsync(retryException.Message, _tokenSource.Token);
-                await ExecAsync(state, token);
-            }
-            catch (OperationCanceledException)
-            {
-            }
             catch (Exception e)
             {
                 UnityEngine.Debug.LogError($"{state}: {e}");
+                var type = await _exceptionController.ShowExceptionAsync(e, _tokenSource.Token);
+                if (type == ExceptionType.Retry)
+                {
+                    await ExecAsync(state, token);
+                }
                 throw;
             }
         }
