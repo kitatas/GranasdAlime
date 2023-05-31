@@ -39,4 +39,22 @@ namespace Tsutaeru.Common
         public const int SCORE_RATE = 10000;
         public const int SHOW_MAX_RANKING = 100;
     }
+
+    public sealed class ExceptionConfig
+    {
+        public const string NOT_FOUND_DATA = "";
+        public const string NOT_FOUND_STATE = "";
+        public const string NOT_FOUND_PROGRESS = "";
+        public const string NOT_FOUND_PREFAB = "";
+
+        public const string FAILED_DESERIALIZE_MASTER = "";
+        public const string FAILED_RESPONSE_DATA = "";
+        public const string FAILED_LOGIN = "";
+
+        public const string UNMATCHED_TYPE_RANKING = "";
+        public const string UNMATCHED_TYPE_LOAD = "";
+        public const string UNMATCHED_TYPE_MOVE = "";
+        public const string UNMATCHED_TYPE_HINT = "";
+        public const string UNMATCHED_USER_NAME_RULE = "";
+    }
 }

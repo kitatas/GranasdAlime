@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Tsutaeru.Common;
 
 namespace Tsutaeru.Boot.Presentation.Controller
 {
@@ -34,7 +35,7 @@ namespace Tsutaeru.Boot.Presentation.Controller
             var currentState = _states.Find(x => x.state == state);
             if (currentState == null)
             {
-                throw new Exception($"Can't find state. (state: {state})");
+                throw new Exception(ExceptionConfig.NOT_FOUND_STATE);
             }
 
             return await currentState.TickAsync(token);

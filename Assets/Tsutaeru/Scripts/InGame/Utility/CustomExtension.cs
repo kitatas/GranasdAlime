@@ -1,4 +1,5 @@
 using System;
+using Tsutaeru.Common;
 
 namespace Tsutaeru.InGame
 {
@@ -26,7 +27,7 @@ namespace Tsutaeru.InGame
                 HintType.Rule => "ゲームルール",
                 HintType.Title => "ゲームタイトル",
                 HintType.Unit => "タンイ",
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                _ => throw new Exception(ExceptionConfig.UNMATCHED_TYPE_HINT),
             };
         }
     }

@@ -21,7 +21,7 @@ namespace Tsutaeru.Common.Data.DataStore
         {
             if (_type != RankingType.TimeAttack)
             {
-                throw new Exception($"unmatched ranking type: {_type}");
+                throw new RebootException(ExceptionConfig.UNMATCHED_TYPE_RANKING);
             }
 
             return _leaderboard

@@ -9,7 +9,7 @@ namespace Tsutaeru.Common
             return type switch
             {
                 RankingType.TimeAttack => PlayFabConfig.RANKING_TIME_ATTACK_KEY,
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                _ => throw new Exception(ExceptionConfig.UNMATCHED_TYPE_RANKING)
             };
         }
     }

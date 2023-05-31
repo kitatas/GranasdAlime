@@ -1,5 +1,6 @@
 using System;
 using Tsutaeru.Base.Data.Entity;
+using Tsutaeru.Common;
 
 namespace Tsutaeru.InGame.Data.Entity
 {
@@ -27,7 +28,7 @@ namespace Tsutaeru.InGame.Data.Entity
             if (value < ProgressConfig.HARD) return Difficulty.Hard;
             if (value < ProgressConfig.SPECIAL) return Difficulty.Special;
 
-            throw new Exception($"ProgressConfig is invalid. (progress: {value})");
+            throw new Exception(ExceptionConfig.NOT_FOUND_PROGRESS);
         }
     }
 }

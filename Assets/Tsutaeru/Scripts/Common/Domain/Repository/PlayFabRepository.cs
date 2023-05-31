@@ -47,7 +47,7 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.LoginWithCustomIDAsync(request);
             if (response.Error != null)
             {
-                throw new Exception($"login failed: {response.Error}");
+                throw new RetryException(ExceptionConfig.FAILED_LOGIN);
             }
 
             return response.Result;
@@ -57,19 +57,19 @@ namespace Tsutaeru.Common.Domain.Repository
         {
             if (response == null)
             {
-                throw new Exception($"login result is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             var payload = response.InfoResultPayload;
             if (payload == null)
             {
-                throw new Exception($"login result payload is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             var userDataRecord = payload.UserData;
             if (userDataRecord == null)
             {
-                throw new Exception($"login result user data is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             var profile = payload.PlayerProfile;
@@ -82,12 +82,12 @@ namespace Tsutaeru.Common.Domain.Repository
         {
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
-                throw new Exception($"invalid name: null or empty or white space.");
+                throw new RetryException(ExceptionConfig.UNMATCHED_USER_NAME_RULE);
             }
 
             if (name.Length.IsBetween(3, 10) == false)
             {
-                throw new Exception($"invalid name length: ${name.Length}");
+                throw new RetryException(ExceptionConfig.UNMATCHED_USER_NAME_RULE);
             }
 
             var request = new UpdateUserTitleDisplayNameRequest
@@ -98,7 +98,7 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.UpdateUserTitleDisplayNameAsync(request);
             if (response.Error != null)
             {
-                throw new Exception($"update name failed: {response.Error}");
+                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
             }
 
             return true;
@@ -110,19 +110,19 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.GetTitleDataAsync(request);
             if (response.Error != null)
             {
-                throw new Exception($"get title data failed: {response.Error}");
+                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
             }
 
             var result = response.Result;
             if (result == null)
             {
-                throw new Exception($"title data result is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             var data = result.Data;
             if (data == null)
             {
-                throw new Exception($"title data is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             return new MasterData(data);
@@ -141,7 +141,7 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.UpdateUserDataAsync(request);
             if (response.Error != null)
             {
-                throw new Exception($"update time attack user failed: {response.Error}");
+                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
             }
 
             return response.Result;
@@ -164,7 +164,7 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.UpdatePlayerStatisticsAsync(request);
             if (response.Error != null)
             {
-                throw new Exception($"send time attack ranking failed: {response.Error}");
+                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
             }
         }
 
@@ -184,19 +184,19 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.GetLeaderboardAsync(request);
             if (response.Error != null)
             {
-                throw new Exception($"get ranking data failed: {response.Error}");
+                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
             }
 
             var result = response.Result;
             if (result == null)
             {
-                throw new Exception($"ranking data result is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             var leaderboard = result.Leaderboard;
             if (leaderboard == null)
             {
-                throw new Exception($"leaderboard is null.");
+                throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
             return new RankingRecordData(leaderboard, type);
