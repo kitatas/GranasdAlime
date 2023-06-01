@@ -9,11 +9,18 @@ namespace Tsutaeru.Common.Presentation.Controller
     public sealed class ExceptionController
     {
         private readonly LoadingUseCase _loadingUseCase;
+        private readonly SceneUseCase _sceneUseCase;
+        private readonly CrashView _crashView;
+        private readonly RebootView _rebootView;
         private readonly RetryView _retryView;
 
-        public ExceptionController(LoadingUseCase loadingUseCase, RetryView retryView)
+        public ExceptionController(LoadingUseCase loadingUseCase, SceneUseCase sceneUseCase,
+            CrashView crashView, RebootView rebootView, RetryView retryView)
         {
             _loadingUseCase = loadingUseCase;
+            _sceneUseCase = sceneUseCase;
+            _crashView = crashView;
+            _rebootView = rebootView;
             _retryView = retryView;
         }
 
@@ -31,12 +38,17 @@ namespace Tsutaeru.Common.Presentation.Controller
             switch (exception)
             {
                 case OperationCanceledException:
-                    return ExceptionType.None;
+                    // Cancel時は何もしない
+                    return ExceptionType.Cancel;
                 case RetryException:
                     await _retryView.ShowAndHideAsync(exception.Message, UiConfig.POPUP_TIME, token);
                     return ExceptionType.Retry;
+                case RebootException:
+                    await _rebootView.ShowAndHideAsync(exception.Message, UiConfig.POPUP_TIME, token);
+                    _sceneUseCase.Load(SceneName.Boot, LoadType.Fade);
+                    return ExceptionType.Reboot;
                 default:
-                    return ExceptionType.None;
+                    return ExceptionType.Crash;
             }
         }
     }

@@ -45,6 +45,9 @@ namespace Tsutaeru.Common
     public enum ExceptionType
     {
         None,
+        Cancel,
         Retry,
+        Reboot,
+        Crash,
     }
 }
