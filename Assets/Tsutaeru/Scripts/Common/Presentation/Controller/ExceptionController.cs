@@ -26,6 +26,8 @@ namespace Tsutaeru.Common.Presentation.Controller
 
         public async UniTaskVoid InitAsync(CancellationToken token)
         {
+            _crashView.HideAsync(0.0f, token).Forget();
+            _rebootView.HideAsync(0.0f, token).Forget();
             _retryView.HideAsync(0.0f, token).Forget();
             await UniTask.Yield(token);
         }

@@ -44,8 +44,10 @@ namespace Tsutaeru.Common.Installer
             builder.RegisterEntryPoint<SoundPresenter>();
 
             // View
+            builder.RegisterInstance<CrashView>(FindObjectOfType<CrashView>());
             builder.RegisterInstance<LoadingView>(FindObjectOfType<LoadingView>());
             builder.RegisterInstance<RetryView>(FindObjectOfType<RetryView>());
+            builder.RegisterInstance<RebootView>(FindObjectOfType<RebootView>());
             builder.RegisterInstance<SoundView>(FindObjectOfType<SoundView>());
             builder.RegisterInstance<TransitionView>(FindObjectOfType<TransitionView>());
         }
