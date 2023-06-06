@@ -20,6 +20,10 @@ namespace Tsutaeru.InGame.Presentation.View
         [HideInInspector] public int wordIndex;
         [HideInInspector] public WordStatus wordStatus;
 
+        private Tween _focus;
+        private Tween _release;
+        private Tween _shift;
+
         public void Init(char message, int index, WordStatus status, Func<bool> isInputState,
             Action<(int index, MoveStatus move)> shift, Action execShift)
         {
@@ -54,7 +58,9 @@ namespace Tsutaeru.InGame.Presentation.View
                     startPointX = (int)transform.localPosition.x;
                     updatePointX = startPointX;
 
-                    transform.ToRectTransform()
+                    _release?.Kill(true);
+
+                    _focus = transform.ToRectTransform()
                         .DOScale(focusScale, WordConfig.FOCUS_SPEED)
                         .SetEase(Ease.OutBack)
                         .SetLink(gameObject);
@@ -109,22 +115,27 @@ namespace Tsutaeru.InGame.Presentation.View
                         execShift?.Invoke();
                     }
 
-                    transform.ToRectTransform()
-                        .DOScale(Vector3.one, WordConfig.FOCUS_SPEED)
-                        .SetEase(Ease.OutQuart)
-                        .SetLink(gameObject);
-                    transform.ToRectTransform()
-                        .DOLocalMoveX(updatePointX, WordConfig.FOCUS_SPEED)
-                        .SetEase(Ease.OutQuart)
-                        .SetLink(gameObject);
+                    _focus?.Kill(true);
+
+                    _release = DOTween.Sequence()
+                        .Append(transform.ToRectTransform()
+                            .DOScale(Vector3.one, WordConfig.FOCUS_SPEED)
+                            .SetEase(Ease.OutQuart)
+                            .SetLink(gameObject))
+                        .Join(transform.ToRectTransform()
+                            .DOLocalMoveX(updatePointX, WordConfig.FOCUS_SPEED)
+                            .SetEase(Ease.OutQuart)
+                            .SetLink(gameObject));
                 })
                 .AddTo(this);
         }
 
         public void TweenShift(float addValue)
         {
+            _shift?.Kill(true);
+
             var endValue = transform.localPosition.x + addValue;
-            transform.ToRectTransform()
+            _shift = transform.ToRectTransform()
                 .DOLocalMoveX(endValue, WordConfig.SHIFT_SPEED)
                 .SetEase(Ease.OutQuint)
                 .SetLink(gameObject);
