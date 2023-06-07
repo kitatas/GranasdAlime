@@ -40,6 +40,7 @@ namespace Tsutaeru.Common
     {
         None,
         TimeAttack,
+        ScoreAttack,
     }
 
     public enum ExceptionType

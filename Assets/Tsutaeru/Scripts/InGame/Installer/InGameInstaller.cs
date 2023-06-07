@@ -19,7 +19,6 @@ namespace Tsutaeru.InGame.Installer
 
         [SerializeField] private ReloadButtonView reloadButtonView = default;
         [SerializeField] private RetryButtonView retryButtonView = default;
-        [SerializeField] private StartButtonView startButtonView = default;
         [SerializeField] private TimeView timeView = default;
         [SerializeField] private TitleView titleView = default;
         [SerializeField] private ProgressView progressView = default;
@@ -41,6 +40,7 @@ namespace Tsutaeru.InGame.Installer
             builder.RegisterInstance<PrefabTable>(prefabTable);
 
             // Entity
+            builder.Register<GameModeEntity>(Lifetime.Scoped);
             builder.Register<ProgressEntity>(Lifetime.Scoped);
             builder.Register<StateEntity>(Lifetime.Scoped);
             builder.Register<TimeEntity>(Lifetime.Scoped);
@@ -54,6 +54,7 @@ namespace Tsutaeru.InGame.Installer
 
             // UseCase
             builder.Register<ClearUseCase>(Lifetime.Scoped);
+            builder.Register<GameModeUseCase>(Lifetime.Scoped);
             builder.Register<QuestionUseCase>(Lifetime.Scoped);
             builder.Register<StateUseCase>(Lifetime.Scoped);
             builder.Register<TimeUseCase>(Lifetime.Scoped);
@@ -81,7 +82,6 @@ namespace Tsutaeru.InGame.Installer
             // View
             builder.RegisterInstance<ReloadButtonView>(reloadButtonView);
             builder.RegisterInstance<RetryButtonView>(retryButtonView);
-            builder.RegisterInstance<StartButtonView>(startButtonView);
             builder.RegisterInstance<TimeView>(timeView);
             builder.RegisterInstance<TitleView>(titleView);
             builder.RegisterInstance<ProgressView>(progressView);

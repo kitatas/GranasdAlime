@@ -2,24 +2,25 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
 using Tsutaeru.Common.Domain.UseCase;
+using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 
 namespace Tsutaeru.InGame.Presentation.Controller
 {
     public sealed class TitleState : BaseState
     {
+        private readonly GameModeUseCase _gameModeUseCase;
         private readonly SoundUseCase _soundUseCase;
         private readonly ProgressView _progressView;
         private readonly TitleView _titleView;
-        private readonly StartButtonView _startButtonView;
 
-        public TitleState(SoundUseCase soundUseCase, TitleView titleView, ProgressView progressView,
-            StartButtonView startButtonView)
+        public TitleState(GameModeUseCase gameModeUseCase, SoundUseCase soundUseCase, ProgressView progressView,
+            TitleView titleView)
         {
+            _gameModeUseCase = gameModeUseCase;
             _soundUseCase = soundUseCase;
             _progressView = progressView;
             _titleView = titleView;
-            _startButtonView = startButtonView;
         }
 
         public override GameState state => GameState.Title;
@@ -35,7 +36,9 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await _startButtonView.push.ToUniTask(true, token);
+            var mode = await _titleView.SelectGameMode().ToUniTask(true, token);
+            _gameModeUseCase.SetUp(mode);
+
             await _titleView.HideAsync(UiConfig.POPUP_TIME, token);
 
             _soundUseCase.PlayBgm(BgmType.Main);
