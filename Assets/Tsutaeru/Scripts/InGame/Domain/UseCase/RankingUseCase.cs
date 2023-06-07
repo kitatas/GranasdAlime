@@ -18,7 +18,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public async UniTask<List<TimeAttackRecordEntity>> GetTimeAttackRankingAsync(CancellationToken token)
         {
-            var recordData = await _playFabRepository.GetRankDataAsync(RankingType.TimeAttack, token);
+            var recordData = await _playFabRepository.GetRankDataAsync(GameMode.TimeAttack, token);
             return recordData.GetTimeAttackRanking();
         }
     }

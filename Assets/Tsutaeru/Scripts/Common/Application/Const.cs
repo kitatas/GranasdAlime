@@ -51,7 +51,7 @@ namespace Tsutaeru.Common
         public const string FAILED_RESPONSE_DATA = "";
         public const string FAILED_LOGIN = "";
 
-        public const string UNMATCHED_TYPE_RANKING = "";
+        public const string UNMATCHED_GAME_MODE = "";
         public const string UNMATCHED_TYPE_LOAD = "";
         public const string UNMATCHED_TYPE_MOVE = "";
         public const string UNMATCHED_TYPE_HINT = "";

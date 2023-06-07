@@ -8,7 +8,7 @@ namespace Tsutaeru.Common.Data.Entity
         {
         }
 
-        protected override RankingType type => RankingType.TimeAttack;
+        protected override GameMode mode => GameMode.TimeAttack;
 
         public override float GetScore()
         {

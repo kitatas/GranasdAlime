@@ -36,7 +36,7 @@ namespace Tsutaeru.Common
         Correct,
     }
 
-    public enum RankingType
+    public enum GameMode
     {
         None,
         TimeAttack,

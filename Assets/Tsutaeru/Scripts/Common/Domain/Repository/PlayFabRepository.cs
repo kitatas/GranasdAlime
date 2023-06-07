@@ -168,11 +168,11 @@ namespace Tsutaeru.Common.Domain.Repository
             }
         }
 
-        public async UniTask<RankingRecordData> GetRankDataAsync(RankingType type, CancellationToken token)
+        public async UniTask<RankingRecordData> GetRankDataAsync(GameMode mode, CancellationToken token)
         {
             var request = new GetLeaderboardRequest
             {
-                StatisticName = type.ToRankingKey(),
+                StatisticName = mode.ToRankingKey(),
                 ProfileConstraints = new PlayerProfileViewConstraints
                 {
                     ShowDisplayName = true,
@@ -199,7 +199,7 @@ namespace Tsutaeru.Common.Domain.Repository
                 throw new RebootException(ExceptionConfig.NOT_FOUND_DATA);
             }
 
-            return new RankingRecordData(leaderboard, type);
+            return new RankingRecordData(leaderboard, mode);
         }
     }
 }

@@ -9,19 +9,19 @@ namespace Tsutaeru.Common.Data.DataStore
     public sealed class RankingRecordData
     {
         private readonly List<PlayerLeaderboardEntry> _leaderboard;
-        private readonly RankingType _type;
+        private readonly GameMode _mode;
 
-        public RankingRecordData(List<PlayerLeaderboardEntry> leaderboard, RankingType type)
+        public RankingRecordData(List<PlayerLeaderboardEntry> leaderboard, GameMode mode)
         {
             _leaderboard = leaderboard;
-            _type = type;
+            _mode = mode;
         }
 
         public List<TimeAttackRecordEntity> GetTimeAttackRanking()
         {
-            if (_type != RankingType.TimeAttack)
+            if (_mode != GameMode.TimeAttack)
             {
-                throw new RebootException(ExceptionConfig.UNMATCHED_TYPE_RANKING);
+                throw new RebootException(ExceptionConfig.UNMATCHED_GAME_MODE);
             }
 
             return _leaderboard
