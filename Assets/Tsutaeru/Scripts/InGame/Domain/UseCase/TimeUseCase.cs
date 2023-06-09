@@ -20,7 +20,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
 
         public void Tick(float deltaTime)
         {
-            if (_stateEntity.IsState(GameState.Input))
+            if (_stateEntity.IsState(GameState.TaInput))
             {
                 switch (_gameModeEntity.value)
                 {

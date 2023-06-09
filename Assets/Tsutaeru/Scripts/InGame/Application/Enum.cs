@@ -4,12 +4,12 @@ namespace Tsutaeru.InGame
     {
         None,
         Title,
-        SetUp,
-        Input,
-        Judge,
-        Clear,
-        Finish,
-        Result,
+        TaSetUp,
+        TaInput,
+        TaJudge,
+        TaClear,
+        TaFinish,
+        TaResult,
     }
 
     public enum Difficulty

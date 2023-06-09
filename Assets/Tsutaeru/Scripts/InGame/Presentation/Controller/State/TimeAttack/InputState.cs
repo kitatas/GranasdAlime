@@ -2,18 +2,18 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.InGame.Domain.UseCase;
 
-namespace Tsutaeru.InGame.Presentation.Controller
+namespace Tsutaeru.InGame.Presentation.Controller.TimeAttack
 {
-    public sealed class JudgeState : BaseState
+    public sealed class InputState : BaseState
     {
         private readonly WordUseCase _wordUseCase;
 
-        public JudgeState(WordUseCase wordUseCase)
+        public InputState(WordUseCase wordUseCase)
         {
             _wordUseCase = wordUseCase;
         }
 
-        public override GameState state => GameState.Judge;
+        public override GameState state => GameState.TaInput;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
@@ -22,16 +22,9 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
         public override async UniTask<GameState> TickAsync(CancellationToken token)
         {
-            await UniTask.Yield(token);
+            await _wordUseCase.ExecShift().ToUniTask(true, token);
 
-            if (_wordUseCase.IsCorrect())
-            {
-                return GameState.Clear;
-            }
-            else
-            {
-                return GameState.Input;
-            }
+            return GameState.TaJudge;
         }
     }
 }

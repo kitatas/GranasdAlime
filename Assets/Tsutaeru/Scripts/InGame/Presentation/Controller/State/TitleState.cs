@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
@@ -46,7 +47,11 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _soundUseCase.PlaySe(SeType.Slide);
             await _progressView.ShowBackgroundAsync(UiConfig.ANIMATION_TIME, token);
 
-            return GameState.SetUp;
+            return mode switch
+            {
+                GameMode.TimeAttack => GameState.TaSetUp,
+                _ => throw new Exception(ExceptionConfig.UNMATCHED_GAME_MODE),
+            };
         }
     }
 }

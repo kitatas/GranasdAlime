@@ -10,18 +10,24 @@ namespace Tsutaeru.InGame.Presentation.Controller
     {
         private readonly List<BaseState> _states;
 
-        public StateController(TitleState titleState, SetUpState setUpState, InputState inputState,
-            JudgeState judgeState, ClearState clearState, FinishState finishState, ResultState resultState)
+        public StateController(
+            TitleState titleState,
+            TimeAttack.SetUpState timeAttackSetUpState,
+            TimeAttack.InputState timeAttackInputState,
+            TimeAttack.JudgeState timeAttackJudgeState,
+            TimeAttack.ClearState timeAttackClearState,
+            TimeAttack.FinishState timeAttackFinishState,
+            TimeAttack.ResultState timeAttackResultState)
         {
             _states = new List<BaseState>
             {
                 titleState,
-                setUpState,
-                inputState,
-                judgeState,
-                clearState,
-                finishState,
-                resultState,
+                timeAttackSetUpState,
+                timeAttackInputState,
+                timeAttackJudgeState,
+                timeAttackClearState,
+                timeAttackFinishState,
+                timeAttackResultState,
             };
         }
 

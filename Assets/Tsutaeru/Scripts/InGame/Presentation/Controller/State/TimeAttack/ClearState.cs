@@ -7,7 +7,7 @@ using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 using UniRx;
 
-namespace Tsutaeru.InGame.Presentation.Controller
+namespace Tsutaeru.InGame.Presentation.Controller.TimeAttack
 {
     public sealed class ClearState : BaseState
     {
@@ -36,7 +36,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _retryButtonView = retryButtonView;
         }
 
-        public override GameState state => GameState.Clear;
+        public override GameState state => GameState.TaClear;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
@@ -92,7 +92,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                 _soundUseCase.PlaySe(SeType.Hint);
                 await _hintView.ResetAsync(UiConfig.ANIMATION_TIME, token);
 
-                return GameState.Finish;
+                return GameState.TaFinish;
             }
             else
             {
@@ -108,7 +108,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
                 _soundUseCase.PlaySe(SeType.ProgressUp);
                 _progressView.Render(_questionUseCase.progress);
 
-                return GameState.SetUp;
+                return GameState.TaSetUp;
             }
         }
     }

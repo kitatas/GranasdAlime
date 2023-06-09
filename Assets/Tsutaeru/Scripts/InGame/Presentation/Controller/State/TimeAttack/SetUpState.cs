@@ -6,7 +6,7 @@ using Tsutaeru.Common.Domain.UseCase;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 
-namespace Tsutaeru.InGame.Presentation.Controller
+namespace Tsutaeru.InGame.Presentation.Controller.TimeAttack
 {
     public sealed class SetUpState : BaseState
     {
@@ -24,7 +24,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _hintView = hintView;
         }
 
-        public override GameState state => GameState.SetUp;
+        public override GameState state => GameState.TaSetUp;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
@@ -45,7 +45,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
 
             await UniTask.Yield(token);
 
-            return GameState.Input;
+            return GameState.TaInput;
         }
     }
 }

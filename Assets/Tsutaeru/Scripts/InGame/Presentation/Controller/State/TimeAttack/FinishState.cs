@@ -5,7 +5,7 @@ using Tsutaeru.Common.Domain.UseCase;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 
-namespace Tsutaeru.InGame.Presentation.Controller
+namespace Tsutaeru.InGame.Presentation.Controller.TimeAttack
 {
     public sealed class FinishState : BaseState
     {
@@ -21,7 +21,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _userRecordView = userRecordView;
         }
 
-        public override GameState state => GameState.Finish;
+        public override GameState state => GameState.TaFinish;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
@@ -41,7 +41,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             // ランキング反映待ち
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: token);
 
-            return GameState.Result;
+            return GameState.TaResult;
         }
     }
 }

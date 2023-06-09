@@ -65,12 +65,12 @@ namespace Tsutaeru.InGame.Installer
 
             // Controller
             builder.Register<StateController>(Lifetime.Scoped);
-            builder.Register<ClearState>(Lifetime.Scoped);
-            builder.Register<FinishState>(Lifetime.Scoped);
-            builder.Register<InputState>(Lifetime.Scoped);
-            builder.Register<JudgeState>(Lifetime.Scoped);
-            builder.Register<ResultState>(Lifetime.Scoped);
-            builder.Register<SetUpState>(Lifetime.Scoped);
+            builder.Register<Presentation.Controller.TimeAttack.ClearState>(Lifetime.Scoped);
+            builder.Register<Presentation.Controller.TimeAttack.FinishState>(Lifetime.Scoped);
+            builder.Register<Presentation.Controller.TimeAttack.InputState>(Lifetime.Scoped);
+            builder.Register<Presentation.Controller.TimeAttack.JudgeState>(Lifetime.Scoped);
+            builder.Register<Presentation.Controller.TimeAttack.ResultState>(Lifetime.Scoped);
+            builder.Register<Presentation.Controller.TimeAttack.SetUpState>(Lifetime.Scoped);
             builder.Register<TitleState>(Lifetime.Scoped);
             builder.RegisterEntryPoint<UserDataController>();
 

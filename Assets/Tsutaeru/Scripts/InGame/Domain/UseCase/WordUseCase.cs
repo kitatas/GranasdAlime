@@ -51,7 +51,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
                 var view = _prefabRepository.GetWordView();
                 var instance = _wordFactory.Generate(view, pointX);
                 instance.Init(_questionEntity.GetQuestionChar(i), i, status,
-                    () => _stateEntity.IsState(GameState.Input),
+                    () => _stateEntity.IsState(GameState.TaInput),
                     x =>
                     {
                         playSe?.Invoke(SeType.Pop);

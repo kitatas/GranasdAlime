@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
@@ -6,7 +5,7 @@ using Tsutaeru.Common.Domain.UseCase;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 
-namespace Tsutaeru.InGame.Presentation.Controller
+namespace Tsutaeru.InGame.Presentation.Controller.TimeAttack
 {
     public sealed class ResultState : BaseState
     {
@@ -30,7 +29,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             _rankingView = rankingView;
         }
 
-        public override GameState state => GameState.Result;
+        public override GameState state => GameState.TaResult;
 
         public override async UniTask InitAsync(CancellationToken token)
         {
