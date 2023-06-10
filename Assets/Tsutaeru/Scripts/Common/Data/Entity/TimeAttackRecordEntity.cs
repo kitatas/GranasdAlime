@@ -4,7 +4,7 @@ namespace Tsutaeru.Common.Data.Entity
 {
     public sealed class TimeAttackRecordEntity : RankingRecordEntity
     {
-        public TimeAttackRecordEntity(PlayerLeaderboardEntry entry) : base(entry)
+        public TimeAttackRecordEntity(PlayerLeaderboardEntry entry, string userId) : base(entry, userId)
         {
         }
 

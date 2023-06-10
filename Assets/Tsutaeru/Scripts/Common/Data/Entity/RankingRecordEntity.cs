@@ -6,12 +6,14 @@ namespace Tsutaeru.Common.Data.Entity
     {
         private readonly PlayerLeaderboardEntry _entry;
 
-        protected RankingRecordEntity(PlayerLeaderboardEntry entry)
+        protected RankingRecordEntity(PlayerLeaderboardEntry entry, string userId)
         {
             _entry = entry;
+            isSelf = id.Equals(userId);
         }
 
         protected abstract GameMode mode { get; }
+        public bool isSelf { get; }
 
         public string id => _entry.PlayFabId;
         public int rank => _entry.Position + 1;

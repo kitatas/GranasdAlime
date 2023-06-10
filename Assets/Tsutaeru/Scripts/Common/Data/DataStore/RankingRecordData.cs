@@ -17,7 +17,7 @@ namespace Tsutaeru.Common.Data.DataStore
             _mode = mode;
         }
 
-        public List<TimeAttackRecordEntity> GetTimeAttackRanking()
+        public List<TimeAttackRecordEntity> GetTimeAttackRanking(string userId)
         {
             if (_mode != GameMode.TimeAttack)
             {
@@ -25,7 +25,7 @@ namespace Tsutaeru.Common.Data.DataStore
             }
 
             return _leaderboard
-                .Select(x => new TimeAttackRecordEntity(x))
+                .Select(x => new TimeAttackRecordEntity(x, userId))
                 .ToList();
         }
     }
