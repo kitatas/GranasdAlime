@@ -98,7 +98,16 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.UpdateUserTitleDisplayNameAsync(request);
             if (response.Error != null)
             {
-                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
+                // 名前更新失敗の要因を2つに絞る
+                // すでに登録されているユーザー名 or それ以外
+                if (response.Error.Error == PlayFabErrorCode.NameNotAvailable)
+                {
+                    throw new RetryException(ExceptionConfig.UNMATCHED_USER_NAME_RULE);
+                }
+                else
+                {
+                    throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
+                }
             }
 
             return true;

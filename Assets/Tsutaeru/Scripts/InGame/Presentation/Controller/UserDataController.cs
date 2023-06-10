@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
 using Tsutaeru.Common.Domain.UseCase;
+using Tsutaeru.Common.Presentation.Controller;
 using Tsutaeru.InGame.Domain.UseCase;
 using Tsutaeru.InGame.Presentation.View;
 using UniRx;
@@ -15,17 +16,20 @@ namespace Tsutaeru.InGame.Presentation.Controller
         private readonly LoadingUseCase _loadingUseCase;
         private readonly SceneUseCase _sceneUseCase;
         private readonly UserDataUseCase _userDataUseCase;
+        private readonly ExceptionController _exceptionController;
         private readonly AccountDeleteView _accountDeleteView;
         private readonly NameInputView _nameInputView;
 
         private readonly CancellationTokenSource _tokenSource;
 
         public UserDataController(LoadingUseCase loadingUseCase, SceneUseCase sceneUseCase,
-            UserDataUseCase userDataUseCase, AccountDeleteView accountDeleteView, NameInputView nameInputView)
+            UserDataUseCase userDataUseCase, ExceptionController exceptionController,
+            AccountDeleteView accountDeleteView, NameInputView nameInputView)
         {
             _loadingUseCase = loadingUseCase;
             _sceneUseCase = sceneUseCase;
             _userDataUseCase = userDataUseCase;
+            _exceptionController = exceptionController;
             _accountDeleteView = accountDeleteView;
             _nameInputView = nameInputView;
 
@@ -65,8 +69,12 @@ namespace Tsutaeru.InGame.Presentation.Controller
             }
             catch (Exception e)
             {
-                // TODO: リトライ
+                // 更新失敗だけなのでリトライは考慮しない
                 UnityEngine.Debug.LogError($"update user name: {e}");
+                await _exceptionController.ShowExceptionAsync(e, _tokenSource.Token);
+
+                // 変更前の名前に戻す 
+                _nameInputView.Init(_userDataUseCase.GetUserName());
                 throw;
             }
         }

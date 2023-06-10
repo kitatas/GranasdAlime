@@ -49,6 +49,7 @@ namespace Tsutaeru.Common
 
         public const string FAILED_DESERIALIZE_MASTER = "";
         public const string FAILED_RESPONSE_DATA = "";
+        public const string FAILED_UPDATE_DATA = "";
         public const string FAILED_LOGIN = "";
 
         public const string UNMATCHED_GAME_MODE = "";
