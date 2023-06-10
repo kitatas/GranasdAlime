@@ -74,8 +74,9 @@ namespace Tsutaeru.Common.Domain.Repository
 
             var profile = payload.PlayerProfile;
             var userName = profile == null ? "" : profile.DisplayName;
+            var userId = profile == null ? "" : profile.PlayerId;
 
-            return new UserData(userName, userDataRecord);
+            return new UserData(userName, userId, userDataRecord);
         }
 
         public async UniTask<bool> UpdateUserNameAsync(string name, CancellationToken token)

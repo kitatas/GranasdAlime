@@ -10,12 +10,13 @@ namespace Tsutaeru.Common.Data.DataStore
         private readonly Dictionary<string, UserDataRecord> _records;
         public readonly UserEntity user;
 
-        public UserData(string name, Dictionary<string, UserDataRecord> records)
+        public UserData(string name, string id, Dictionary<string, UserDataRecord> records)
         {
             _records = records;
 
             user = new UserEntity();
             user.SetUserName(name);
+            user.SetUserId(id);
             user.SetTimeAttack(GetUserTimeAttack());
         }
 
