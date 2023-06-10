@@ -7,7 +7,7 @@ namespace Tsutaeru.InGame
         public const GameState INIT_STATE = GameState.Title;
 
         public const int MAX_QUESTION = 20;
-
+        public const float MAX_TIME = 30.0f;
     }
 
     public sealed class UrlConfig
