@@ -1,4 +1,5 @@
 using Tsutaeru.Base.Data.Entity;
+using UnityEngine;
 
 namespace Tsutaeru.InGame.Data.Entity
 {
@@ -11,7 +12,8 @@ namespace Tsutaeru.InGame.Data.Entity
 
         public void Subtract(float subValue)
         {
-            Add(-subValue);
+            // 残り時間が負数にならないようにする
+            Set(Mathf.Max(value - subValue, 0.0f));
         }
     }
 }
