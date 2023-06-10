@@ -120,7 +120,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30CA\u30DE\u30A8 \u30F2 \u30CB\u30E5\u30A6\u30EA\u30E7\u30AF..."
+  m_text: "\u540D\u524D\u3092\u5165\u529B..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31ad53f7918ca4853aa29bbf9b9598a7, type: 2}
   m_sharedMaterial: {fileID: -9116758655335922762, guid: 31ad53f7918ca4853aa29bbf9b9598a7, type: 2}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 15
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 15
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
