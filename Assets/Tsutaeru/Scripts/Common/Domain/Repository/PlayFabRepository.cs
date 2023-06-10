@@ -106,7 +106,7 @@ namespace Tsutaeru.Common.Domain.Repository
                 }
                 else
                 {
-                    throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
+                    throw new RetryException(ExceptionConfig.FAILED_UPDATE_DATA);
                 }
             }
 
@@ -150,7 +150,7 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.UpdateUserDataAsync(request);
             if (response.Error != null)
             {
-                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
+                throw new RetryException(ExceptionConfig.FAILED_UPDATE_DATA);
             }
 
             return response.Result;
@@ -173,7 +173,7 @@ namespace Tsutaeru.Common.Domain.Repository
             var response = await PlayFabClientAPI.UpdatePlayerStatisticsAsync(request);
             if (response.Error != null)
             {
-                throw new RetryException(ExceptionConfig.FAILED_RESPONSE_DATA);
+                throw new RetryException(ExceptionConfig.FAILED_UPDATE_DATA);
             }
         }
 
