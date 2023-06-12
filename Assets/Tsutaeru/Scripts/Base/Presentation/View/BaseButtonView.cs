@@ -16,9 +16,16 @@ namespace Tsutaeru.Base.Presentation.View
         [SerializeField] private bool isPlaySe = true;
 
         private readonly float _animationTime = 0.1f;
+        private bool _isInit = false;
 
         public virtual async UniTaskVoid InitAsync(Action<SeType> playSe, CancellationToken token)
         {
+            if (_isInit)
+            {
+                return;
+            }
+
+            _isInit = true;
             var rectTransform = button.transform.ToRectTransform();
             var scale = rectTransform.localScale;
 
