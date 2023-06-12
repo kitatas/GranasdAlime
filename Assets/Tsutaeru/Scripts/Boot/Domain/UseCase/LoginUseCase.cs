@@ -51,7 +51,8 @@ namespace Tsutaeru.Boot.Domain.UseCase
             var isSuccess = await _playFabRepository.UpdateUserNameAsync(name, token);
             if (isSuccess)
             {
-                _userEntity.SetUserName(name);
+                // 再ログインでユーザーデータをキャッシュする
+                await LoginAsync(token);
                 return true;
             }
             else
