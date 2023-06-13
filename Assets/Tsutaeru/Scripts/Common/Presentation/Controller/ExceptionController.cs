@@ -50,6 +50,13 @@ namespace Tsutaeru.Common.Presentation.Controller
                     _sceneUseCase.Load(SceneName.Boot, LoadType.Fade);
                     return ExceptionType.Reboot;
                 default:
+                    // 予期せぬ例外のため、強制終了させる
+                    await _crashView.ShowAndPushAsync(exception.Message, UiConfig.POPUP_TIME, token);
+#if UNITY_ANDROID
+                    UnityEngine.Application.Quit();
+#else
+                    // android以外の挙動は追記する
+#endif
                     return ExceptionType.Crash;
             }
         }
