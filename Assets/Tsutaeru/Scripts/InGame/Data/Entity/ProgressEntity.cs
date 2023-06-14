@@ -1,4 +1,3 @@
-using System;
 using Tsutaeru.Base.Data.Entity;
 using Tsutaeru.Common;
 
@@ -28,7 +27,7 @@ namespace Tsutaeru.InGame.Data.Entity
             if (value < ProgressConfig.HARD) return Difficulty.Hard;
             if (value < ProgressConfig.SPECIAL) return Difficulty.Special;
 
-            throw new Exception(ExceptionConfig.NOT_FOUND_PROGRESS);
+            throw new CrashException(ExceptionConfig.NOT_FOUND_PROGRESS);
         }
     }
 }

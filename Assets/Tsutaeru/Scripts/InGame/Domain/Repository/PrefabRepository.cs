@@ -1,4 +1,3 @@
-using System;
 using Tsutaeru.Common;
 using Tsutaeru.InGame.Data.DataStore;
 
@@ -18,7 +17,7 @@ namespace Tsutaeru.InGame.Domain.Repository
             var data = _prefabTable.word;
             if (data == null)
             {
-                throw new Exception(ExceptionConfig.NOT_FOUND_PREFAB);
+                throw new CrashException(ExceptionConfig.NOT_FOUND_PREFAB);
             }
 
             return data;

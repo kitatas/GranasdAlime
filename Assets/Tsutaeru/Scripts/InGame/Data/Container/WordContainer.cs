@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Tsutaeru.Base.Data.Container;
 using Tsutaeru.Common;
@@ -15,7 +14,7 @@ namespace Tsutaeru.InGame.Data.Container
             {
                 MoveStatus.Left  => 1,
                 MoveStatus.Right => -1,
-                _ => throw new Exception(ExceptionConfig.UNMATCHED_TYPE_MOVE),
+                _ => throw new CrashException(ExceptionConfig.UNMATCHED_TYPE_MOVE),
             };
 
             (_list[index], _list[index + addIndex]) = (_list[index + addIndex], _list[index]);

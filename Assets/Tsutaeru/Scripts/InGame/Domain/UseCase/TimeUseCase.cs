@@ -1,4 +1,3 @@
-using System;
 using Tsutaeru.Base.Domain.UseCase;
 using Tsutaeru.Common;
 using Tsutaeru.InGame.Data.Entity;
@@ -31,7 +30,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
                         _timeEntity.Subtract(deltaTime);
                         break;
                     default:
-                        throw new Exception(ExceptionConfig.UNMATCHED_GAME_MODE);
+                        throw new CrashException(ExceptionConfig.UNMATCHED_GAME_MODE);
                 }
 
                 Set(_timeEntity.value);

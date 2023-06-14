@@ -15,4 +15,11 @@ namespace Tsutaeru.Common
         {
         }
     }
+
+    public sealed class CrashException : Exception
+    {
+        public CrashException(string message) : base(message)
+        {
+        }
+    }
 }

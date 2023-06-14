@@ -1,4 +1,3 @@
-using System;
 using Tsutaeru.Common;
 using Tsutaeru.InGame.Data.Entity;
 
@@ -21,7 +20,7 @@ namespace Tsutaeru.InGame.Domain.UseCase
             {
                 GameMode.TimeAttack  => 0.0f,
                 GameMode.ScoreAttack => GameConfig.MAX_TIME,
-                _ => throw new Exception(ExceptionConfig.UNMATCHED_GAME_MODE),
+                _ => throw new CrashException(ExceptionConfig.UNMATCHED_GAME_MODE),
             };
             _timeEntity.Set(initTime);
 

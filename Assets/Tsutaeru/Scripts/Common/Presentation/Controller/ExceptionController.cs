@@ -51,7 +51,10 @@ namespace Tsutaeru.Common.Presentation.Controller
                     return ExceptionType.Reboot;
                 default:
                     // 予期せぬ例外のため、強制終了させる
-                    await _crashView.ShowAndPushAsync(exception.Message, UiConfig.POPUP_TIME, token);
+                    var message = exception is CrashException
+                        ? exception.Message
+                        : ExceptionConfig.UNKNOWN_ERROR;
+                    await _crashView.ShowAndPushAsync(message, UiConfig.POPUP_TIME, token);
 #if UNITY_ANDROID
                     UnityEngine.Application.Quit();
 #else

@@ -41,7 +41,7 @@ namespace Tsutaeru.Common.Presentation.Presenter
                             FadeLoadAsync(x.sceneName, _tokenSource.Token).Forget();
                             break;
                         default:
-                            throw new Exception(ExceptionConfig.UNMATCHED_TYPE_LOAD);
+                            throw new CrashException(ExceptionConfig.UNMATCHED_TYPE_LOAD);
                     }
                 })
                 .AddTo(_transitionView);

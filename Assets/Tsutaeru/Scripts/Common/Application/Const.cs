@@ -58,5 +58,7 @@ namespace Tsutaeru.Common
         public const string UNMATCHED_TYPE_MOVE = "";
         public const string UNMATCHED_TYPE_HINT = "";
         public const string UNMATCHED_USER_NAME_RULE = "";
+
+        public const string UNKNOWN_ERROR = "";
     }
 }

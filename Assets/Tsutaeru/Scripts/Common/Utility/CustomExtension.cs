@@ -1,5 +1,3 @@
-using System;
-
 namespace Tsutaeru.Common
 {
     public static class CustomExtension
@@ -9,7 +7,7 @@ namespace Tsutaeru.Common
             return mode switch
             {
                 GameMode.TimeAttack => PlayFabConfig.RANKING_TIME_ATTACK_KEY,
-                _ => throw new Exception(ExceptionConfig.UNMATCHED_GAME_MODE)
+                _ => throw new CrashException(ExceptionConfig.UNMATCHED_GAME_MODE)
             };
         }
     }

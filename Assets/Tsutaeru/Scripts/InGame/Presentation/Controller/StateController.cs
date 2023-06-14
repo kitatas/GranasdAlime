@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -46,7 +45,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             var currentState = _states.Find(x => x.state == state);
             if (currentState == null)
             {
-                throw new Exception(ExceptionConfig.NOT_FOUND_STATE);
+                throw new CrashException(ExceptionConfig.NOT_FOUND_STATE);
             }
 
             return await currentState.TickAsync(token);

@@ -21,7 +21,7 @@ namespace Tsutaeru.Common.Data.DataStore
         {
             if (_mode != GameMode.TimeAttack)
             {
-                throw new Exception(ExceptionConfig.UNMATCHED_GAME_MODE);
+                throw new CrashException(ExceptionConfig.UNMATCHED_GAME_MODE);
             }
 
             return _leaderboard

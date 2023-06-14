@@ -18,7 +18,7 @@ namespace Tsutaeru.Common.Data.DataStore
         {
             return _resultData.TryGetValue(PlayFabConfig.MASTER_APP_VERSION_KEY, out var json)
                 ? JsonConvert.DeserializeObject<AppVersionEntity>(json)
-                : throw new Exception(ExceptionConfig.FAILED_DESERIALIZE_MASTER);
+                : throw new CrashException(ExceptionConfig.FAILED_DESERIALIZE_MASTER);
         }
     }
 }

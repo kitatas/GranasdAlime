@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Tsutaeru.Common;
@@ -50,7 +49,7 @@ namespace Tsutaeru.InGame.Presentation.Controller
             return mode switch
             {
                 GameMode.TimeAttack => GameState.TaSetUp,
-                _ => throw new Exception(ExceptionConfig.UNMATCHED_GAME_MODE),
+                _ => throw new CrashException(ExceptionConfig.UNMATCHED_GAME_MODE),
             };
         }
     }
