@@ -15,7 +15,7 @@ namespace Tsutaeru.InGame.Presentation.View
         {
             if (entity.isSelf)
             {
-                background.color = new Color(0.0f, 0.25f, 0.0f, 0.5f);
+                background.color = new Color(0.3f, 0.3f, 0.3f, 1.0f);
             }
 
             rank.text = $"{entity.rank.ToString()}";
